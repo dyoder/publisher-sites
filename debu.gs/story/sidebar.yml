@@ -1,0 +1,8 @@
+--- 
+format: mab
+published: 2009-04-25 12:12:19.902723 -07:00
+content: |
+  #div.sidebar { story :debugs }
+  div.sidebar { show :blog, :debugs }
+
+key: sidebar

@@ -1,0 +1,40 @@
+--- 
+format: textile
+title: Introducing Autocode 0.9.9
+author: Dan Yoder
+published: 2008-05-18
+tags: ruby
+content: |-
+  Autocode is basically a class loader for Ruby that acts as a mixin. It will also load modules and add initialization hooks. This provides _true_ code reloading, that can actually be used to hot-swap code for production apps. Since it actually removes constants from memory at runtime, there is no danger of artifacts remaining from prior loads.
+  
+  h2. Example
+  
+  The following code will attempt to load any referenced constant in the scope of the @Views@ module from the "view" class. Thus, @Views::Show@ will attempt to load "views/show.rb".
+  
+  <pre><code>
+  module Views
+    include AutoCode
+    auto_load true, :directories => [ 'views' ]
+  end
+  </code></pre>
+  
+  Here's another more sophisticated example that will first attempt to load a model class from the 'models' directory and, failing that will use a "default" exemplar to create a class.
+  
+  <pre><code>
+  module Blog
+    module Models
+      class Default
+        # ...
+      end
+      auto_create_class true, Blog::Models::Default
+      auto_load_class true, :directories => ['models']
+    end
+  end
+  </code></pre>
+  
+  
+  That's it. Not only can you not worry about using @require@ to load everything, you can actually call @Blog::Models.reload@ to unload all the dynamically loaded code (thereby forcing it to be reloaded).
+  
+  "Go to the main project page.":http://autocode.rubyforge.org/
+summary: Autocode is an open source class / module loader for Ruby. We've just updated it with some bug fixes and initialization hooks.
+key: introducing-autocode-0-9-9

@@ -1,0 +1,12 @@
+--- 
+name: software
+format: textile
+title: Debu.gs Software
+author: Pete Elmore
+published: 2006-09-29 12:55:22 -07:00
+content: |
+  * "GoogleCheckout":/google-checkout
+  * "MFE":/mfe
+
+summary: ""
+key: software

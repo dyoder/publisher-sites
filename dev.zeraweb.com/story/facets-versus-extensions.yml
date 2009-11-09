@@ -1,0 +1,101 @@
+--- 
+format: textile
+title: Facets Versus Extensions Versus ...
+author: Dan Yoder
+blog: mousetrap-2
+published: 2008-02-13
+tags: ruby
+content: |-
+  One of the great things about Ruby is that it's so easy to extend the core libraries. Just re-open a class and start defining methods! In fact, it's so easy, that it's led to at least two gems whose sole purpose is to collect useful extensions. Here we'll define an _extension_ as something useful that doesn't really warrant its own gem. A great example of this kind of extension is @IO#write@ in the "Extensions gem":http://extensions.rubyforge.org (there is a similar method, @File#write@ in "Facets":http://facets.rubyforge.org), which allows you to simply write:
+  
+  <pre>
+  File.write( path, date )
+  </pre>
+  
+  instead of:
+  
+  <pre>
+  File.open(path, "wb") do |file|
+    return file.write(data)
+  end
+  </pre>
+  
+  Again, it's a small thing, but if you add up a lot of small things, they make a difference. Another great example comes originally from "Why's":http://whytheluckystiff.net/ "metaid gem":http://whytheluckystiff.net/articles/seeingMetaclassesClearly.html, which has been incorporated into the Facets library, so that you can write:
+  
+  <pre>
+  foo.meta_class # => return's foo's special singleton class
+  </pre>
+  
+  instead of the rather confusing looking:
+  
+  <pre>
+  class << foo ; self ; end
+  </pre>
+  
+  A small thing. In this case, it isn't so much that it saves us writing the same code over and over ... it arguably does something far more important: it clarifies the intent of the code. And when dealing with meta-programming, one of Ruby's most powerful features, this can be a life-saver. When I wrote the "autocode gem":http://autocode.rubyforge.org/, this clarity I am sure saved me many hours of debugging time, and made it relatively simple to implement.
+  
+  The problem we have now is a good one to have: too many extensions in too many places. Many libraries and frameworks add in a few here and there. Rails does. I know my own framework "Waves":http://rubywaves.com/ does (although I plan to replace them with those from Facets and/or Extensions). It is so easy to do in Ruby, it is difficult to resist. 
+  
+  In Waves, for example, there are lots of places I needed to construct paths for accessing various things: controllers, configuration files, whatever. Somewhere (I wish I could remember so I could give the proper credit), I saw this really neat method for constructing paths from symbols using the @/@ operator:
+  
+  <pre>
+  :public / :javascript / 'site.js' # => fully qualified path name
+  </pre>
+  
+  This is much nicer than:
+  
+  <pre>
+  File.expand_path( File.join( %w( public javascript site.js )))
+  </pre>
+  
+  which doesn't really even look like you're accessing path at all. However, this little nicety didn't exist in either the Facets or Extensions gems, and although I am sure I would like to see it incorporated into one or both libraries, I figured I'd get to that later and just quickly added it into Waves.
+  
+  Here's one that is also in Waves, but a variation is in "Giles Bowkett's":http://gilesbowkett.blogspot.com "Utility Belt gem":http://utilitybelt.rubyforge.org, inspired initially by a question on the Ruby mailing-list:
+  
+  <pre>
+  with( Car.new ) { drive ; refuel; drive; park }
+  </pre>
+  
+  One subtlety about this is that this also replaces a related variant found in Rails, @returning@:
+  
+  <pre>
+  returning( Car.new ) { |car| car.drive; car.refuel; car.drive; car.park }
+  </pre>
+  
+  I wanted actually to make @returning@ an alias for @with@, but I was concerned that enough people were familiar with @returning@ from using it Rails that they would be surprised by the difference. The nice thing about @with@ is that you don't have to include the more-or-less redundant instance variable as a parameter to the block. On the other hand, because @with@ relies on @instance_eval@ you can't use local variables within the block, which can be confusing at times.
+  
+  <pre>
+  home = Destination.new( home_address )
+  with( Car.new ) { drive home; park } # ! error; home is undefined
+  </pre>
+  
+  This can be addressed by using another nice piece of code @instance_exec@, which will actually be in Ruby 1.9. It was originally posted on the Ruby ML by "Mauricio Fernandez":http://eigenclass.org/, and allows you to pass parameters to a block that will be evaluated in the scope of a given object, just like @instance_eval@. With this change, you could deal with the scoping issue something like this:
+  
+  <pre>
+  home = Destination.new( home_address )
+  with( Car.new, home ) { |home| drive home; park }
+  </pre>
+  
+  But this is arguably even more confusing.
+  
+  At any rate, what is clear is that there are tons of useful little tidbits like this floating around within various gems and frameworks and so on. I will call this _facet splintering_, for no good reason other than it sounds reasonably official. It does not mean I am only talking about the Facets gem. It's just I like the idea of there being gems and then facets of gems that are not entire gems, which captures the spirit of these extensions nicely.
+  
+  There are really two problems associated with facet splintering. The first is predictability. It is difficult to be sure when you use a gem or library or whatever that perhaps uses some extensions, exactly which ones it might be using and whether two libraries might then introducing conflicting extensions (facet collisions) and so, in effect, while you know you are using Ruby, you can't be sure which Ruby you are really getting.
+  
+  The second problem is that there isn't any one library where all the extensions are managed. Obviously, Extensions and Facets have the same idea here, but they take different approaches and neither has all the goodies that I want. Which is really the core dillema: everybody is probably going to favor different extensions and so on you can't just create one master repository because someone else will just create another one because yours doesn't quite make them happy. Ruby makes this all so easy that it tends to promote this facet splintering effect.
+  
+  Now, obviously, the solution is for me to decide what goes in the repository and for everyone just to use whatever I come up with. However, since I don't have the time, we'll have to come up with another solution. For a clue, let's take a look at how Extensions and Facets differ in their approach. The most obvious difference is that Extensions bundles its extensions by class or module, whereas Facets bundles each extension separately. With Extensions, if you want @IO#write@, you get all the @IO@ extensions. In Facets, if you want @File#write@ you can just require 'facets/file/write' if you want and not get anything else.
+  
+  Both approaches strike me as problematic. With the former, you get a bunch of extensions when maybe you didn't need them all and which aren't necessarily conceptually related. With the latter, things are just as unpredictable as ever, since each framework or library will include whichever bits and pieces they like. Facets appears to be in the process of trying to address this by grouping things together into more logical units, which strikes me a step in the right direction. For example, all methods relating to string formatting can be loaded by requiring 'facets/string/format'. You don't get all the string extensions, but there is some notion of a standard set of string formatting methods.
+  
+  This begins to address the "knowledge management" problem associated with facet splintering. But it still doesn't help much with predictability. One possible idea would be to record meta-data whenever a given extension is loaded that would make it easy to inspect and document the loaded extensions. This could perhaps be integrated with an @ri@ and / or @rdoc@ extension that would make it easy to incorporate this meta-data into automatically generated documentation. In Facets, for example, you could add a @Facets.extensions@ variable that tracks the loaded extensions. (Or, similarly, in Extensions, you might have @Extensions.loaded@ or something.)
+  
+  Another differing philosophy is that Extensions appears to be much pickier than Facets. This is partly implicit in the way you load extensions: the more coarse-grained the loading, the pickier you have to be; but I also think there is something to be said for setting the bar relatively high when it comes to inclusion. For example, there is a lot of stuff in Facets that appears to be "speculative":http://facets.rubyforge.org/rdoc/behavior/index.html, "specialized":http://facets.rubyforge.org/rdoc/minitar/index.html, and/or "poorly documented":http://facets.rubyforge.org/rdoc/aop/index.html. I also think that the scope of a "facet" should be pretty narrow. String formatting methods seems like a good candidate for includes, while a library for aspect-oriented programming seems like it should live in its own gem. Why? Because AOP is really a completely different paradigm, not a set of convenience methods.
+  
+  Ruby's own standard libraries tend to suffer from this same kind of semantic disarray. I'm not sure why there are two libraries for parsing command-line options, or why there is a SOAP library and not a JSON library? (Neither belong in the standard library, IMHO). Conversely, there are things in Facets and Extensions that seem like they belong in the standard library.
+  
+  All in all, it seems like a major refactoring is in order of the Ruby facets ecosystem. Even the Gems project has the drawback that there are now so many gems it is sometimes difficult to find the ones you need if you don't recall the name. I am sure there are plenty of people in the Ruby community who are aware of these issues and are working diligently on them. We're getting there.
+  
+  In the meantime, the question is, what should library and framework authors do? I am very tempted at this point, to simply cut-and-paste the extensions I want to use and include them directly in my projects, in order to ensure that everything I'm using is well-documented. This also ensures that I don't include extensions I don't want. Another alternative is to do this for RDoc and @ri@ purposes, but then use the gem versions in deployment. It will probably continue to be a combination of approaches for the time being. I don't think we've really seen a true solution to this problem, though. But, hey, I'd rather have _this_ problem than not have enough libraries!
+summary: One of the great things about Ruby is that it's so easy to extend the core libraries. Just re-open a class and start defining methods! In fact, it's so easy, that it's led to at least two gems whose sole purpose is to collect useful extensions.
+key: facets-versus-extensions

@@ -1,0 +1,20 @@
+--- 
+name: about-pete
+format: textile
+title: About Pete
+author: Pete Elmore
+published: 2008-07-25 00:00:00 -07:00
+domain: debu.gs
+tags: ""
+content: |-
+  <img src="/images/pete-photo" style="float: left; margin: 0 1em 1em 0;">I do a lot of "Ruby":http://ruby-lang.org/ and C, with a few other languages thrown in when I can get away with it.  I'm working at YellowPages.com, along with my good friend and former employer "Dan Yoder":http://dev.zeraweb.com/ .
+  
+  As far as things you may have heard of, I did "LiveConsole":live-console , which provides IRB over a TCP connection inside a running app (with Unix socket support planned when I get a free minute).  I have a "Google Checkout":google-checkout ruby gem, although I am not actively maintaining it.  (A one-off thing for "Vixby":http://www.vixby.com/ .  Anyone who wants to take over the project can email me.)  
+  
+  I'm also playing with a new Lisp, which will appear on this site when I have finalized the core language features.  (I swear, this will take less time to release than "Arc":http://arclanguage.org , and you won't need mzscheme to run it.)  It is progressing nicely, and has as its main goals programmer convenience, nice integration with the OS and with its base language C, and a powerful set of primitives.  The feature set is already enough for actual coding to be done in it:  macros, binding manipulation, in-language support for regexes, a prototype-based object system with a convenient syntax for method dispatch, string interpolation, UTF-8 source files (and thus UTF-8 function/variable names), no keywords (seriously, zero keywords), pattern-matching, nice looping primitives, nice scripting support, hashes, Ruby/Perl-esque string manipulation, with more planned soon.  It just needs some solidifying of the semantics, a few more features that I want pretty badly, and a partial refactoring of the implementation to go from prototype code to thing-I-am-not-ashamed-to-show-the-public.  Expect it to be leaps and bounds beyond Common Lisp, to be as fun and easy as Ruby, to have lots of irritating, superfluous parentheses (although there are fewer than in CL or Scheme), and to have ripped off a lot of things I liked in "Lush":http://lush.sf.net/ , "Ruby":http://ruby-lang.org/ , "Haskell":http://www.haskell.org/ , and C, and a little from each of "Arc":http://arclanguage.org, Perl, and others.  I'll write some blog entry about this at some point leading up to the beta release.
+  
+  In the past, I worked on "Freenote":http://phreenote.sf.net/ (not to be confused with either FreenoDe or Keynote), my favorite project for "Petta Technology":http://freenote.petta-tech.com/ .  Sadly, the project was abandoned by the company, although my other good friend and former employer Damon Petta (along with "Eric Wong":http://yhbt.net/) works here at YP (and in fact recruited me) so it may eventually get resurrected.
+  
+  If I'm not in front of a machine, I'm usually kickboxing or cooking.
+summary: So you've got some kind of idea who's typed all this.
+key: about-pete

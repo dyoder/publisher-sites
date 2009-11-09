@@ -1,0 +1,22 @@
+--- 
+twitter_password: planetjj
+name: janetjoseph
+twitter_account: jmjoseph
+title: Janet Joseph
+domain: janetjoseph.com
+Admin: 
+- property
+- story
+- image
+- blog
+- gallery
+description: My personal Web site, with my cooking blog and spa treatments.
+authors: 
+- Janet Joseph
+roles: 
+- Admin
+key: site
+administrators: 
+- name: Janet Joseph
+  password: planetjj
+  email: janetjoseph@mac.com

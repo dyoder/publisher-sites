@@ -1,0 +1,33 @@
+format: textile
+published: 2007-10-15
+content: |
+
+  Don't forget to "check out my blog":http://janetjoseph.wordpress.com/ for more!
+  
+  <div class='blog'>
+  
+  h1. No Pasta Spaghetti
+  
+  Super yummy and hearty spaghetti sauce over thinly sliced yellow bell peppers. 
+  
+  "More ...":/no-pasta-spaghetti
+  
+  ---
+    
+  h1. Lime-Tomatillo Enchiladas
+  
+  Made with homemade tomatillo sauce and lime sour cream, these enchiladas are irresistible!
+  
+  "More ...":/enchiladas
+  
+  ---
+    
+  h1. Kickin' Movie Popcorn
+  
+  If you’re tired of bland tasteless microwave and movie popcorn, try this recipe out.
+  
+  "More ...":/popcorn
+  
+  ---
+    
+  </div>

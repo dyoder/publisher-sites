@@ -1,0 +1,13 @@
+--- 
+format: html
+author: California For L`Aquila
+blog: ""
+title: Gallery
+published: 2009-04-19 00:00:00 -07:00
+tags: ""
+content: |-
+  <p>These images are from Flickr using the Creative Commons license.</p>
+  
+  <object width="400" height="300"> <param name="flashvars" value="offsite=true&lang=en-us&page_show_url=%2Fsearch%2Fshow%2F%3Fq%3Dabruzzo%2Bearthquake%26m%3Dtags%26l%3Dcommderiv%26ss%3D0%26ct%3D0&page_show_back_url=%2Fsearch%2F%3Fq%3Dabruzzo%2Bearthquake%26m%3Dtags%26l%3Dcommderiv%26ss%3D0%26ct%3D0&method=flickr.photos.search&api_params_str=&api_tags=abruzzo%2Cearthquake&api_tag_mode=bool&api_license=4%2C5&api_media=all&api_sort=date-posted-desc&jump_to=&start_index=0"></param> <param name="movie" value="http://www.flickr.com/apps/slideshow/show.swf?v=70933"></param> <param name="allowFullScreen" value="true"></param><embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/slideshow/show.swf?v=70933" allowFullScreen="true" flashvars="offsite=true&lang=en-us&page_show_url=%2Fsearch%2Fshow%2F%3Fq%3Dabruzzo%2Bearthquake%26m%3Dtags%26l%3Dcommderiv%26ss%3D0%26ct%3D0&page_show_back_url=%2Fsearch%2F%3Fq%3Dabruzzo%2Bearthquake%26m%3Dtags%26l%3Dcommderiv%26ss%3D0%26ct%3D0&method=flickr.photos.search&api_params_str=&api_tags=abruzzo%2Cearthquake&api_tag_mode=bool&api_license=4%2C5&api_media=all&api_sort=date-posted-desc&jump_to=&start_index=0" width="400" height="300"></embed></object>
+summary: ""
+key: gallery

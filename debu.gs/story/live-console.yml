@@ -1,0 +1,154 @@
+--- 
+name: live-console
+format: html
+author: Pete Elmore
+title: LiveConsole
+published: 2007-10-20 11:39:04 -07:00
+content: "\n\
+  <div id=\"bodyContent\">\n\
+  <div id=\"contextContent\">\n\
+  <div id=\"description\">\n\
+  <h1>LiveConsole</h1>\n\
+  <h2>Summary</h2>\n\
+  <p>\n\
+  LiveConsole is a library for\n\
+  providing IRB over a TCP connection or\n\
+  a Unix Domain Socket. If you add it to your application, you can run\n\
+  arbitrary code against your application. For example, you can:\n\
+  </p>\n\
+  <ul>\n\
+  <li> Inspect the state of a running application\n\
+  <li> Change the state of the application\n\
+  <li> Patch code on the fly, without a restart.\n\
+  <li> Let anyone on the net 0wn you if you bind to a public interface. :)\n\
+  </ul>\n\
+  <p>\n\
+  It&#8216;s useful as a diagnostic tool, a debugging tool, and a way to\n\
+  impress your friends or get those Lisp guys off your back. You know the\n\
+  ones I mean.\n\
+  </p>\n\
+  <h2>Stern Security Warning. Grrr.</h2>\n\
+  <p>\n\
+  Have a look at the bugs section. It should be pretty apparent that\n\
+  incorrect use of this library could create a large security hole,\n\
+  especially before authentication is implemented.\n\
+  </p>\n\
+  <h2>Installation</h2>\n\
+  <p>\n\
+  You can install via rubygems,\n\
+  </p>\n\
+  <pre>\n\
+  gem install live_console\n\
+  </pre>\n\
+  <p>\n\
+  or plain old setup.rb:\n\
+  </p>\n\
+  <pre>\n\
+  ruby setup.rb install\n\
+  </pre>\n\
+  <h2>How to use LiveConsole</h2>\n\
+  <p>\n\
+  LiveConsole is very easy to\n\
+  use in your own app:\n\
+  </p>\n\
+  <pre>\n\
+  require 'rubygems'\n\
+  require 'live_console'\n\n\
+  # Create a LiveConsole using TCP on port 1337\n\
+  lc = LiveConsole.new :socket, :port =&gt; 1337\n\
+  # We're not yet accepting connections.  We need to start it up:\n\
+  lc.start            # Starts the LiveConsole thread\n\
+  # At this point, users can connect and get an IRB prompt.\n\
+  lc.stop             # Kills the LiveConsole thread\n\
+  # Now, no one can connect.\n\n\
+  # Create a LiveConsole using a Unix socket in /tmp/live-console.sock\n\
+  lc = LiveConsole.new :unix_socket, :path =&gt; '/tmp/live-console.sock'\n\
+  # As above:\n\
+  lc.start\n\
+  lc.stop\n\n\
+  # Have a LiveConsole run code in a binding other than the top-level:\n\
+  lc = LiveConsole.new :unix_socket, :path =&gt; '/tmp/live-console.sock'\n\
+  :bind =&gt; binding\n\
+  lc.start\n\
+  # That will start IRB in the current binding.  There is also an accessor:\n\
+  lc.bind = binding\n\
+  # Of course, you must restart before IRB will see the new binding:\n\
+  lc.restart\n\
+  </pre>\n\
+  <p>\n\
+  Have a look at doc/lc_example.rb or doc/lc_unix_example.rb for brief\n\
+  examples of how to use LiveConsole.\n\
+  </p>\n\
+  <p>\n\
+  Try just running it:\n\
+  </p>\n\
+  <pre>\n\
+  $ ruby doc/lc_example.rb 4000 test\n\
+  # Then, in a different shell:\n\
+  $ netcat localhost 4000\n\
+  irb(main):001:0&gt; puts 'Wow, magic!'\n\n\
+  $ ruby doc/lc_unix_example.rb /tmp/live-console.sock\n\
+  # Then, in a different shell:\n\
+  $ udscat /tmp/live-console.sock\n\
+  irb(main):001:0&gt; puts 'Words cannot describe the joy I feel.'\n\
+  </pre>\n\
+  <p>\n\
+  You can get creative about it, only starting LiveConsole when there&#8216;s an\n\
+  unhandled exception in your server, and then calling LiveConsole#stop when\n\
+  you&#8216;ve diagnosed and fixed whatever the problem was.\n\
+  </p>\n\
+  <p>\n\
+  Additionally, if you want to run LiveConsole on a server, but run\n\
+  netcat locally, you can use SSH port forwarding to avoid having to open LiveConsole to the world:\n\
+  </p>\n\
+  <pre>\n\
+  ssh -L4000:localhost:4000 you@server\n\
+  </pre>\n\
+  <p>\n\
+  Then, locally, you can do\n\
+  </p>\n\
+  <pre>\n\
+  netcat localhost 4000\n\
+  </pre>\n\
+  <p>\n\
+  and get the remote LiveConsole. man ssh for more\n\
+  details. Of course, this only works for the TCP socket mode.\n\
+  </p>\n\
+  <h2>Bugs</h2>\n\
+  <p>\n\
+  LiveConsole lacks many of the\n\
+  niceties of IRB on the console, like\n\
+  Readline support.\n\
+  </p>\n\
+  <p>\n\
+  Typing exit, hitting ^D, or sending signals (like INT or STOP)\n\
+  doesn&#8216;t work. Just exit the program you used to connect to it. This\n\
+  has more to do with the program you use to connect to the socket.\n\
+  </p>\n\
+  <p>\n\
+  For TCP connections, there is no authentication support yet, although it is\n\
+  planned for the near future. This creates a security risk: anyone that can\n\
+  connect to the socket can run arbitrary Ruby code as the user who owns the\n\
+  process. In fact, even binding to localhost can be a security issue if\n\
+  you&#8216;re on a box with any untrusted users. If there&#8216;s a chance\n\
+  you don&#8216;t know what you&#8216;re doing, avoid using this library. The\n\
+  Unix Domain Socket version is more secure, as you can control access via\n\
+  filesystem permissions.\n\
+  </p>\n\
+  <p>\n\
+  Only one client can connect at a time. I don&#8216;t think anyone needs\n\
+  multiple LC connections to serve multiple instances of IRB to various clients, but if you need\n\
+  it, let me know.\n\
+  </p>\n\
+  <p>\n\
+  The README contains a slur against Lisp guys. Please stop hitting me with\n\
+  that PDP-10 manual. I love your language and the lambda tattoo on your\n\
+  chest.\n\
+  </p>\n\
+  <p>\n\
+  Other than that, LiveConsole\n\
+  doesn&#8216;t have any known bugs, but it is odd software that also\n\
+  monkey-patches IRB, so they are likely\n\
+  to be there. Bug reports and patches gratefully accepted.\n"
+summary: ""
+key: live-console

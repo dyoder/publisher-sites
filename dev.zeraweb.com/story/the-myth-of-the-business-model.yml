@@ -1,0 +1,36 @@
+--- 
+format: html
+title: The Myth Of The Missing Business Model
+author: Dan Yoder
+published: 2009-05-10
+tags: innovation
+content: |-
+  <p>Over the years, there has been a lot of angst about the <a href="http://adage.com/mediaworks/article?article_id=136388">perceived lack of a business model</a> with Web startups. The venture capitalists backing these startups are even accused of being a means of socialist style wealth redistribution, which would make any <a href="http://www.amazon.com/Vulture-Capital-August-Riordan-2/dp/0918395216">veteran entrepreneur laugh spastically</a>. Still, after the Silly Season of Web 1.0 and the Endless Summer of Facebook and Twitter, I guess I can understand the doubts.</p>
+  <p>Except that ... well, most of doubts have the squishy sound of envy.</p>
+  
+  <div class='inset'>
+    <p class='caption'>Don't kid yourself. Twitter is a money program.</p>
+    <img src='http://farm4.static.flickr.com/3437/3401397827_f0b7eb7dc7.jpg'/>
+  </div>
+  
+  <p>To begin with, a very safe assumption here is that everyone involved is looking to make as much money as they possibly can. During the Silly Season, <a href="http://en.wikipedia.org/wiki/Boo.com">you might have wondered why boo.com got $135M</a> in funding, but the truth was the IPO market was red hot, so hot in fact that <em>the very act of raising more than $100M</em> probably made them a billion dollar company ... had they been able to IPO right after raising the money.</p>
+  <p>Which also explains why the underwriters were pushing out these very unsound IPOs ... as the recent mortgage crisis demonstrates, investment banks are as eager as anyone else to cash in on a trend, and IPOs present them with almost no risk anyway, outside of that to their reputation (which, as we see clearly now, had its price). Once an ill-concieved start-up implodes, they are far removed from the scene of the crime.</p>
+  <p>More recently, Facebook has reportedly turned down acquisition offers <a href="http://www.techcrunch.com/2009/04/30/facebook-rumored-to-be-looking-for-funding-at-5-6-billion-valuation/">as high as four or five billion dollars</a> <em>in the midst of a recession</em>. And this for a company that, OMG, <em>has no freakin' business model!</em> It's just like YouTube! Panic in Detroit!</p>
+  <p>Except that this isn't the mortgage crisis ... or, for that matter, the tech stocks con circa 1999. There is no con, at all, in fact ... just brilliant business strategy.</p>
+  <div class='inset'>
+    <p class='caption'>We've seen this game before.</p>
+    <img src='http://farm1.static.flickr.com/225/492321919_5f584a4779.jpg'/>
+  </div>
+  <p>To begin with, the idea of investing sizeable amounts of money to corner an explosive growth market is <a href="http://en.wikipedia.org/wiki/List_of_people_associated_with_rail_transport#Railroad_Tycoons_.26_Businessmen">nothing new</a>. And social networking is nothing if not an <a href="http://www.readwriteweb.com/archives/hello_india_facebook_now_available_local_languages.php">explosive growth market</a>. Unless you are running out of cash, you don't stop until the growth slows and you reach diminishing marginal returns. And considering <a href="http://twitter.com/ryanblock/status/1563465860">The Oprah just joined Twitter last week</a>, I don't think we're there yet.</p>
+  <p>Second, it happens to be a market where the act of monetizing the service presents tremendous risk ... no one knows exactly how consumers will react to a given monetization strategy. So it is something you do slowly and carefully. In fact, since the consumer <em>is the supply</em>, the last thing you want to do is drive them away while the market is still in rapid growth mode. The social graph is the switching cost and the main barrier to entry. You need to own it, first and foremost.</p>
+  <p>Let's take a closer look at what Twitter is doing ... because it is one of the most brilliant Web business plans I've ever seen.</p>
+  <div class='inset'>
+    <p class='caption'>Sometimes, more features are just confusing.</p>
+    <img src='http://farm4.static.flickr.com/3149/2985736447_e4fc45f02d.jpg'/>
+  </div>
+  <p>To begin with, they built an extremely simple product. Most startups lose on this point, right out of the gate, by trying to build something <a href="http://www.pownce.com/">too clever or complicated</a> or even <a href="http://www.crunchbase.com/company/brijit">pioneering a new market entirely</a>. Twitter took advantage of a known market - SMS messaging - and introduced a simple solution for that market. Yes, there were more sophisticated broadcast messaging solutions, which is exactly why Twitter beat them, because they looked complicated by comparison.</p>
+  <p>That scares consumers away, and when your whole model depends on network effects, you can't afford that. Next, they opened up their API, which led to an entire cottage industry of add-ons, so that Twitter can simply sit back and watch what works and what doesn't risking the loss of marketshare with a crucial misstep. They can even let <em>these </em>companies experiment with monetization strategies. The ones that are the most successful can simply be acquired (or cloned) at a later date.</p>
+  <p>As to the business model, there are many, many ways to monetize access to hundreds of millions of consumers with enough money for a smart phone, computer, and enough leisure time to spend on social networks. <em>Are you kidding me?</em> Not only that, but the potential for targeting specific consumers, by age, location, hobbies, etc., goes far beyond anything we have today. Google built multibillion dollar business based on nothing more than targeting by keywords. Good God.</p>
+  <p>In other words, these are very shrewd entrepreneurs who are trying to corner the market on the social graph because, if you own that, you will be bigger than Google. Probably by an order of magnitude. These guys know exactly what they're doing.</p>
+summary: <p>Over the years, there has been a lot of angst about the <a href="http://adage.com/mediaworks/article?article_id=136388">perceived lack of a business model</a> with Web startups. The venture capitalists backing these startups are even accused of being a means of socialist style wealth redistribution, which would make any <a href="http://www.amazon.com/Vulture-Capital-August-Riordan-2/dp/0918395216">veteran entrepreneur laugh spastically</a>. Still, after the Silly Season of Web 1.0 and the Endless Summer of Facebook and Twitter, I guess I can understand the doubts.</p>
+key: the-myth-of-the-business-model

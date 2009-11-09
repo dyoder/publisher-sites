@@ -1,0 +1,64 @@
+---
+name: introducing-pez
+format: textile
+blog: debugs
+author: Pete Elmore
+published: 2009-07-24 19:48:51.135590 -07:00
+title: Introducing Pez
+summary: |-
+  A new project, a new language, a more Unix-y Forth.
+content: |
+  I'm happy to announce the new language Pez!
+
+  Pez is a fork of the Atlast project, and is still under development.  It shares many of the same goals, although it is also going in a very different direction.  If you'd like to follow the development and/or contribute code, the project is hosted on GitHub at "github.com/pete/pez":http://github.com/pete/pez .
+
+  h3. About Atlast
+
+  The Atlast codebase started life as an internal scripting engine for AutoDesk, and was implemented by "John Walker":http://fourmilab.ch/ in 1990, and later released into the public domain.  The main goal of Atlast was very simple:  produce a uniform internal scripting language that works cross-platform, sort of like LUA is today.
+
+  The case for something like this is very strong.  User scripting in any application of reasonable size is nearly essential; one only has to look at the success of AutoCAD, Emacs, vim, Photoshop, and countless others.  The added bonus is that if your application also has a scripting language, you can use that same language for the configuration files.  Unfortunately, the language used is often somewhat ad-hoc, having been built up from a small set of commands, gradually adding power to the language.  Sometimes the developers end up using the language for tricky parts of the application logic.  It smells remarkably like "Greenspun's Tenth Rule":http://en.wikipedia.org/wiki/Greenspun's_Tenth_Rule to me.  Often, as is the case with my favorite editor vim, the language evolves along very odd lines, and scripting can be a pain.
+
+  I think Mr. Walker makes a really excellent case for including a little language to embed in your program, which you can find as the introduction to the Atlast manual:  "http://fourmilab.ch/atlast/":http://fourmilab.ch/atlast/ .  So I won't belabor the topic, but do have a read if you are interested.
+
+  h3. Here Comes Pez
+
+  Pez is based on Atlast, which has been generously released into the public domain.  (In keeping with the spirit, I intend to keep Pez in the public domain as well.)  Pez shares many of the same goals as Atlast:
+    * A small, simple, fun codebase.
+    * A library to add scripting to whatever application you have.
+    * A powerful language to do this scripting in.
+    * A highly portable implementation.
+    * Fun for the whole family.
+  
+  There are a couple of differences in the roadmap, though.  Pez is actively maintained, and features are being added.  I am fleshing it out for more general-purpose coding, so that in addition to keeping Pez useful as a scripting language, Pez will be more useful as a standalone language.  I'll even be adding real regular expression support.
+
+  And the reasons for going with Atlast were that it is tiny (~4k lines), it's clever, it's portable, it's written entirely in C, it's public domain, and it's fun.
+
+  h3. Weirdness Ahoy!
+
+  Forth is a weird language; it evolved along different lines than most languages.  Although different coding paradigms (some new, some old) are becoming more and more popular all the time.  (Have a look at "Factor":http://factorcode.org/ , "Haskell":http://www.haskell.org/ , "Joy":http://www.latrobe.edu.au/philosophy/phimvt/joy.html , "Erlang":http://erlang.org/ , "Scala":http://www.scala-lang.org/ , "Reia":http://reia-lang.org/ , and the numberous other new interesting languages.  They're fun!)  So the "weirdness isn't so bad":http://www.paulgraham.com/avg.html , and maybe it's actually great.
+
+  While we're accumulating weirdness, then, I'm pleased to say that Atlast is sort of a weird Forth.  It only loosely followed the standard, and its design predates the 1994 standard.  Even better, Pez is a weird version of Atlast!  Although Forth is great, there are already plenty of standards-compliant flavors laying around.  Pez can be thought of as following more modern conventions without breaking the spirit of Forth.  Single-line comments start with a backslash in Forth, but start with either "#" or "#!" in Pez, so that you can write a script that starts with "#! /usr/bin/env pez" and expect it to run.  The standard Unix system calls and an autotools-based build are being added and refined (respectively) as we speak.
+
+  h3. Who's Responsible for this Fiasco?
+
+  So far, mostly me.  (Although Mr. Walker implemented it, I'll take responsibility for the "fiasco" part.)  The "credits":http://github.com/pete/pez/blob/master/doc/CREDITS are available online or in the repository for the full run-down of contributions.  
+  
+  "Matthew King":http://www.automatthew.com/ came up with the name, and has made some contributions already.  (Stack-based language?  Pez?  Right?  I'm going to call the package distribution system "Dispenser".  Feel free to ignore the cultural reference if you're from somewhere that doesn't have PEZ candy.)  
+  
+  Patches are always gratefully accepted.
+
+  h3. The Plan
+
+  So, where is Pez going from it's current, humble status?  As previously mentioned, Pez is going to be fleshed out for general-purpose coding as a standalone language, with the application-scripting part kept up as well.  There is a first pass at an FFI, for calling C libraries from Pez.  There are multiple bug fixes and some performance enhancements coming.  You can get the (almost) full list from the "todo":http://github.com/pete/pez/blob/master/doc/TODO file.  I have some ideas about concurrency that are not quite solid yet, but will hopefully make their way into the language.
+
+  There will, thanks to the FFI, be a lot of libraries to add with minimal effort needed.  I'm starting with "SDL":http://www.libsdl.org/ , because that sounds like the most fun.  I suppose we'll eventually also need some grown-up libraries for parsing JSON, dealing with web-apps, and what have you.
+
+  And I'm planning to try out using Pez as an intermediate language for the Roboto compiler.  Pez (and nearly every Forth dialect) has an odd mixture of portability, dynamism, and closeness to the machine, so I think it would be fun to use for a VM, instead of a bytecode compiler.
+
+  h3. Rupez
+
+  In keeping with having fun with the language, the above-mentioned Matthew King has also created "rupez":http://github.com/automatthew/rupez so that Pez can be portably called from Ruby.  It uses Ruby-FFI, so you can even eval Pez code on top of the JVM in JRuby or from Rubinius, in addition the the normal MRI 1.8 and 1.9 interpreters.
+
+  h3. That's All I've Got.
+
+  Feel free to check it out.  It's at "github.com/pete/pez":http://github.com/pete/pez .  If it doesn't work, let me know.  If you want to hack at it, feel free.  If you want to take the project, fork it, change the name, turn the comment character back to backslash, integrate it into the Windows kernel, and use it to implement next-gen DRM capabilities to make people un-watch movies after seeing them so that they can't tell their friends about them, then hey, it's public domain, the most free of the free software licenses.  Do whatever.  Put that in RMS's GNU/Pipe and GSmoke it.

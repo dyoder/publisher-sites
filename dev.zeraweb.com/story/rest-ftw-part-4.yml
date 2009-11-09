@@ -1,0 +1,27 @@
+--- 
+format: html
+blog: mousetrap-2
+author: Dan Yoder
+title: REST FTW, Part 4
+published: 2009-07-21
+tags: rest
+content: |-
+  <p><em>This is part of a <a href="/rest-ftw-part-1">series of articles</a> on REST.</em></p>
+   
+  <p>So far, we've established the following basic ideas:</p>
+   
+  <ul>
+  <li>REST / ROA are really about distributed messaging.</li>
+   
+  <li>Resources are analogous to objects in OOP. But they are more flexible.</li>
+   
+  <li>In particular, resources are platform and protocol neutral. Thus I can use different representations for a resource (JSON, HTML, MP3, etc.) over different schemes (HTTP, HTTPS, FTP, etc.).</li>
+   
+  <li>HTTP sees the Web as a giant distributed hash. URIs are keys and resources are values. We can only work with resources in terms of its representations.</li>
+   
+  <li>PUT, GET, and DELETE are the main verbs for working with said hash. POST is a catch-all operation, which is why its semantics are left undefined.</li>
+   
+  </ul>
+  <p>For this installment, I am going to simply refer you <a href="http://www.theamazingrando.com/blog/?p=107">here</a>. This skips around a bit, relative our approach here, but (a) I haven't had time to write a new installment, (b) I'd like to give some link love to Rando, since he is also trying to help clear up the confusion on REST, (c) it is a good, practical, article, and (d) you can see some of the same thought process I went through in terms of deciphering Roy's blog.</p>
+summary: <p>For this installment, I am going to simply refer you <a href="http://www.theamazingrando.com/blog/?p=107">here</a>. This skips around a bit, relative our approach here, but (a) I haven't had time to write a new installment, (b) I'd like to give some link love to Rando, since he is also trying to help clear up the confusion on REST, (c) it is a good, practical, article, and (d) you can see some of the same thought process I went through in terms of deciphering Roy's blog.</p>
+key: rest-ftw-part-4

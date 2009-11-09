@@ -1,0 +1,20 @@
+--- 
+format: mab
+author: California For L`Aquila
+blog: ""
+title: ""
+published: 2009-04-13 00:00:00 -07:00
+tags: ""
+content: |-
+  h2 "Spread The Word!"
+  div.twitter do
+    form :action => '/social/twitter', :method => 'POST' do
+        properties do
+    		property :label => 'Status', :type => 'textarea', :name => 'status', :value => 'I just donated $5 to the Abruzzo Earthquake Relief Fund! You can too! http://g33ks4abruzzo.org/donate'
+            property :label => 'Username', :type => 'text', :name => 'user', :value => @user || '', :required => true
+            property :label => 'Password', :type => 'password', :name => 'password', :value => @pwd || '', :required => true
+        end
+        buttons [{ :label => 'Twitter this!', :type => :submit }]
+    end
+  end  
+summary: ""

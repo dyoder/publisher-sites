@@ -1,0 +1,94 @@
+--- 
+format: textile
+title: Just In Time Resources And Why They Matter
+author: Dan Yoder
+published: 2008-02-16 00:00:00 -08:00
+content: |
+  One of the things I always found myself doing in Rails was refactoring my models and controllers so that I could create new ones by simply inheriting from an appropriate base class and then maybe add a few tweaks and be finished. I typically ended up with three or four base classes representing different types of resources. For example, I might have on for administration-related controllers, another for content-delivery related controllers, and so on.
+  
+  h2. Extremely DRY
+  
+  I took this a step further and started refactoring even the "tweaks" - filters, view selection, etc. - into modules that provided class methods to quickly and reliably customize a particular type of resource. Other projects - "DrySQL":http://drysql.rubyforge.org/ and "Dr.Nic's Magic Models":http://magicmodels.rubyforge.org/dr_nic_magic_models/ were doing similar things for models. It was all just "DRY":http://en.wikipedia.org/wiki/Don't_repeat_yourself taken to it's logical extreme within Rails.
+  
+  h2. The "Empty Class" Problem
+  
+  I soon found I had lots of empty, or nearly empty, class definitions defining my models and controllers. In other words, lots of classes that looked something like this:
+  
+  <pre>
+  class CalendarController < ContentController ; end
+  </pre>
+  
+  This seemed to be kind of a shame since Ruby makes it quite easy to create classes or modules on the fly. For example, the above class can be created just as easily like this:
+  
+  <pre>
+  CalendarController = Class.new( ContentController )
+  </pre>
+  
+  So I hacked ActiveDependency so that I could get rid of all these source files whose sole purpose was to declare a class. Now, when a resource class (a model or controller) was referenced, it would spring into existance automatically, just as though I had defined it explicitly. This was cool, but it turned out to have several unexpected benefits.
+  
+  h2. Down The Rabbit Hole
+  
+  *Conformant Resources.* The first was just a side-effect of the all refactoring, but it became more obvious once these "just-in-time" classes were implemented. Resources could generally be placed into categories that defined everything from access to storage in terms of well-defined idioms. Rails itself began moving in this direction with ActiveResource and its related @map.resource@ routing feature. All I had really done was establish a whole bunch of related conventions along the same lines.
+  
+  Now, when I couldn't just use a convention that was already implemented, I would ask myself _why not?_ What was so unique about _this_ particular resource that it had to break from the established conventions. And was the cost of having to maintain it separately worth the benefit? Even though in some cases, it was only few lines of code either way, there was something about not needing to explicitly define models or controllers that encouraged reuse.
+  
+  *Reuse Is For The Lazy.* The second benefit was there was just a lot less work. When all was said and done, probably 60% of my models and controller files disappeared. Documentation and testing were greatly simplified, since if a resource did not have an explicitly defined controller or model, obviously it couldn't override any of the default behaviors. Combined, this represented at least a 25% reduction, on average, in total effort for bringing new resources on-line.
+  
+  *I Typed In The URL And The App Wrote Itself.* The third benefit was that even initial development was faster, for two reasons. First, the increased use of standard conventions (much like those imposed by ActiveResource) made it easier to reuse and integrate code across applications. Second, in many cases, a lot of the initial development could be done without writing any code at all, other than coding up the views. And even that sometimes could be done initially with the right "scaffolding." But that's another topic.
+  
+  h2. Refactoring Responsibilities
+  
+  One thing that was reducing the reusability factor, however, was the complexity of many of the controllers. In addition, there was limited support within Rails for reusing controllers, partly as a consequence of their complexity. Controllers had to run filters, select views and layouts, and determine the content-type of the response. This was one of the motivations for Waves - if the controllers had fewer responsibilities, the impact of the "just-in-time" approach would be amplified.
+  
+  In Waves, controllers have fewer responsibilities, which are taken up by "request lambdas":/more-about-request-mappings and an improved view model. In addition, controllers can be directly reused from within other controllers or views (or, really anywhere in a Waves application). Thus, they are more reusable and also easier to reuse. What remains is to pre-package a variety of common idioms as mixins.
+  
+  h2. "I Want My Own Magic"
+  
+  The "just-in-time" aspect of this solution is the automatic class creation. Of course, you might be wondering, how do I know what class is going to be created? How do I control which idioms apply to a given resource? The answer is in your application's initialization file. Each application is loaded by loading the @startup.rb@ file. This in turn @requires@ your application-specific file. If your application is named @blog@, then this would be the @blog.rb@ file in @lib@.
+  
+  Let's take a look. Right around line 23, we something like:
+  
+  <pre>
+  # autocreate declarations ...
+  case name
+  # don't autocreate configs
+  when :Configurations then nil
+  # set the dataset for Models
+  when :Models
+    autocreate true, eval("Blog::Models::Default") do
+      set_dataset Blog.database[ basename.snake_case.plural.intern ]
+    end
+  # everything else just use the exemplar
+  else
+    autocreate true, eval("Blog::#{name}::Default")
+  end
+  </pre>
+  
+  This is the code where we set how classes are automatically created. The @case@ statement is used to customize the class creation for each application module. The @else@ clause provides the default behavior, which is to use the class @Default@ within the given module. So, for the @Controllers@ module, which is where all the application's controllers live, this would be @Blog::Controllers::Default@.
+  
+  What this means is that @Default@ will be cloned whenever we need a controller that wasn't explicitly defined. We don't actually inherit from the default, which avoids unnecessary additions to the inheritance chain. Instead, we simply copy it. 
+  
+  If we look in our @controllers@ directory, we'll find @default.rb@ that defines this controller. We can put whatever we want in there, but that becomes our default controller. We can also change the autocreate code if we want to use different defaults. For example, we could set certain controllers to be administrative controllers:
+  
+  <pre>
+  %w( User Group Site ).each { |name| autocreate( name, Blog::Controllers::Admin ) }
+  </pre>
+  
+  In this case, each time we want to add a new admin controller, we would just add it to the list here. We would then place the definition of the @Admin@ controller in @admin.rb@.
+  
+  h2. Attack Of The Clones!
+  
+  Why not simply access the admin controller directly, rather than creating these clones? Well, there are three reasons. The first is that if we decided we want to override the default behavior for a given controller, all we have to do is explicitly define it and it will automatically be loaded from its source file instead of autocreated; no code that depends on it needs to change.
+  
+  Second, it's often useful to use reflection from within the controller to infer things like which model it should be associated with. Without giving each controller an appropriate class name, these associations would have to be made explicitly in some other way.
+  
+  Third, it keeps the application consistent. Requests refer to resources, which in turn refer to a model, view, and controller. We can see a URL like @/events/2008-02-13@ and be pretty sure we will be using a controller named @Events@ which probably has a method taking a date and returning a list of events. Consistency is what makes it possible for us to make these kinds of educated guesses and not have to wonder if maybe we should look for a @Calendar@ controller instead.
+  
+  h2. Just-In-Time Resources. Use Them. Or Not.
+  
+  In the end, though, you can use the startup file to do whatever you want. Just-in-time resources is a capability provided by Waves, but you don't always have to use it. Most of the time, however, it can save you considerable time in development, testing, and documentation. In fact, it really goes beyond DRY into something I call Programming By Exception - but that will be a topic for another day and another blog post. In the meantime, you can "read more about the Autocode gem":http://autocode.rubyforge.org/ that is used to implement the autocreate feature.
+
+summary: |
+  One of the things I always found myself doing in Rails was refactoring my models and controllers so that I could create new ones by simply inheriting from an appropriate base class and then maybe add a few tweaks and be finished. I typically ended up with three or four base classes representing different types of resources. For example, I might have one for administrative-related controllers, another for content-delivery related controllers, and so on.
+
+key: just-in-time-resources

@@ -1,0 +1,16 @@
+--- 
+name: contact
+format: textile
+title: Get In Touch
+author: Farooq
+published: 2008-03-07 00:00:00 -08:00
+tags: ""
+content: |-
+  We want to hear from you! What can we do better?
+  
+  "Click here":mailto:farooqshah@me.com to send us an email.
+  
+  Or "just call or come by.":/map
+  
+summary: ""
+key: contact

@@ -1,0 +1,15 @@
+--- 
+name: about-the-artist
+format: html
+title: About The Artist
+author: Vax
+published: 2008-03-07 00:00:00 -08:00
+domain: dan.local
+tags: ""
+content: |-
+  <div style='float:right; padding-left: 10px'>
+    <img src="/images/IMG_3191_JPG?size=small" alt='Vax with some of his amazing pumpkins!'/>
+  </div>
+  <p>Vax Bowes grew up in Venice Beach, California where he still lives today. He has been making art glass mini pumpkins for the last 6 years and has perfected the unique detail in each beautiful pumpkin.</p>
+summary: ""
+key: about-the-artist

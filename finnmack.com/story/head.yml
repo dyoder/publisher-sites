@@ -1,0 +1,19 @@
+--- 
+format: mab
+blog: ""
+author: Dan Yoder
+title: ""
+published: 2009-04-21 00:00:00 -07:00
+tags: ""
+content: |-
+  title "#{ site['title'] }: #{ @title }"
+  # link :rel => 'alternate', :type => 'application/rss+xml', :href => 'http://feeds2.feedburner.com/MouseTrap20'
+  link :rel => 'stylesheet', :type => 'text/css', :href => '/css/site.css'
+  meta :name => 'description', :content => site['description']
+  meta :name => 'verify-v1', :content => 'SJp07enRMbdu2hJ8AhT08Wc6OyTAGjtvxVzo7X1k83g='
+  script :type => 'text/javascript', :src => '/javascript/jquery-1.2.1.pack.js'
+  script :type => 'text/javascript', :src => '/javascript/jquery.flash.js'
+  script :type => 'text/javascript', :src => '/javascript/jquery.cycle.pack.js'
+  script :type => 'text/javascript', :src => '/javascript/site.js'
+summary: ""
+key: head

@@ -1,0 +1,15 @@
+--- 
+name: mfe-menu
+format: wysiwyg
+title: MFE
+author: Pete Elmore
+published: 2006-09-18 14:50:34 -07:00
+content: |-
+  <ul style="">
+      <li><a href="/mfe">About MFE</a></li>
+      <li><a href="/mfe-doc">Documentation</a></li>
+      <li><a href="/mfe-faq">FAQ</a></li>
+      <li><a href="/mfe-download">Download MFE</a></li>
+  </ul>
+summary: <p>&nbsp;</p>
+key: mfe-menu

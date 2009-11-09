@@ -1,0 +1,19 @@
+--- 
+name: introducing-waves
+format: html
+title: Introducing Waves
+author: Dan Yoder
+published: 2008-02-06
+domain: dev.zeraweb.com
+tags: ruby
+content: |-
+  <p>Okay, another one of the big projects I kept alluding to is now out the door: Waves.&nbsp;</p>
+  
+  <p>Waves is an open-source Ruby framework for building Web apps. It was inspired by Rails and Camping, but goes beyond either in terms of features. I hope you'll <a href="http://rubywaves.com">check it out</a>.</p>
+  
+  <p>You should start seeing more posts here now that both <a href="http://datejs.com">DateJS</a> and Waves are out the door.&nbsp;In particular, I am planning to start blogging about some of the interesting stuff I've learned doing these projects, in the form of tips-and-tricks type posts.</p>
+  
+  <p>There are still more interesting things coming in the future, though.&nbsp;I still have to crank up the&nbsp;<a href="http://code.google.com/p/cruiser">Cruiser JavaScript project</a>&nbsp;again (that includes the parser library used in the DateJS project). And there is one more secret squirrel project in the works as well. So stay tuned!</p>
+summary: <p>Waves is an open-source Ruby framework for building Web apps. It was inspired by Rails and Camping, but goes beyond either in terms of features. I hope you'll <a href='http://rubywaves.com'>check it out</a>.</p>
+key: introducing-waves
+

@@ -1,0 +1,19 @@
+domain: zeraweb.com
+title: ZeraWeb
+name: zeraweb.com
+description: Web sites for the rest of us!
+authors:
+- Dan Yoder
+administrators:
+- name: Dan Yoder
+  email: dan@zeraweb.com
+  password: zigzag9
+roles:
+- Admin
+
+Admin:
+- property
+- story
+- image
+- blog
+- gallery

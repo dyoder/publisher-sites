@@ -1,0 +1,18 @@
+--- 
+format: mab
+published: 2009-04-25 12:12:20.648320 -07:00
+content: |
+  if @title.nil? or @title.empty?
+    title site['title']
+  else
+    title "#{ site['title'] }: #{ @title }"
+  end
+  link :type => 'text/css', :rel => 'stylesheet', :href => '/css/site.css'
+  link :rel => 'alternate', :type => 'application/rss+xml', :href => 'http://feeds2.feedburner.com/HangTen'
+  script :type => 'text/javascript', :src => '/javascript/jquery-1.2.1.pack.js'
+  script :type => 'text/javascript', :src => '/javascript/jquery.media.js'  
+  script :type => 'text/javascript', :src => '/javascript/jquery.blockUI.js'    
+  script :type => 'text/javascript', :src => '/javascript/site.js'
+  meta :name => 'verify-v1', :content => 'hd7axhHSwfqAoflkBnEwW3RQOY6QZAFvR3W6nuiN9nk='
+
+key: head

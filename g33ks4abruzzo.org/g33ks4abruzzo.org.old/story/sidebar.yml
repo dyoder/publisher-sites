@@ -1,0 +1,15 @@
+--- 
+format: mab
+author: California For L`Aquila
+title: ""
+blog: ""
+published: 2009-04-16 00:00:00 -07:00
+tags: ""
+content: |-
+  div.sidebar do
+    div.block { story 'please-donate' }
+    div.block { show :blog, 'news' }
+    div.block { story 'resources' }
+  end
+summary: ""
+key: sidebar

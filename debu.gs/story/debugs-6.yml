@@ -1,0 +1,28 @@
+--- 
+name: debugs-6
+format: textile
+title: Old Technology Wins and Loses Simultaneously
+author: Pete Elmore
+blog: debugs
+published: 2007-02-11 00:00:00 -08:00
+content: |
+  I'm using "mozex":http://mozex.mozdev.org/ so that I can write this article with vi, using a deprecated version of "Blackbox":http://blackboxwm.sourceforge.net/ because I can't stand the 0.7 series, and to top it all off, using Mozilla instead of Firefox.
+  
+  Why insist on deprecated software?  There are new, nicer versions of Blackbox, right?  Firefox has a ton of features lacking in Mozilla, right?  The same reason people are still using Lisp, Plan 9, ncurses, and OpenBSD:  new technology takes forever to catch up to old technology.
+  
+  Take, for example, X11 versus MacOS X.  OS X use OpenGL instead of a regular bitmap display.  All text is rendered using postscript, and it looks great.  There's plenty of eye-candy, keys can be bound to run arbitrary commands (finally), and the GUI is tightly integrated with everything the computer does.  What possible reason is there to be using twenty-year-old technology, with its jagged fonts and its general complicated nature?
+  
+  The reason is that a large amuont of X's functionality has not been duplicated in OS X.  It's maddening that what most people consider the state of the art in GUI design still hasn't caught up to the 1980s.  X has a client-server architecture that lets me see windows from different machines scattered across the globe next to eachother on my desktop.  X is independant from the window-manager, so I can pick my own look and feel.  Not only that, but from anywhere on earth (provided a net connection), I can start an X application on my desktop at home.  These are features that, once you get used to them, are irreplacable.  (VNC doesn't cut it, because that's essentially turning the machine single-user, and I want just one application, not an entire X display.)  This stuff is so useful that OS X even includes a buggy, unstable, slow version of X11 (which, oddly, about half the Mac users I know didn't even know was there).
+  
+  I don't care how nice OS X's GUI gets; if it doesn't have these features, I'll go nuts trying to use it.  I'm putting up with 1984's idiosyncracies because the state of the art hasn't yet caught up with it.  
+  
+  It's a similar sentiment that keeps Lisp users tied to their language: even though Haskell and Ruby are a lot nicer, they are missing significant features that Lisp had in fifty years ago.  A Lisp die-hard will point out that Object Orientation, "infinite lists":http://www.cs.chalmers.se/Cs/Grundutb/Kurser/d1pt/d1pta/ListDoc/infinite.html , decent regex support, and currying can be kind of done in Common Lisp, but they can't bear to work in a language that doesn't have macros and a parse-tree syntax.  Languages today are full of improvements over Lisp (despite what Lisp fanatics may tell you), but they still seem unable to catch up with 1956.  
+  
+  I'm sure to a Plan 9 user, my talk about those X11 features I can't possibly live without sounds a lot like pining for Perl's object system.  OS X hasn't quite caught up with Linux, but Linux hasn't quite caught up with Plan 9.  Nothing Adobe puts out has the ability to replace T<sub>E</sub>X.  People still code in Forth, run Slackware, chat on IRC, and play "NetHack":http://www.nethack.org/ .  The list goes on ad nauseum.  
+  
+  And the worst part is that it's not just because the OS X/Linux/Haskell/Ruby/Adobe developers were dumb.  It's not because of their specific limitations; it's because of the limitations of people in general.  Partially, it's because if you allow some things (function currying in Haskell), you make other things difficult or impossible (variable-length argument lists like in Ruby or even C).  Anoter problem is failure to learn from "previous, sensible designs":http://debu.gs/stories/show/debugs-5 (which occasionally happens because a coder doesn't recognize the value in the older design).  But the worst part is features that don't fit into either of those categories:  if you try to create something that does everything, you'll either be overwhelmed by the complexity and "never deliver anything useful":http://www.reactos.org/en/index.html or you'll exhaust all of your time and still deliver "nothing useful":http://www.gnu.org/software/hurd/ .  
+  
+  So the good news is that the problem is partially solvable:  keep the problem down to something you can handle, and you can write something useful.  The bad news is that we might have to wait another 20 years before we've caught up to Plan 9.
+
+summary: Why there's a good reason to still be using Plan 9, Lisp and ncurses.
+key: debugs-6

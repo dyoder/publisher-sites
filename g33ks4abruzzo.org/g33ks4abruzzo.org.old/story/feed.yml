@@ -1,0 +1,12 @@
+--- 
+format: mab
+published: 2009-04-25 12:12:21.127194 -07:00
+content: |
+  div.feed do
+      a :href => "#{@feed}" do
+            img :src => '/images/feed.png'
+            label 'Subscribe ...'
+      end
+  end
+
+key: feed

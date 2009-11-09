@@ -1,0 +1,47 @@
+--- 
+format: mab
+published: 2009-04-25 12:12:19.899341 -07:00
+content: |
+  div.blog do
+    b = find('blog','debugs')
+        a "All entries...", :href => "/debugs"
+    if b['feed']
+      div.feed do
+        a :href => "#{b['feed']}" do
+          img :src => '/images/feed.gif'
+          label 'Subscribe ...'
+        end
+      end
+    end
+    h1 b['title']
+    p.subtitle b['summary'] if b['summary']
+    div.entries do
+      if b['entries']
+        b['entries'].map { |name| find( 'story', name ) }.
+          sort_by { |entry| entry['published'] || Date.today }.reverse[0..5].
+          each do | entry |
+            h2 do
+              a :href => "/#{entry['name']}" do
+                entry['title']
+              end
+            end
+            div.byline do
+              text 'by ' 
+              span.author entry['author']
+              text ' on '
+              span.date entry['published'].strftime('%b %d, %Y') if entry['published']
+            end
+            p do
+              show entry, :content => ('summary' if entry['summary']), :title => false
+            end
+            p.more do
+              a :href => "/#{entry['name']}" do
+              'More ...'
+              end
+            end
+          end
+      end
+    end
+  end
+
+key: blog_summary

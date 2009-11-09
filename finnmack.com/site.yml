@@ -1,0 +1,22 @@
+--- 
+twitter_password: zigzag9
+name: finnmack
+twitter_account: finnmack
+title: Finn Mack Is Back
+domain: finnmack.com
+Admin: 
+- property
+- story
+- image
+- blog
+- gallery
+description: The World According To Finn Mack
+authors: 
+- Finn Mack
+key: site
+roles: 
+- Admin
+administrators: 
+- name: Dan Yoder
+  password: zigzag9
+  email: dan@zeraweb.com

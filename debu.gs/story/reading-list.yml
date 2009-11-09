@@ -1,0 +1,82 @@
+--- 
+name: reading-list
+format: textile
+blog: debugs
+author: Pete Elmore
+title: Reading List for Coders
+published: 2009-07-20 13:59:51.135590 -07:00
+summary: |-
+  Interesting/essential/fun reading for coders.
+content: |
+  This is a collection of articles and code that hold interest to every coder, and all present a fascinating look at different sides of software and computer science, and a couple of historical articles.  The sort of piece that leaves your mind buzzing with possibilities.  All of these pieces will change the way you think about computers, and are all fascinating besides.  They should be of interest whether or not you are familiar with or like any given technology.
+  
+  The first few I selected provided me for an important criterion for inclusion:  rather than finishing this list, I wanted to re-read them (and did for most).  The order is pseudo-random.
+  
+  Ken Thompson, "Reflections on Trusting Trust"
+  "http://cm.bell-labs.com/who/ken/trust.html":http://cm.bell-labs.com/who/ken/trust.html
+  
+  Ken, one of the infamous Bell Labs trio, along with Dennis Ritchie and Brian Kernighan, describes self-reference in code uses it to demonstrate how a compiler is written in the language it is designed to compile, uses that to demonstrate possibly the world's most clever compiler hack and uses that to demonstrate why software is fundamentally untrustworthy.
+  
+  Richard W. M. Jones, "JonesForth"
+  "http://www.annexia.org/_file/jonesforth.s.txt":http://www.annexia.org/_file/jonesforth.s.txt
+  
+  In the only appropriate use of the literate programming style that I've ever seen, Jones builds a complete Forth compiler before his readers' eyes.  It makes for a distressingly addictive read once you are far enough into it, and shows exactly what is so brilliant about Forth, the only language besides most assembly languages to provide at the same time low-level control and dynamism.  (In many ways, newer "dynamic" languages such as Ruby, Perl, and Python, pale in comparison to the dynamism inherent in Forth's execution model.)
+  
+  Ed Post, "Real Programmers Don't Use Pascal" and 
+  Ed Nather, "The Story of Mel"
+  "http://www.pbm.com/~lindahl/real.programmers.html":http://www.pbm.com/~lindahl/real.programmers.html
+  "http://www.pbm.com/~lindahl/mel.html":http://www.pbm.com/~lindahl/mel.html
+  
+  The first article is a brilliant piece of satire from 1983.  Aside from being a hilarious read, you can out-old other coders if you recognize all of the topics mentioned.  It is here to break the list up slightly, but mostly because it is both enjoyable and sets the stage for the second article, "The Story of Mel."  Mel's tale may be a bit obscure if you do not understand machine code, but is still a great read nonetheless.
+  
+  Paul Graham, "Beating the Averages"
+  "http://www.paulgraham.com/avg.html":http://www.paulgraham.com/avg.html
+  
+  Too much low-level stuff, right?  This article is probably the most likely to have been read before seeing this list, so much so that I have to fight the urge to list my criticisms of the article to avoid sounding like a Paul Graham worshipper.  But that doesn't change that the article is brilliant, and in case you have not read it, it is an exploration of the reasons for choosing programming langauges with a brief defense of Lisp, through the description of the "Blub Paradox".  The Blub Paradox is possibly the most interesting part of the article, that I hope I am summarizing fairly when I say that it is like a coder who, because he has never seen a screw, cannot fathom why he would need a screwdriver.  Worse, having never owned a screwdriver, he doesn't know why he would ever buy a screw.
+  
+  Topher Cyll, "If It's Not Nailed Down, Steal It"
+  "http://www.artima.com/rubycs/articles/patterns_sexp_dsls.html":http://www.artima.com/rubycs/articles/patterns_sexp_dsls.html
+  
+  Cyll shows, in what is perhaps inadvertently a different take on the Blub Paradox, the core of the hacker ethos:  feature-stealing.  Starting with basic Ruby, he jumps through a number of hoops to add pattern-matching, S-expressions, and a small DSL to write an interpreter for the familiar Logo language.  It is a fun look at writing an interpreter for a small language, and at de-Blubbing your language of choice.
+  
+  Pete Stevens, "Upside-down-ternet"
+  "http://www.ex-parrot.com/~pete/upside-down-ternet.html":http://www.ex-parrot.com/~pete/upside-down-ternet.html
+  
+  A description of a fun hack for your local network, using Linux's iptables and squid.  Stevens' neighbors are jumping on his unencrypted wireless network, so he serves them an upside-down version of the internet.  It shows exactly how creative one can get with seemingly mundane system tools.
+  
+  Brian W. Kernighan, "Why Pascal is Not My Favorite Programming Language"
+  "http://www.lysator.liu.se/c/bwk-on-pascal.html":http://www.lysator.liu.se/c/bwk-on-pascal.html
+  
+  Brian Kernighan, another Bell Labs vet, talks about programming language design by contrasting Pascal with Fortran, and his experiences in porting Fortran code to Pascal, and describes the biggest problem, a problem still relevant to more modern languages:  "There is no escape."
+  
+  Dennis M. Ritchie, "The Evolution of the Unix Time-sharing System"
+  "http://cm.bell-labs.com/cm/cs/who/dmr/hist.html":http://cm.bell-labs.com/cm/cs/who/dmr/hist.html
+  
+  I promise that this is the last Bell Labs article.  It is a history of Unix, and rationale for its design decisions.  Unix's design still survives today in nearly every operating system, especially Linux and MacOS X (even Windows has, sometimes grudgingly, gradually imported features from Unix, especially from the C coder's perspective).  Especially the section "Pipes", in which DMR talks about modularity and how the pipe operator got its current form in the shell.
+  
+  Tom Duff, "Duff's Device"
+  "http://www.lysator.liu.se/c/duffs-device.html":http://www.lysator.liu.se/c/duffs-device.html
+  
+  Tom Duff describes Duff's Device, which is some sort of abuse of some C feature, probably its syntax.  If you have never encountered one, it is an interesting (but short) read on low-level constructs popping up in higher level languages, and an amusing push at the edges of what C can do.
+  
+  Various MIT hackers, "HAKMEM"
+  "http://home.pipeline.com/~hbaker1/hakmem/hakmem.html":http://home.pipeline.com/~hbaker1/hakmem/hakmem.html
+  
+  This is actually so widely available that it is almost redundant to provide a link.  It is a collection of small hacks on varied topics, but mostly math and PDP assembly code.  Several of the ones that I can understand are absolutely mesmerizing.  
+  
+  John Walker, "ATLAST"
+  "http://fourmilab.ch/atlast/atlast.html":http://fourmilab.ch/atlast/atlast.html
+  
+  This is a full manual for the ATLAST language, although the section I mean to discuss is the introduction.  Despite describing a problem Walker had in 1990, this article (like many listed) is still incredibly relevant.  It discusses the importance of writing applications that are user-scriptable, his experiences with adding AutoLISP to AutoCAD, and the problem that applications rarely can be scripted.  When they are, though, it is often as a manifestation of Greenspun's Tenth Law.  Walker also certainly has a hacker's sense of humor:  "[D]on't be put off by the examples.  Just skim over them as if you understood them."  (I hate to plug here, but I have forked ATLAST to add more portability, FFI, and a few other new features.  See "http://github.com/pete/pez":http://github.com/pete/pez for the Pez project.)
+  
+  Richard P. Gabriel, "Lisp:  Good News, Bad News, How to Win Big"
+  "http://www.dreamsongs.com/WIB.html":http://www.dreamsongs.com/WIB.html
+  
+  This is the article that first laid out the worse-is-better approach, discussing mainly what happened to Lisp in the 80s and why Unix became the dominant platform.  "Worse is Better" is simply solving the 90% case and leaving the user an escape hatch for the remaining 10%, which is a philosophy that has gained a lot of ground.  Gabriel wrote rebuttals to his own argument under a pseudonym, and then rebutted those.  The story behind those articles is as interesting as the articles themselves:  "http://www.dreamsongs.com/WorseIsBetter.html":http://www.dreamsongs.com/WorseIsBetter.html .
+  
+  That's it, that's the list, and it is by no means complete or perfect, but does represent a collection of articles that stuck out in my mind as having had an impact on my approach to computers and specifically to writing code, and are likely relevant to a large number of coders.  They are the articles that I have often excitedly shared with co-workers.  I'm somewhat disappointed that textbooks that are purportedly about computing don't borrow more heavily from the philosophy of the actual coders who created the field that they're writing about, which I hope to have represented well in this collection (including a few more contemporary pieces).
+  
+  But mostly, I hope that these are fun to read.
+
+summary: "Interesting/essential/fun reading for coders."
+key: home

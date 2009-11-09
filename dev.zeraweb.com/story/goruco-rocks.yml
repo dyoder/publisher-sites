@@ -1,0 +1,52 @@
+--- 
+format: textile
+title: GoRuCo Rocked
+author: Dan Yoder
+published: 2009-06-06
+tags: ruby
+summary: |-
+  First, for those of you who haven't heard, "I've left AT&T Interactive and am now with new startup, SharesPost.com":http://dev.zeraweb.com/moving-on. ("Launch is coming soon.":http://sharespost.com/) And, no, it isn't running on Waves. At least, not yet. More on this momentarily.
+
+  Second, some thoughts on the recent "GoRuCo":http://goruco.com, held at Pace University in Manhattan ... to begin with, awesome. _That_ is how you do it. I haven't been to all the regional RubyConfs, but I've been to several, as well as the national conference, and many smaller non-Ruby conferences. They all tend to suffer from one common malady: too many talks and too little socializing. Furthermore, there just aren't enough women involved. I realize "this has become topical lately":http://www.sarahmei.com/blog/?p=46, but I've always thought the imbalance in the technical world (not just Ruby Nation) was ridiculous. 
+content: |-
+  h2. Moving On
+  
+  First, for those of you who haven't heard, "I've left AT&T Interactive and am now with new startup, SharesPost.com":http://dev.zeraweb.com/moving-on. ("Launch is coming soon.":http://sharespost.com/) And, no, it isn't running on Waves. At least, not yet. More on this momentarily.
+  
+  h2. GoRuCo Rocks
+  
+  <div class='inset'>
+  <p class='caption'>OMG girls ... !</p>
+  <img src='http://farm4.static.flickr.com/3613/3577954653_6903d3b560.jpg'/>
+  </div>
+  
+  Second, some thoughts on the recent "GoRuCo":http://goruco.com, held at Pace University in Manhattan ... to begin with, awesome. _That_ is how you do it. I haven't been to all the regional RubyConfs, but I've been to several, as well as the national conference, and many smaller non-Ruby conferences. They all tend to suffer from one common malady: too many talks and too little socializing. Furthermore, there just aren't enough women involved. I realize "this has become topical lately":http://www.sarahmei.com/blog/?p=46, but I've always thought the imbalance in the technical world (not just Ruby Nation) was ridiculous. 
+  
+  Thankfully, the organizers of GoRuCo seem to have made it a goal to socialize more and get more women involved. At least two of the organizers and two of the speakers (out of just 7) are women. Second, there were plenty of opportunities to socialize, including a very nice dinner for the speakers and a very well attended gathering at Ulysses after the conference. As a first-time speaker, I felt very welcome, like I was now a sort of honorary member of the NYC.rb.
+  
+  On top of the that, the talks were quite good (not counting my own). "Sandi Metz":http://sandimetz.com/, in particular, knocked her talk out of the park, which is tough when you're talking about something everyone already thinks they know about (object-oriented design). There were other talks on the future direction of Ruby, building mobile apps in Ruby, and the great Merb/Rails merger, the last talk presented by none other than wycats hims<script type="text/javascript" src="http://dev.zeraweb.com/javascript/tiny_mce/themes/advanced/langs/en.js"></script>elf.
+  
+  I think LA RubyConf (HoRuCo? LaRuCo) can learn a few things from Francis Hwang and the GoRuCo team. I don't think we did badly at all, given that it was our first one, and also that I did absolutely nothing to help. (Well, I offered, but I think Coby was too busy to even figure out what he needed help with, if that makes any sense.) But I do hope that more RubyConf's (and technical conferences) emulate GoRuCo. After all, I think the main reason we go to these things is to be social. Otherwise, I'd just read your blog.
+  
+  <div class='inset'>
+  <p class='caption'>You can't beat the Big Apple for places to go afterwards.</p>
+  <img src='http://farm3.static.flickr.com/2480/3580654712_f972afc321.jpg'/>
+  </div>
+  
+  h2. About Waves
+  
+  I thought my own talk was pretty well received. At least what I saw on the Twitters and what was said to my face was positive. I was on the wrong IRC channel at first, so I didn't see any of the real dirt. However, I don't worry too much about that, anyway. I _felt_ like it was the best version of the talk I've done so far. I think I am striking a better balance between making it clear that Waves is not a REST framework, per se, but also talking about how Waves can help us build more Resourceful apps. Coby, who, because of Confreaks and LA Ruby, has seen every single one of my public Waves talks so far, also agreed this was my best talk. So I'm feeling good about that.
+  
+  I am looking forward to sharing some of these insights in the next installments of my REST FTW series. In addition, the talk should be on-line soon. (Ironically, I can't post the slides on Slideshare because they're HTML. I will get them up soon and the Confreaks video will also be up shortly.) Waves development has stalled at the moment, which is unfortunate, because we have a major release ready to go out as soon as someone can find the time to bang on it a bit and call it a wrap. However, I am hopeful that I can begin to utilize Waves at my new gig and thus put more time into it. If nothing else, I am actively coding again on a daily basis, which helps a lot.
+  
+  <div class='inset'>
+  <p class='caption'>The mad Viking, hard at work bringing you Confreaks.</p>
+  <img src='http://farm4.static.flickr.com/3323/3578838298_df18ca5776.jpg'/>
+  </div>
+  
+  h2. The New Gig
+  
+  Some people have expressed surprise to hear I'm using Rails again at SharesPost.com. I can assure you, had this been greenfield, I would not be using Rails. But the original version was built by contractors and done as a standard Rails app. However, as it happened, I found I was actually looking forward to seeing the state-of-the-art in the Rails world. After all, when I stopped actively using Rails, version 1.2 had just come out. In the end, the experience has served only to remind me why I wrote Waves in the first place. But at least now I can talk to Waves' strengths without wondering if perhaps Rails (or Merb, whichever) had leapfrogged us.
+  
+  It is too early to worry much about whether I'll be using Waves on this project. But I am still running Pages (which runs this site and many others) on it and, last I checked, AT&T is still using as the back-end for the consumer prototypes we launched. For those of you who might be interested, I plan to blog more about where I think the whole Rails/Merb stack has gone wrong and how Waves approaches things differently. It is too involved a topic to embed in an already long and rambling post. I'm not sure why, exactly, but I _feel_ like I am going to be able to write a bit more often going forward. Until then, happy hacking!
+key: goruco-rocks

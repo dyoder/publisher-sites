@@ -1,0 +1,81 @@
+--- 
+format: html 
+title: Functors In JavaScript
+author: Dan Yoder
+published: 2007-04-12
+tags: javascript
+content: |-
+  <p>Merging functional and object-oriented semantics can be tricky. Take, for example, currying a function, a staple of functional programming. Let&rsquo;s take an example of add on a ShoppingCart object. If I curry add, do I curry it with a ShoppingCart instance, or a Product? Technically, this is first parameter, albeit implicit, so we can argue this either way.</p>
+  
+  <p>Another example is composing functions, which is a crucial dimension of functional programming. In the <span class="caps"><span class="caps">OOP</span></span> world, we have to worry about which method an instance is being bound to.</p>
+  
+  <p>In JavaScript, we have yet another challenge to contend with: JavaScript&rsquo;s &ldquo;native&rdquo;, or built-in functions. Consider the following transcript from a Firebug session:</p>
+   <pre>&gt;&gt;&gt; String.prototype.split<br />split()<br /></pre> 
+  <p>Notice that the return type is not &ldquo;function&rdquo;. Even so, I can apply the function:</p>
+   <pre>&gt;&gt;&gt; String.prototype.split.apply('1,2,3',[','])<br />["1", "2", "3"]<br /></pre> 
+  <p>But if I try the same trick with Element.appendChild, it won&rsquo;t work:</p>
+   <pre>// this works like a charm ...<br />body = document.body<br />div = document.createElement("div")<br />body.appendChild(div)<br /><br />// but this doesn't and gives an exception<br />Element.prototype.appendChild.apply( body, [ div ] )<br /></pre> 
+  <p>In other words, even if we can figure out the semantics of functional + <span class="caps"><span class="caps">OOP</span></span>, we still have to deal with the quirkiness of JavaScript&rsquo;s built-in functions.</p>
+  
+  <p>The reason that this matters is that Prototype has introduced the tantalizing possibility of using second order functions with interfaces like Enumerable. As it is, this is still very powerful, since you can define functions inline:</p>
+   <pre>elements.each( function(e) { <br />  document.body.appendChild(e)<br />})<br /></pre> 
+  <p>However, for more complex operations, it is tempting to want to be able dash off one-liners like this:</p>
+   <pre>products.each( Element.prototype.appendChild.bind( document.body )<br />  .compose( Products.prototype.toDom ) );<br /></pre> 
+  <p>In other words, rather than writing code, and thus introducing room for new bugs, we are simply assembling pieces that we already know work.</p>
+  
+  <p>Of course, this example won&rsquo;t work, due to the problems we introduced above. Not only does appendChild not get along with functions that rely on apply (such as bind), but composing a method, as opposed to a function, has dubious semantics. If we bind to this, as this example would imply, then we won&rsquo;t be able to compose ordinary functions.</p>
+  
+  <p>It gets even worse! Since Prototype&rsquo;s Enumerable tries to helpfully overload its iteration functions to take an optional index argument, we have to be certain that the resulting function we pass to it doesn&rsquo;t inadvertently accept the index argument and try to do something with it.</p>
+   <pre>elements.each( update );<br /></pre> 
+  <p>We might expect this to simply clear the contents of the elements in question, but actually what it will do is set the content to &lsquo;1&rsquo;, &lsquo;2&rsquo;, &lsquo;3&rsquo;, and so on. We have to actually do it this way to clear the elements properly:</p>
+   <pre>elements.each( function(e) { e.update() })<br /></pre> 
+  <p>So with this morass of obstacles, can we still proceed with a functional-style approach? Or is the invitation extended by JavaScript&rsquo;s apply and Prototype&rsquo;s Enumerable just an illusion? Is it simply too complicated and too troublesome to bother?</p>
+  
+  <p>Before waving the white flag, why don&rsquo;t we take a look at a few strategies for addressing the problems we are facing? Because, upon reflection, so to speak, it turns out that none of the difficulties we&rsquo;re facing are completely inscrutable.</p>
+  
+  <p>First, let&rsquo;s address the murky semantics of &ldquo;classic&rdquo; functional operators in an <span class="caps"><span class="caps">OOP</span></span> world. There is a very simple answer to this puzzle: restrict functional operations to true functions, not functions that are actually methods. That is to say, curry and compose will simply ignore this. This would seem to be rather drastic, but since we can convert any method into a &ldquo;true&rdquo; function using Prototype&rsquo;s bind, we aren&rsquo;t in bad shape at all.</p>
+  
+  <p>This still doesn&rsquo;t work when we want to defer binding this, as in the toDOM example above. What we need there is another function that, in effect, curries a method while allowing this to be passed in as an argument to the resulting function.</p>
+  
+  <p>But before we bust our brain on <em>that</em> problem, recall that none of these second order functions work with JavaScript&rsquo;s native functions anyway. So perhaps we should consider a completely different approach, one that will work with native functions and perhaps also solve the problem of deferred binding of methods.</p>
+  
+  <p>Thus, we introduce the notion of a Functor. The big difference between a function and a Functor is that a Functor is that (a) a Functor is an ordinary JavaScript &ldquo;class&rdquo; (that is, an object used to create other objects); and (b) it deals with functions as strings, rather than objects. Remember, you can access a function using hash notation:</p>
+   <pre>&gt;&gt;&gt; $$0('body')['appendChild']<br />appendChild()<br /></pre> 
+  <p>What&rsquo;s even better is that I can actually invoke native functions this way:</p>
+   <pre>// dynamic access of native functions<br />$$0('body')['appendChild']( Html.div("Noodles") )<br /></pre> 
+  <p></p>
+  
+  <p>(The code above introduces two of Cruiser&rsquo;s additions to Prototype, $$0, which takes the first element returned from Prototype&rsquo;s $$, and our builder routines, which encapsulate the Scriptaculous builder functions in the Html object.)</p>
+  
+  <p>Let&rsquo;s take a look at how a Functor might look in action. Let&rsquo;s see if we can construct the example above where we were adding product objects to the body of the document.</p>
+   <pre>products.each( Functor('appendChild').bind($$0('div.catalog')).<br />  compose( Functor('toDom')).toUnary())<br /></pre> 
+  <p></p>
+  
+  <p>Well, that&rsquo;s better, now, isn&rsquo;t it? Let&rsquo;s follow the logic here.</p>
+   <ol> 
+  <li>We create a Functor for appendChild. We can do this now because we are accessing native functions as an object property. </li>
+  
+  <li>We bind that Functor to the catalog DIV. In other words, we&rsquo;re going to call appendChild on the catalog DIV.</li>
+  
+  <li>We then compose that Functor with &lsquo;toDom&rsquo;. So we will call toDom first, and then call the appendChild Functor on the result.</li>
+  
+  <li>We then convert the result to a unary function. This ensures that the resulting function won&rsquo;t accidentally accept an index argument from each.</li>
+   </ol> 
+  <p>There is a little bit of magic here. Functor doesn&rsquo;t immediately convert itself into a function, like the classic functional operators do. Instead, it simply keeps track of which attributes (such as a binding or arguments) have been provided and which ones haven&rsquo;t. When it gets converted into a function (in this case, using toUnary), it can determine whether the first argument to the function should be the object (binding) or just an ordinary argument.</p>
+  
+  <p>In this case, since we bound the &lsquo;appendChild&rsquo; functor, it assumes the resulting function should simply take the element to append. &lsquo;toDom&rsquo; however, was never bound, so it knows that the resulting function needs to take a binding object as an argument.</p>
+  
+  <p>Note that we still have our classic functional operators as well. In fact, toUnary (and toBinary) are actually implemented on Function, not Functor. The Functor methods are defined simply defined in terms of these methods.</p>
+  
+  <p>In a nutshell, Functor:</p>
+   <ol> 
+  <li>Provides clear semantics for integrating <span class="caps"><span class="caps">OOP</span></span> and FP styles.</li>
+  
+  <li>Frees the classic FP functions from needing to support <span class="caps"><span class="caps">OOP</span></span> directly.</li>
+  
+  <li>Addresses the difficulties of using built-in functions in JavaScript.</li>
+  
+  <li>Allows us to better leverage functionally flavored libraries like Prototype.</li>
+   </ol>
+summary: "<p>Merging functional and object-oriented semantics can be tricky. Take, for example, currying a function, a staple of functional programming. Let\xE2\x80\x99s take an example of <code>add</code> on a <code>ShoppingCart</code> object. If I curry <code>add</code>, do I curry it with a <code>ShoppingCart</code> instance, or a <code>Product</code>? Technically, <code>this</code> is first parameter, albeit implicit, so we can argue this either way.</p>\r\n              "
+key: functors-in-javascript

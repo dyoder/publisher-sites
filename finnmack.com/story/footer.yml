@@ -1,0 +1,16 @@
+--- 
+format: html
+published: 2009-04-25 12:12:19.987035 -07:00
+content: |
+  
+  <p>&#169; Finn Mack, All Rights Reserved Worldwide, Motherfucker</p>
+  
+  <script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+  try {
+  var pageTracker = _gat._getTracker("UA-731705-8");
+  pageTracker._trackPageview();
+  } catch(err) {}</script>

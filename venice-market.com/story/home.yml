@@ -1,0 +1,15 @@
+--- 
+name: home
+format: textile
+title: Welcome
+author: Farooq
+published: 2009-08-01
+tags: ""
+content: |-
+  <div class='inset'>
+    <img src="/images/storefront.jpg" alt='Your friendly neighborhood market!'/>
+  </div>
+
+  At Venice Market, we want to be a true "neighborhood market," _your_ neighborhood market. Who wants to be forced to choose between convenience and cost? We're all busy and big grocery stores are such a hassle. We want to make it easy for you, and that means a commitment to every day low prices.
+summary: ""
+key: home

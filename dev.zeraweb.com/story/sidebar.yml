@@ -1,0 +1,10 @@
+--- 
+title: Welcome
+format: textile
+published: 2009-04-25 12:12:19.992136 -07:00
+content: |
+  Hi, my name is Dan. :)
+  
+  You can be "my friend":http://www.facebook.com/profile.php?id=1162092623&ref=profile if you want, or just "follow me":http://twitter.com/dyoder. Take a look at my "professional background":http://www.linkedin.com/in/dyoder or my various "open source projects":http://github.com/dyoder. "Peruse the presentations":http://www.slideshare.net/dyoder I've done, or even "watch one":http://rubyconf2008.confreaks.com/waves-a-resource-oriented-framework.html. If all else fails, "read my blog":/blog/mousetrap-2. 
+
+key: home

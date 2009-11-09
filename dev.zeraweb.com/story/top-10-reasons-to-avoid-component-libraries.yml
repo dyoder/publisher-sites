@@ -1,0 +1,36 @@
+--- 
+format: wysiwyg
+title: Top 10 Reasons To Avoid JavaScript Component Libraries
+tags: javascript
+author: Dan Yoder
+published: 2007-05-18
+content: |-
+  <p>An <a href="http://ajaxian.com/archives/adf-faces-rich-client-components-demo">interesting commentary</a> over at <a href="http://ajaxian.com/">Ajaxian</a> concerning the proliferation of component libraries (YUI, <span class="caps">TIBCO</span>, etc.):</p>
+  
+  <p class="quote">Sometimes I feel a little bad when people enjoy a new component here or there, when there are tools such as <span class="caps">TIBCO</span>, Backbase, and Oracle <span class="caps">ADF</span> that have hundreds of them :)</p>
+  
+  <p>Well, here are 10 reasons why Dion shouldn&rsquo;t feel bad. :)</p>
+   <ol> 
+  <li><strong>HTML is better than proprietary markup.</strong> That is especially true when the proprietary markup is in <span class="caps">XML</span>, which it almost always is &hellip; some of us want markup that describes the interface with libraries that just &ldquo;hook&rdquo; into it via <span class="caps">CSS</span> and / or some well-defined structure.</li>
+  
+  <li><strong>My handpicked components load and run faster.</strong> Some of these libraries include, as Dion says, hundreds of components. It isn&rsquo;t always easy to &ldquo;trim the fat&rdquo; and get rid of what you don&rsquo;t need. In addition, the quality of the implementation may vary, particularly in terms of performance. Sorry, I need my page to load fast even over a shaky <span class="caps">DSL</span> connection.</li>
+  
+  <li><strong>Desktop UIs are so 90s.</strong> We don&rsquo;t need to keep trying to make the Web look like the desktop apps. Many of the Web UI idioms that are emerging are far superior to those on the desktop anyway. Let&rsquo;s keep moving forwards, not trying to go back to the past.</li>
+  
+  <li><strong>I don&rsquo;t want your <span class="caps">IDE</span>.</strong> I have my own already. Thanks for using Eclipse, that&rsquo;s better than making us use some completely proprietary <span class="caps">IDE</span>, but not all of us use Eclipse, either (TextMate, anyone?). Sorry. Bottom line: if using your libraries successfully depends on an <span class="caps">IDE</span>, that&rsquo;s a problem.</li>
+  
+  <li><strong>I don&rsquo;t need a drag-and-drop <span class="caps">GUI</span> builder.</strong> That&rsquo;s overkill. I&rsquo;ve been doing <span class="caps">HTML</span> for years. It&rsquo;s relatively simple and I generate most of it anyway from templates. I just want to describe my UI and let your library step in where its needed (see above). It&rsquo;s called being nonintrusive.</li>
+  
+  <li><strong>KISS still applies to Web apps.</strong> Some Web apps really do need a super auto sorting filtering live editing grid. Most don&rsquo;t. Sometimes it is better to provide a simple list with a couple of obvious options for editing it. Note how successful Web apps (see Flickr, YouTube, et al) usually follow this approach.</li>
+  
+  <li><strong>Web development idioms aren&rsquo;t baked yet.</strong> Sometimes I think actually we&rsquo;re just getting started. Some libraries have a great design that follows current best practices (see <a href="http://prototypejs.org">Prototype</a>), while others are already outdated before they&rsquo;re even released. Selectors are a great example of this. Selectors have become a powerful way to bind objects and events to <span class="caps">HTML</span> with the (quite recent) availability of fast <span class="caps">CSS3</span> implementations. That dramatically changes the best practices for interacting with the <span class="caps">DOM</span>.</li>
+  
+  <li><strong>&rdquo;It&rsquo;s very nice, but we already got one.&rdquo;</strong> I not only don&rsquo;t need all of your components, but I may not want some of your &ldquo;core&rdquo; code. Selectors are again a great example. I&rsquo;m quite happy with Prototype&rsquo;s selector implementation. I don&rsquo;t want to load a second one, but I can&rsquo;t take yours out without breaking everything.</li>
+  
+  <li><strong>Standards-based is good.</strong> Thanks for wanting to save me from <span class="caps">HTML</span>, CSS, and JavaScript, but I kind of like the fact that the code I write depends only on the community&rsquo;s continued support of widely adopted standards. For all I know, you may decide that Web apps aren&rsquo;t quite so important to you anymore a year or two down the road. Sure, maybe you&rsquo;ve open-sourced the code, but without you, who keeps the platform moving forward?</li>
+  
+  <li><strong>You still don&rsquo;t have a <span class="caps">WYSIWYG HTML</span> editor.</strong> Pretty much anything you can do, I can do better (with the help of the many talented open source component authors out there). But there are a few things you probably <em>could</em> do better, but you don&rsquo;t. So why do I care?</li>
+   </ol> 
+  <p>Is there any component library out there that can say that even seven out of ten of these don&rsquo;t apply? I&rsquo;d like to know. I admit, I haven&rsquo;t looked at each one in detail. After awhile, you get a bit cynical. And you never know when a new release might take a quantum leap. But, for now, I think I&rsquo;m on pretty sure ground.</p>
+summary: An interesting commentary over at Ajaxian concerning the proliferation of component libraries (YUI, TIBCO, etc.)
+key: top-10-reasons-to-avoid-component-libraries

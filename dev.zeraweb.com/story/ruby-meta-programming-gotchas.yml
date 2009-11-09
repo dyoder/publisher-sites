@@ -1,0 +1,62 @@
+--- 
+format: html
+blog: mousetrap-2
+title: Ruby Meta-Programming Gotchas
+author: Dan Yoder
+tags: ruby
+published: 2007-05-16
+content: "<p>One of the neat features of Ruby is its support for meta-programming. That is code that, essentially, writes code. For example, my Rails <code>ApplicationController</code> has a method called <code>instance</code>, which uses the model name to return an instance variable using <code>instance_variable_get</code>, like this:</p>\n\n\n\
+  <pre><code>\n\
+  def instance\n  instance_variable_get \"@#{model_name}\" \n\
+  end\n\
+  </code></pre>\n\n\
+  \t<p>Another powerful technique is the use of <code>method_missing</code> (which I always want to call <code>missing_method</code> for some reason). Rails itself uses this to implicitly add getters and setters for model instance\xE2\x80\x99s attributes.</p>\n\n\n\
+  \t<h2>Danger, Will Robinson!</h2>\n\n\n\
+  \t<p>However, like any powerful feature, there are some dangers that go along with using these techniques. A couple of the more obvious ones:</p>\n\n\n\
+  \t<p><strong>Bypassing <code>private</code> and <code>protected</code>.</strong> Ruby has an interesting approach when it comes to meta-programming: it assumes that if you know enough to use these kind of features, you don\xE2\x80\x99t need the programming language to protect you from yourself. By definition, <code>instance_variable_get</code> gives you access to private data. Another method, <code>send</code> gives you access to private methods. This can have some interesting side-effects, as we\xE2\x80\x99ll see below.</p>\n\n  <p><strong>Unexpected invocation of <code>method_missing</code>.</strong> Defining <code>method_missing</code> means that erroneous method invocations will now simply invoke your <code>method_missing</code>. This can lead to strange bugs and infinite loops. For example, from within the class that defines <code>method_missing</code>, even a reference to an undefined local variable can invoke <code>method_missing</code>, since Ruby thinks it might be a method invocation.</p>\n\n\
+  \t<h2>But Dan, What Can I Do?</h2>\n\n\n\
+  \t<p>The number one rule about these methods is probably <em>don\xE2\x80\x99t use them unless you have to</em>! However, that\xE2\x80\x99s not much fun, since arguably you never really <em>have</em> to. I coded in <code>C++</code> for years and did just fine for the most part, and <code>C++</code> could not play these kinds of tricks \xE2\x80\x93 and least not easily. But one of the things that the Rails folks have reminded us about is that there is nothing wrong with wanting to enjoy what you do. And meta-programming is fun.</p>\n\n\n\
+  \t<p>So, having decided that we will use <code>missing_method</code> or <code>method_missing</code> or whatever it is, what can we do to keep from hurting ourselves? Here are a couple of handy little rules:</p>\n\n\n\
+  \t<ul>\n\
+  \t<li><strong>Don\xE2\x80\x99t use meta-programming to access private or protected data.</strong> Generally, if you are doing this, you are breaking the interface to the class. If you want to add to the interface, re-open the class definition and add the necessary accessors or whatever. At least that way you aren\xE2\x80\x99t violating the encapsulation of the class.</li>\n\
+  \t</ul>\n\n\n\
+  \t<p>In the example above, <code>instance</code> is defined on the controller. The <code>instance_variable_get</code> method is being used entirely because it provides a simple way to access the \xE2\x80\x9Cinstance\xE2\x80\x9D of the controller without knowing what the instance variable name is, since it varies from controller to controller. Notice that this, in turn, makes it possible for other methods to access the instance variable for the controller without using <code>instance_variable_get</code>.</p>\n\n\n\
+  \t<ul>\n\
+  \t<li><strong>Save <code>method_missing</code> for last.</strong> There is nothing wrong with implementing a method like <code>get_dynamic_attribute</code> or something like that, and then later, once you have the kinks worked out, changing it to <code>method_missing</code>. That way, while you are debugging, you don\xE2\x80\x99t accidentally invoke <code>method_missing</code> and confuse things. Also, you might find that it actually makes more sense to have an explicit interface for such a method. And, after all that, if you still feel like <code>method_missing</code> improves your interface, you can add it quite easily, like this:</li>\n\
+  \t</ul>\n\n\n\
+  <pre><code>\n\
+  def method_missing(method,*args)\n  get_dynamic_attribute(method,*args)\n\
+  end\n\
+  </code></pre>\n\n\
+  \t<ul>\n\
+  \t<li><strong>Use <code>super</code> in <code>method_missing</code>.</strong> <code>method_missing</code> allows you to implicitly define methods on a class. However, it also gets invoked even for methods you didn\xE2\x80\x99t intend to define. In those cases, you need to pass along <code>method_missing</code> to the superclass. For example, Rails does this in ActiveRecord objects if you invoke a method that is not actually an attribute of the class. That way, the programmer still gets a missing method exception if they attempt to access a method that you never wanted to define, instead of some mysterious error that might not even make sense to you.</li>\n\
+  \t</ul>\n\n\n\
+  \t<p>Which means the above wrapper code should really look like this:</p>\n\n\n\
+  <pre><code>\n\
+  def method_missing(method,*args)\n  get_dynamic_attribute(method,*args) rescue super\n\
+  end\n\
+  </code></pre>\n\n\
+  \t<ul>\n\
+  \t<li><strong>Don\xE2\x80\x99t use <code>send</code> and <code>method_missing</code> together.</strong> More on this below.</li>\n\
+  \t</ul>\n\n\n\
+  \t<h2>Send Buddhism</h2>\n\n\n\
+  \t<p>Let\xE2\x80\x99s examine one of the mysteries of <code>send</code>. Actually, it isn\xE2\x80\x99t really a mystery of <code>send</code> so much as <code>Object</code>. As I mentioned above, <code>send</code> bypasses private / protected distinctions \xE2\x80\x93 you can invoke <em>any</em> method on an object using <code>send</code>. This is very consistent with other meta-programming methods in Ruby. What makes this interesting is that there are a lot of methods defined on <code>Object</code> as private methods. They get pulled in from <code>Kernel</code> and, because they are private, they are easy to overlook. In fact, it is this bit of magic that allows you to use <code>Kernel</code> methods, like <code>puts</code> without referencing an <code>Object</code>.</p>\n\n\n\
+  \t<p>Here is a quick <code>irb</code> session that demonstrates what I\xE2\x80\x99m talking about here:</p>\n\n\n\
+  <pre><code>\n\
+  irb(main):002:0> class Foo ; end\n\
+  => nil\n\
+  irb(main):003:0> Foo.new.puts \"hello\" \n\
+  NoMethodError: private method `puts' called for #<Foo:0x34d7d0>\n        from (irb):3\n\
+  irb(main):004:0> Foo.new.send :puts, \"hello\" \n\
+  hello\n\
+  => nil\n\
+  </code></pre>\n\n\
+  \t<p>However, what this means is that when you use <code>send</code>, you have to remember that <em>all these methods become part of the interface</em>. There are a lot of these and so the interface may not be what you expect it to be when using <code>send</code>. In combination with other meta-programming techniques, including the use of <code>method_missing</code>, this can lead to very unexpected results.</p>\n\n\n\
+  \t<h2><code>method_not_missing</code></h2>\n\n\n\
+  \t<p>This can come up quite naturally. For example, suppose you want to parse a template that gives you access to an ActiveRecord attribute. You get the name of the attribute and naturally decide to use <code>send</code> to invoke the accessor. However, the accessor happens to be named \xE2\x80\x9Cdisplay\xE2\x80\x9D. Guess what? Instead of the ActiveRecord object\xE2\x80\x99s <code>method_missing</code> (as he corrects himself for the 17th time in this blog entry after writing <code>missing_method</code>), you will get <code>Object#display</code>, which will quietly print the object on standard out and return nil.</p>\n\n\n\
+  \t<p>To your template parsing code, it looks as though the value of the <code>display</code> attribute is nil, when in fact, you have no idea what the value might be. There is no error or exception, either, and you\xE2\x80\x99d have to look closely at your logs to see that anything at all was happening out of the ordinary. This is the kind of bug you can have nightmares about years later.</p>\n\n\n\
+  \t<p>This is another benefit to having an explicit interface for the implicit methods. Then, instead of using <code>send</code>, you can use that method. This is a flaw, in my opinion, of the current ActiveRecord implementation. An improved version would explicitly provide an accessor function in place of the current <code>method_missing</code>, and then simply have <code>method_missing</code> invoke that function, catching any exceptions and calling super.</p>"
+summary: |
+  <p>One of the neat features of Ruby is its support for meta-programming. That is code that, essentially, writes code. However, like any powerful feature, there are some dangers that go along with using these techniques.</p>
+
+key: ruby-meta-programming-gotchas

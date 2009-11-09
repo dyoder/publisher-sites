@@ -1,0 +1,22 @@
+--- 
+name: venice-market
+title: "Venice Market: Convenience, Not Cost"
+domain: venice-market.com
+description: Neighborhood market in Venice, California.
+authors: 
+- Farooq
+administrators: 
+- name: Farooq
+  password: farooq
+- name: Dan Yoder
+  password: zigzag9
+  email: dan@zeraweb.com
+roles:
+- Admin
+
+Admin:
+- property
+- story
+- image
+- blog
+- gallery

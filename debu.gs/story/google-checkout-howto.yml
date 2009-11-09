@@ -1,0 +1,62 @@
+--- 
+name: google-checkout-howto
+format: wysiwyg
+title: Google Checkout
+author: Pete Elmore
+published: 2006-09-29 16:12:38 -07:00
+content: |-
+  <div id="contextContent">
+  <div id="description">
+  <h2>Installation</h2>
+  <p> Currently, it&lsquo;s only available as a gem. </p>
+  <h2>What is Google Checkout?</h2>
+  <p> Well, according to Google, &quot;Google Checkout helps you increase sales. And process them for free when you advertise with Google.&quot; What it really amounts to is that Google will process your orders for a 10% fee and you get a little shopping cart icon in your ad if you advertise through AdWords. The fee can be paid by running AdWords ads on your site. You can read about it and get an account at <a href="http://checkout.google.com/sell">checkout.google.com/sell</a> . </p>
+  <h2>What is google-checkout?</h2>
+  <p> google-checkout is a module for working with the Google Checkout API (<a href="http://code.google.com/apis/checkout/index.html">code.google.com/apis/checkout/index.html</a>). Specifically, if you have a Google Checkout account, you can use this module to do things like add &quot;Checkout&quot; and &quot;Buy Now&quot; buttons to your site. </p>
+  <h2>Brief Example</h2>
+  <pre>  require 'rubygems'<br />  require 'google-checkout'<br /><br />  merchant_id = 'Your merchant id.'<br />  merchant_key = 'Your merchant key.  Keep this a secret!'<br /><br />  cart = GoogleCheckout::Cart.new(merchant_id, merchant_key)<br />  cart.add_item(:name =&gt; 'Chair', :description =&gt; 'A sturdy, wooden chair',<br />                :price =&gt; 44.99)<br />  puts cart.checkout_button<br /><br /></pre>
+  <h2>Usage</h2>
+  <p> First, you&lsquo;ll need a merchant ID and a merchant key, which you can get from the Google Checkout site once you have an account. After you have that, you can start writing code. </p>
+  <p> The class you&lsquo;ll be working with is GoogleCheckout::Cart. Of course, it represents a cart, and you can fill it with items. </p>
+  <pre>  cart = GoogleCheckout::Cart.new(merchant_id, merchant_key, item1, item2)<br />  cart.add_item item3<br /></pre>
+  <p> The items you put into the cart should be one of two types: </p>
+  <ul>
+      <li>A Hash containing the following &nbsp;
+      <ul>
+          <li>:name </li>
+          <li>:description </li>
+          <li>:price </li>
+          <li>:quantity (default 1) </li>
+          <li>:currency (default &lsquo;USD&rsquo;) </li>
+          <li>:regular_shipping, the shipping cost (default $0) </li>
+      </ul>
+      </li>
+  </ul>
+  <ul>
+      <li>Or any Object that has a method called to_google_product that returns a hash like the one described.  </li>
+  </ul>
+  <p>  Once you have a cart full of items, you can generate the XML for the API call by calling Cart#checkout_xml, although you&lsquo;ll probably just want to add a checkout button to your page with Cart#checkout_button. This method generates HTML for a form containing a button and the hidden inputs necessary to call Google Checkout. Cart#checkout_button has plenty of options for controlling the look of the button. Once again, the arguments are passed as a hash, although the defaults are usually reasonable so you might not need to pass anything. </p>
+  <ul>
+      <li>:size is the size of the button, one of :small, :medium, or :large. Google is picky about the sizes of these buttons. See GoogleCheckout::ButtonSizes for more information. The default is :medium.  </li>
+      <li>:variant is one of &lsquo;disabled&rsquo; or &lsquo;text&rsquo;. &lsquo;disabled&rsquo; means that the button should be greyed-out; it is used in cases that the item you are selling cannot be bought via Google Checkout. (There&lsquo;s a long list of items that are not allowed at <a href="https://checkout.google.com/seller/content_policies.html">checkout.google.com/seller/content_policies.html</a>  </li>
+      <li>:buy_or_checkout must be one of :buy_now or :checkout . This determines the look of the button that will be displayed. The default is to use :checkout if there are two or more items in the cart.  </li>
+      <li>:style must be one of &lsquo;white&rsquo; or &lsquo;trans&rsquo;. &lsquo;white&rsquo; gets you a white button, while &lsquo;trans&rsquo; gets you a transparent button suitable for use on non-white backgrounds. The default is &lsquo;white&rsquo;.
+      <p> cart.checkout_button :size =&gt; :small, :style =&gt; &lsquo;trans&lsquo; </p>
+      </li>
+  </ul>
+  <p> When users click the button, they will be taken to the Google Checkout page with a cart full of the products you specified, and your work is done. </p>
+  <h2>Missing Features</h2>
+  <ul>
+      <li>Level 1 integration is complete except for tax tables   </li>
+      <li>Level 2 integration is missing.  </li>
+  </ul>
+  <p> See <a href="http://checkout.google.com/support/sell/bin/answer.py?answer=42917&amp;topic=8671">checkout.google.com/support/sell/bin/answer.py?answer=42917&amp;topic=8671</a> for more information about the two integration levels. </p>
+  <p> If there are missing features I haven&lsquo;t thought of, let me know. </p>
+  <h2>Bugs</h2>
+  <p> No &lsquo;hard&rsquo; bugs, I hope. My contact information is at the bottom of the page if you find one. There may be more subjective bugs (e.g., design issues); feel free to tell me about these, too. </p>
+  <h2>Contact Information</h2>
+  <p> The home page is at <a href="http://debu.gs/google-checkout">debu.gs/google-checkout</a> . You can email me at pete dot elmore at gmail dot com. Try to mention Google Checkout in the subject line. </p>
+  </div>
+  </div>
+summary: <p>A guide to the google-checkout API.</p>
+key: google-checkout-howto

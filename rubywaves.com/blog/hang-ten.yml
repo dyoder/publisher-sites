@@ -1,0 +1,35 @@
+--- 
+name: hang-ten
+title: Hang Ten
+published: 2009-03-07 15:08:13.355190 -08:00
+domain: dan.local
+entries: 
+- att-announcement
+- speaking-at-rubyconf
+- 0-8-1
+- 0-8-0
+- waves-0-7-5
+- announce-0.7.0
+- announce-0.6.9
+- more-about-request-mappings
+- matz-blogs-about-waves
+- just-in-time-resources
+- waves-on-infoq-and-rubyinside
+- official-move-to-git
+- ive-joined-yellowpagescom
+- lonestar-announcement
+- updated-roadmap
+- waves-0-7-7
+- waves-rumors
+- why-resource-oriented-matters
+- when-waves-grows-up
+- la-rubyconf-kills-it
+- speaking-at-goruco
+- rest-ftw-part-1
+- rest-ftw-part-2
+- rest-ftw-part-3
+- rest-ftw-part-4
+- goruco-rocks
+summary: Announcements, tutorials, guides, etc. about Waves.
+key: hang-ten
+feed: http://feeds.feedburner.com/HangTen

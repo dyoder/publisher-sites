@@ -1,0 +1,248 @@
+--- 
+name: compact-tutorial-2
+format: textile
+blog: ""
+title: Compact Applications, part 2
+author: Dan Yoder
+published: 2008-01-29 00:00:00 -08:00
+domain: dan.local
+tags: ""
+content: |-
+  Our dear little @Spitball@ wants to grow up to be a file-based Pastie application.  To make his wish come true, we will create a resource named @Pastie@ and delegate to it all requests to paths starting with @/pasties@.  Change the request matching declarations in the Map resource (in @startup.rb@) to look like this:
+  
+  p(commit). "commit edd8d40":http://github.com/waves/waves/compact-tutorial/tree/edd8d40/startup.rb
+  
+  <pre>
+  on( true, [ 'hello' ] ) { to( :greeting ) }
+  on( true, [ 'hello', true ] ) { to( :greeting ) }
+  
+  on( true, [ 'pasties' ] ) { to( :pastie ) }
+  on( true, [ 'pasties', true ] ) { to( :pastie ) }
+  </pre>
+  
+  In a path matching array, @true@ will match any value, so long as the corresponding path component exists.  This is why we need two declarations for each resource; @/hello@ has only a single path component, so @[ 'hello', true ]@ does not match it. Do leave the greeting bits in for now, because sometimes a fellow gets lonely.
+  
+  Next, create a file named @pastie.rb@ in your application directory and add this code:
+  
+  p(commit). "commit edd8d40":http://github.com/waves/compact-tutorial/tree/edd8d40/pastie.rb
+  
+  <pre>
+  require 'markaby'
+  module Spitball
+    module Resources
+      class Pastie
+        include Waves::Resources::Mixin
+  
+        # Request dispatching declarations
+        on( :get, [ 'pasties' ] ) { list }
+  
+        # Resource methods
+        def list
+          pasties = Dir.entries( 'pasties' ).slice(2..-1)
+  
+          layout :title => "Spitball presents Pasties" do
+            h1 "Have some pasties!"
+            ul do
+              pasties.each do |pastie|
+                li { a pastie, :href => "/pasties/#{pastie}" }
+              end
+            end
+          end
+  
+        end
+  
+        def layout( assigns = {}, &block )
+          Markaby::Builder.new assigns do
+  
+            html do
+              head { title @title }
+              body do
+                div.main!(&block)
+              end
+            end
+  
+          end
+        end
+  
+      end
+    end
+  end
+  </pre>
+  
+  As written, @Pastie@ now handles GET requests to @/pasties@.  The return value of @#list@ will be used as the response body.  We also introduced a helper, @Pastie#layout@, using Markaby::Builder to render HTML.
+  
+  h2. Yes, we have no pasties today
+  
+  @Pastie#list@ assumes that you have a directory named @pasties@ in your project, which makes now a good time to create that directory and add a few dummy files.  We modified @startup.rb@, which is not subject to code reloading, so you need to restart the waves server again.  Then visit @/pasties@, and you should see a list of the dummy files you created.  The pastie links don't actually work yet, that being the next thing we need to fix.
+  
+  First add a request matcher:
+  
+  p(commit). "commit 415890":http://github.com/waves/compact-tutorial/tree/415890/pastie.rb
+  
+  <pre>
+  # Request dispatching declarations
+  on( :get, [ 'pasties' ] ) { list }
+  on( :get, [ 'pasties', :name ]) { show( captured.name ) }
+  </pre>
+  
+  Then add a @show@ method to @Pastie@:
+  
+  p(commit). "commit 415890":http://github.com/waves/compact-tutorial/tree/415890/pastie.rb
+  
+  <pre>
+  def show(name)
+    pastie = "pasties/#{name}"
+    response.status = 404 and return "404 Not Found" unless File.exist?( pastie )
+    string = File.read( pastie )
+  
+    layout :title => "pastie #{name}" do
+      h1 "Here's a hot pastie!"
+      hr
+      pre { text(string) }
+      hr
+    end
+  end
+  </pre>
+  
+  The pastie links at /pasties now work, but because @Pastie#show@ gives up a 404 when the file doesn't exist, random pastie names do not.  As this code shows, you can access the HTTP response attributes using the @response@ helper method.  Waves has a better way to handle Not Found situations, however, which is why the 404 error you saw before was so much prettier.  Substitute the following code for the <nobr>@response.status = ...@ line:</nobr>
+  
+  p(commit). "commit 6be59bd":http://github.com/waves/compact-tutorial/tree/6be59bd/pastie.rb
+  
+  <pre>
+  raise Waves::Dispatchers::NotFoundError unless File.exist?( pastie )
+  </pre>
+  
+  This works because the compact foundation declares an exception handler that rescues all NotFoundErrors.  The exception handler sets the response status to 404 and renders a built-in error page.
+  
+  The app can now display individual pasties, as well as a list, but we don't have a way to create them yet.  At minimum, we need a form and an action to handle it.  Following the customary REST semantics, we'll use a POST to @/pasties@ to create a new pastie.  An alternate setup, if we're willing to allow users to choose the name of the pastie, would accept PUT requests to @/pasties/<name>@.  This would provide an means of updating items, as well as creating them.  For this tutorial, though, we're going to consider pasties immutable, and we will assign them arbitrary filenames.
+  
+  Add two declarations to the request matchers; one for displaying the form, and one for creating the pastie.  The first declaration is straightforward and does not introduce anything new.  The second declaration uses the @query@ helper, which provides access to the HTTP query params.
+  
+  p(commit). "commit f68a281":http://github.com/waves/compact-tutorial/tree/f68a281/pastie.rb
+  
+  <pre>
+  on( :get, [ 'pasties', 'form' ]) { form }
+  on( :post, [ 'pasties' ] ) { create( query['code'] ) }
+  </pre>
+  
+  For the form, which will be accessible at @/pasties/form@, create another view method in Pastie using the @layout@ helper.  Our pasties do not have titles or any other metadata at this stage, so the form only needs a single textarea.  As you can see in the request matcher above, the field name is 'code'.
+  
+  p(commit). "commit f68a281":http://github.com/waves/compact-tutorial/tree/f68a281/pastie.rb
+  
+  <pre>
+  def form
+    layout :title => "Create a new pastie" do
+      h1 "I want your pastie."
+      form :method => :post, :action => "/pasties" do
+        label "Code goes here" ; br
+        textarea :name => :code, :id => "pastie_code", 
+          :rows => 24, :cols => 80; br
+        input :type => "submit", :value => "Save"
+      end
+    end
+  end
+  </pre>
+  
+  When creating a pastie file, we need to generate a unique name.  One robust way to avoid naming collisions is to use an MD5 digest.  Insert @require 'digest/md5'@ at the top of @pastie.rb@, then add the following method, which derives a digest string from the time, a random number, and the first 80 characters of the text. After creating a file named with the digest string and containing the pastie text, we call the @redirect@ helper method.
+  
+  
+  p(commit). "commit f68a281":http://github.com/waves/compact-tutorial/tree/f68a281/pastie.rb
+  
+  <pre>
+  def create(text)
+    digest = Digest::MD5.hexdigest("#{Time.now}#{rand(256)}#{text[0,79]}")
+    pastie = "pasties/#{digest}"
+    File.open( pastie, 'w' ) { |f| f.print text }
+    redirect pastie
+  end
+  </pre>
+  
+  Finally, add a link to the form in the list view:
+  
+  p(commit). "commit f68a281":http://github.com/waves/compact-tutorial/tree/f68a281/pastie.rb
+  
+  <pre>
+  def list
+    pasties = Dir.entries( 'pasties' ).slice(2..-1)
+  
+    layout :title => "Spitball presents Pasties" do
+      h1 { a "Give me a pastie!", :href => "/pasties/form" }
+      h1 "Have some pasties!"
+      ul do
+        pasties.each do |pastie|
+          li { a pastie, :href => "/pasties/#{pastie}" }
+        end
+      end
+    end
+  </pre>
+  
+  
+  h2. Static assets  
+  
+  If you want to use CSS to spice up the visuals, you can (of course) add it inline to the views or layout helper, or you can arrange for the use of an actual file.  The easiest way to do the latter is to add a request matching declaration to one of the resources, backed up with a block or method that uses File.read to get the content from an actual file.  For better performance, you can also alter the Rack configuration to add a piece of middleware that shortcuts requests to certain URLs.
+  
+  p(commit). "commit 26c56f3":http://github.com/waves/compact-tutorial/tree/29757cb/startup.rb
+  
+  <pre>
+  module Configurations
+    class Development
+      reloadable [ Resources ]
+  
+      application do
+        use ::Rack::ShowExceptions
+        use ::Rack::Static, :urls => [ '/public/site.css' ], :root => './'
+        run ::Waves::Dispatchers::Default.new
+      end
+    end
+  end
+  </pre>
+  
+  The block passed to @application@ configures Rack for use with your application.  This example was borrowed from the classic application template and simplified for our use.  The @run@ method gives Rack its entry point into the Waves application, so hands off that line.  The @use@ method inserts pieces of Rack middleware into the processing chain.  Here the Rack::Static middleware intercepts any requests @/public/site.css@ and serves that file directly from the application root.
+  
+  Next we modify the layout to link to that URL:
+  
+  p(commit). "commit 26c56f3":http://github.com/waves/compact-tutorial/tree/29757cb/pastie.rb
+  
+  <pre>
+  def layout( assigns = {}, &block )
+    Markaby::Builder.new assigns do
+      html do
+        head do
+          title @title
+          link :href => '/public/site.css', :rel => 'stylesheet', :type => 'text/css'
+        end
+        body do
+          div.main!(&block)
+        end
+      end
+    end
+  end
+  </pre>
+  
+  You can put whatever styles you like in @public/site.css@, naturally.  I liked these:
+  
+  p(commit). "commit 26c56f3":http://github.com/waves/compact-tutorial/tree/29757cb/public/site.css
+  
+  <pre>
+  body { background: #9cf; }
+  a, a:visited { color: #069; }
+  pre { padding: 10px; background: #eee; }
+  li { list-style: none;}
+  hr { color: transparent; background: #900; }
+  div#main { margin: 25px; padding: 25px; background: white; }
+  </pre>
+  
+  h2. It's alive!
+  
+  We now have a reasonably functional pastie application.  Logical next steps: 
+  
+  * change the list view to display blurbs for each pastie, instead of just the meaningless filename
+  * paginate or limit the number of pasties shown on the list page, perhaps by shelling out and using @find -cmin@ to get only the most recent files
+  * provide a way to create a new pastie starting with an existing pastie's text
+  * track each pastie's language using a file extension on the pastie file
+  * syntax coloring
+  * add title and other metadata to pasties, requiring a change from the simplistic file content == pastie text storage method
+  
+  We leave these enhancements as an exercise for the reader.
+summary: ""
+key: compact-tutorial-2

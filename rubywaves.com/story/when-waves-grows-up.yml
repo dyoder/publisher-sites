@@ -1,0 +1,22 @@
+--- 
+format: textile
+blog: ""
+author: Dan Yoder
+title: When Waves Grows Up
+published: 2009-03-13 00:00:00 -07:00
+tags: ""
+content: |-
+  I get a number of questions along the lines of, "Why shouldn't I just use Rails or Merb? How is Waves better than Rails?" and so forth. The thing is, Waves is not "a better Rails" -- Rails does a great job for database-driven Web apps and Merb provides a nice target for "Rails 3". Waves is trying to solve a different problem entirely.
+  
+  What Rails is to Web apps, Waves aspires to be for the semantic Web, which is why there is so much more focus on REST and HTTP in Waves. For example, caching in Waves is based entirely on HTTP caching, rather than implementing an application-level caching stack. This is far more powerful since it allows caching to be pushed as close to the edge of the network as possible rather than trying to do it all at the source.
+  
+  Tim Berners-Lee has been evangelizing the semantic Web for a number of years now. He is now referring to it as "linked data":linked-data, probably because "semantic Web" sounds sort of arcane, whereas "linked data" sounds fairly straightforward. "He recently gave a short TED talk":linked-data (less than 20 minutes) on the subject, which I think does a nice job of capturing the appeal of this idea. I also "wrote a blog post":top-10-roa about why I think the time for linked data (I talk about it in terms of Resource Oriented Architecture) has come.
+  
+  Today, "there aren't many frameworks for developing Web resources":rest-frameworks. For the most part, existing frameworks focus on MVC, which is the wrong abstraction for REST. In turn, that "makes it hard to write truely REST APIs":rest-requirements and causes a lot of confusion. The benefits of REST are so compelling, however, that it's worth overcoming these obstacles and creating a framework that helps developers create REST-based applications. Rails did that for MVC apps and essentially lowered the barrier-to-entry for writing them. Now we're trying to do the same for REST.
+  
+  [linked-data]http://blog.ted.com/2009/03/tim_berners_lee_web.php
+  [top-10-roa]http://dev.zeraweb.com/top-10-reasons-resource-oriented-architecture-matters/
+  [rest-frameworks]http://littlefyr.com/articles/2009/02/13/where-are-the-rest-frameworks
+  [rest-requirements]http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
+summary: I get a number of questions along the lines of, "Why shouldn't I just use Rails or Merb? How is Waves better than Rails?" and so forth. The thing is, Waves is not "a better Rails" -- Rails does a great job for database-driven Web apps and Merb provides a nice target for "Rails 3". Waves is trying to solve a different problem entirely.
+key: when-waves-grows-up

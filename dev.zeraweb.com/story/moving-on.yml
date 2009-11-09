@@ -1,0 +1,63 @@
+--- 
+format: html
+blog: mousetrap-2
+title: Moving On
+author: Dan Yoder
+published: 2009-05-31
+tags: professional
+content: |-
+  <h2>What In The Wide, Wide World Of Sports ...</h2>
+  
+  <p>Okay, people. Here's the big explanation. First, the facts of the matter. I've left AT&amp;T and started a new gig with <a href="http://sharespost.com/">SharesPost.com</a>, which provides on-line trading for privately held stock, joining them as their VP of Engineering. This is pretty heady stuff, all Ruby, and all the more so because it is associated with an up-and-coming incubator, <a href="http://brighth.com/">Brighthouse</a>, and because it is located in Santa Monica, so I can move back to the bizzeach!</p>
+  
+  <h2>But I Just Moved To Glendale, Dammit</h2>
+  
+  <p>Why leave AT&amp;T Interactive? After all, we had succeeded in creating a little pseudo start-up inside this giant telco, recruited a great team, and had launched a half-dozen <a href="http://www.have2eat.com/have2eat">consumer prototypes</a>, including <a href="http://www.speak4it.com/">one of the first voice-search apps for the iPhone</a>. Along the way, we'd helped to <a href="http://www.larubyconf.com/">get the LA Ruby group off the ground</a> and made a fair amount of noise at various conferences, ranging from LA UX to SxSW.</p>
+  
+  <div class="inset">
+  <p class='caption'>I even wrote <a href='http://dl.getdropbox.com/u/1137867/the-roosevelt.mp3'>a song</a> about this place.</p> <img src="http://farm3.static.flickr.com/2157/2271006633_380a39dd05.jpg" alt="" /></div>
+  
+  <p>The high-point was undoubtedly our off-site 2009 planning event at the Roosevelt Hotel. The theme we chose was convergence (inspired by <a href="http://www.ted.com/">TED</a> and <a href="http://mindshare.la/">Mindshare</a>): entertainment, arts, and technology, that we'd hit an inflection point where tech was going mainstream. Everyone was brainstorming like mad and we were just going to rock the world. We had secured kudos from several senior execs at corporate, <a href="http://www.spazout.com/">Chris Hughes</a> had just been invited to join the CTO's Technology Council, and I had just come back from an\xC2\xA0exhilarating visit with the legendary AT&amp;T Labs. Looking back, it is hard to believe that only three months later, I would be resigning!</p>
+  
+  <h2>About Those Expense Reports ...</h2>
+  
+  <p>What followed, I can only describe as insane backlash. We weren't following the rules and we had to be stopped! This ranged from PR violations to past due expense reports to creating new brands without the proper review. At one point, one of our apps had been rejected by the App Store at the request of ... <span style="font-style: italic;">AT&amp;T</span>, if you can believe that. Mix in the usual fear and envy and corporate politics you find in any large organization, and you end up with a <a href="http://www.mobilecrunch.com/2009/05/05/att-finally-releases-what-should-have-been-the-first-iphone-app/">cocktail of fail</a>.</p>
+  
+  <p>I won't bore you with the details. Suffice to say, in short order, we were told to behave ourselves or else, and those who might have intervened to keep the game going decided the timing wasn't right. (I'm not sure what they're waiting for, but I hope it's worth it. Because, well, Google has Android and now Google Voice and ... yeah.) So I suddenly found myself with two choices: play ball or try to hide in a corner for awhile and hope no one bothered me too much.</p>
+  
+  <div class="inset">
+  <p class='caption'>"Just try it on, maybe you'll like it ..."</p> <img src="http://farm4.static.flickr.com/3580/3453691619_ccc989ebed.jpg" alt="" /></div>
+  
+  <p>Neither approach is really my style. Furthermore, Chris had already quit and my boss, Benson Tang, had been reassigned. In neither case, did I feel AT&amp;T handled the situation professionally or, really, even ethically. I have a hard time in situations like that, going with the flow. I've made the mistake of trying to do it in the past and regretted it afterwards. So I felt I basically had no choice but to start looking.</p>
+  
+  <h2>Psst! Wanna Buy Some Twitter Stock?</h2>
+  
+  <p>That said, I wasn't in any hurry. I was thinking it might be time to start a company again, despite being fairly broke still from my past failures. I'm like a gambling addict, except with startups. I planned to get out and just spend a month or two networking and perhaps doing some weekend projects and seeing if anything materialized from that. I felt I was in a good position. I could take my time and find the right opportunity.</p>
+  
+  <p>As it happened, though, it didn't take long to find a very appealing opportunity with Brighthouse. The next venture out of the chute is <a href="http://sharespost.com">SharesPost.com</a>, which is an extremely compelling idea. And those who know me know I don't say that about too many deals. It took me forever to decide Twitter was a good idea, although that might say more about my (lack of) business acumen than the difficulty of impressing me.</p>
+  
+  <p>The more I thought about it, the more this idea appealed to me. On-line trading for startups. Like Twitter, in fact. Very cool, because it solves a maj<script type="text/javascript" src="http://dev.zeraweb.com/javascript/tiny_mce/themes/advanced/langs/en.js"></script><script type="text/javascript" src="http://dev.zeraweb.com/javascript/tiny_mce/themes/advanced/langs/en.js"></script>or problem, namely, the exit. With VCs, its always about the exit. A viable market for privately held securities means you don't need a defined exit, per se. You just sell your shares if and when you can get your desired return. So it could be quite a game-changer. And then there's this incubator. And did I mention that it's in Santa Monica?</p>
+  
+  <div class="inset">
+  <p class='caption'>"Wait. What? Google has a phone service?"</p> <img src="http://mattcbr.files.wordpress.com/2006/09/palpatine004.jpg" alt="" width="350px" /></div>
+  
+  <h2>And My Cell Service Has Improved ...</h2>
+  
+  <p>So now, here I am, going on 4 months since our fabulous off-site, now at a tiny startup, working my ass off to get our first product out the door. From one extreme to the other in record time. But it's fun. I'm happy. I'm proud of what we accomplished at the Death Star and even prouder of the way we did it, with a sense of fun and adventure. It was a great opportunity to work with a lot of seriously talented people, and some of those relationships I'll hopefully have for the rest of my life.</p>
+  
+  <p>In the end, it was always up to Palpatine. We presented him with the choice. You wanna compete? You wanna be a real player? Or do you want to continue to wait for the Apples and Googles of the world to lead the way and hope you don't end up being the next decade's Lehman Brothers or General Motors? Well, they made their choice. Maybe we made it a little easier for the next rebels, I don't know.</p>
+  
+  <h2>Lasers. Heh. Kewl.</h2>
+  
+  <p>And, honestly, I don't much care. I care about the people there, because some of them are good, talented people. And it might have been cool if we could have become part of making AT&amp;T an innovator again. We forget now, but they practically invented the computing industry. Not just C and Unix, but things like information theory and the transistor. Not to mention, um, radio astronomy and lasers.</p>
+  
+  <p>So, yeah, the idea that we could help bring our beleaguered colleagues at AT&amp;T Labs into the limelight again was very motivating. But, in the end, it's just another giant corporation that <a href="http://www.engadget.com/2009/05/13/atandts-fridge-even-more-rotten-than-its-3g-streaming-limits/">seems to have lost its way</a>. There are <a href="http://g33ks4abruzzo.org">greater tragedies in the world</a>. I read all about how terrible it is that GM was "allowed" to fail or that we'll all be lost without The New York Times. It all sounds silly to me. None of these dinosaurs is irreplaceable. In fact, the reason we break up behemoths like AT&amp;T in the first place was to make sure of that.</p>
+  
+  <h2>Stupid, Meet Crazy</h2>
+  
+  <p><b>Update:</b> Right on cue, just as I finished this blog entry, <a href='http://twitter.com/#search?q=%23tweetmyjobs%20AT%26T'>AT&amp;T spammed Twitter</a>.</p>
+  
+  <p>So if AT&amp;T wants to stupid itself to death, they're welcome to do so. There are plenty of crazy entrepreneurs like me, waiting to pick up the slack. And as for all the great people they have working for them, they are all adults. In many cases, they are still set up to do great work there. They can take it or leave it as they see fit. Most everyone in that crowd are talented enough to go wherever and whenever they please. I only hope that, one way or another, I'll have the opportunity to work with them again.</p>
+  
+  <p>But, of course, it would be great if maybe something grew out of the seeds we planted there. In the meantime, I've products to launch.</p>
+summary: <p>Okay, people. Here's the big explanation. First, the facts of the matter. I've left AT&amp;amp;T and started a new gig with <a href="http://sharespost.com/">SharesPost.com</a>, which provides on-line trading for privately held stock, joining them as their VP of Engineering. This is pretty heady stuff, all Ruby, and all the more so because it is associated with an up-and-coming incubator, <a href="http://brighth.com/">Brighthouse</a>, and because it is located in Santa Monica, so I can move back to the bizzeach!</p>

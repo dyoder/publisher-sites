@@ -1,0 +1,48 @@
+* { 
+    margin: 0; padding: 0;
+    font-family: verdana, arial, helvetica, sans-serif; 
+}
+
+body { border-top: solid 10px #9c6;
+  background: url(/images/IMG_3113_JPG?size=large) 0 -200px; }
+img { border: none; }
+
+div.page { margin: 20px 10%; padding: 20px; width: 840px; background-color: #9c6; opacity: 0.9;  }
+div.main { padding-right: 20px; height: 450px;}
+div.sidebar { 
+  float: right; height: 400px; width: 250px; overflow: hidden;
+  padding: 0 20px; margin-left: 20px; border-left: 2px dotted #333; 
+}
+
+
+img.logo { padding-left: 20px; border: none; }
+
+h1, h2, h3, p { margin-bottom: 20px;}
+h1, h2, h3 { text-transform: lowercase; letter-spacing: -1px; margin-bottom: 20px; }
+p, li { color: black; }
+li { margin-left: 1.5em; margin-bottom: 10px; }
+div.main p, div.main li { font-family: "Georgia", times, serif; font-size: 15pt; }
+
+
+a { color: #333; text-decoration: none; font-weight: bold; }
+a:hover, a.selected { color: #666; }
+
+
+div.column { float: left; width: 265px; margin-right: 20px; }
+
+p.caption { text-align: center; font-size: 9pt; }
+
+div.menu a { 
+  display: block; width: 180px; margin: 10px; padding: 10px;
+  border: 1px solid black; color: black; font-size: 10pt;
+  text-align: center; text-transform: lowercase;
+}
+
+div.menu a:hover, div.menu a.selected { 
+  background-color: #ff9; color: black;
+}
+
+div.footer { 
+    width: 100%; 
+    font-size: 8pt; text-align:center; color: #333;
+}

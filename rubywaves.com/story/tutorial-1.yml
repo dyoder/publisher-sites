@@ -1,0 +1,185 @@
+--- 
+name: tutorial-1
+format: textile
+blog: ""
+title: Getting Started - Compact Apps
+author: Matthew King
+published: 2008-12-23 00:00:00 -08:00
+domain: dan.local
+tags: ""
+content: |-
+  Let us assume you have installed Waves as a gem.
+  
+  <pre>
+    $ gem install waves
+  </pre>
+  
+  You can also "run from source":/working-from-source if you like.
+  
+  h2. App Generation
+  
+  Let us also assume you are in the directory where you want to create the application. We will generate the application using @waves generate@. The @waves@ command is a many splendored thing. It generates applications, runs servers, and drops you deep into the bowels of IRB consoles.  You may obtain a list of its powers by running @waves help@ or @waves <command> --help@.
+  
+  Waves, not having any fixed ideas about application structure, currently comes with two generator templates:  _classic_ and _compact_. A _compact_ application has just barely enough code to run; it's a one-file project with room in the back yard for expansion. A _classic_ application's layout is similar to Rails, and it includes a "foundation":/foundations-and-layers that provides MVC infrastructure and code-reloading magic.  @waves generate@ uses the classic template by default, but for this tutorial, you need a compact application.
+  
+  <pre>
+    $ waves generate --name=spit_ball --template=compact 
+    ** Waves 0.8.0 **
+    ** Creating new Waves application ...
+    ** Application created!
+  </pre>
+  
+  This should create a directory named "spit_ball", with a grand total of one file inside.  You can also clone the "tutorial repository at GitHub":http://github.com/waves/compact-tutorial and follow along with the commits listed after code examples.
+  
+  From the application directory, start the web server:
+  
+  <pre>
+    $ waves server
+    ** Waves 0.8.0 **
+    I, [2008-10-20 13:38:27 #3790]  INFO -- : Logger started.
+    I, [2008-10-20 13:38:27 #3790]  INFO -- : Waves::Server starting ...
+    I, [2008-10-25 11:24:31 #3790]  INFO -- : ruby-debug enabled
+    I, [2008-10-20 13:38:27 #3790]  INFO -- : Mongrel started on 127.0.0.1:3000.
+  </pre>
+  
+  There's nothing quite like the smell of a newborn app running on port 3000 on localhost. Bring up @localhost:3000@ in your browser, and you'll hear the plaintive wail of a 404 Not Found.  Our little darling doesn't know how to do anything else yet.
+  
+  The single file in your application folder is @startup.rb@. Waves runtimes (e.g. the server and console) look for a file with this name when starting up. You can, in times of great need, point Waves at a different file using @--startup@.  A startup file should require the appropriate foundation and establish your application namespace.
+  
+  p(commit). "commit 86bd0f":http://github.com/waves/compact-tutorial/tree/86bd0f/startup.rb
+  
+  <pre>
+  require 'foundations/compact'
+  
+  module Spitball
+    include Waves::Foundations::Compact
+  end
+  </pre>
+  
+  h2. Foundations and Layers
+  
+  Waves uses a layered architectural approach such that ORM and templating engines are provided as modules to be "layered" into your application as mixins. Moreover, Waves allows layers to make major structural decisions on its behalf.  The MVC infrastructure of a _classic_ application is provided entirely by a layer, for example. A _foundation_ is a layer module that, when mixed into something, configures that something with all the juju it needs to run as a Waves application.  Foundations typically include a stack of other layers for mix and match functionality.  
+  
+  The compact foundation imbues an application namespace with minimal internal structure, comprising only @Configurations@ and @Resources@.  A configuration class (which lives under @YourApp::Configurations@) is loosely analogous to an environment in Rails; compact apps have development and production configurations by default.  Waves runtimes (i.e. server and console) default to the development configuration, but you can specify something else using the --config option.  We'll discuss configurations in more depth later.
+  
+  h2. Resources
+  
+  Resources process web requests.  Sure, there's some glue to get a request into a resource and a response back to the client, but the mighty Resource is the Spartan warrior of Waves.  All other classes are his helots.
+  
+  The compact foundation defines a resource named @Map@ and makes it the entry point for request processing.  Map doesn't match any requests by default, hence the 404 Not Found.  Let's change that by reopening @Spitball::Resources::Map@:
+  
+  p(commit). "commit ede0ba":http://github.com/waves/compact-tutorial/tree/ede0ba/startup.rb
+  
+  <pre>
+  require 'foundations/compact'
+  
+  module Spitball
+    include Waves::Foundations::Compact
+  
+    module Resources
+      class Map
+        on( :get ) { "Hello World!" }
+      end
+    end
+  
+  end
+  </pre>
+  
+  The call to @on@ is a mapping declaration that means: on any GET request, return the string "Hello World!".
+  
+  To see the result, you have to restart the server (the compact Foundation does not provide any support for code-reloading). Use whatever passes for control-C on your platform, then run @waves server@ again. Now if you refresh the browser window, you should see "Hello World!" in the window.  You should also see this for any URL you type in after the localhost:3000 bit, because the mapping declaration matches any path.
+  
+  You can restrict a mapping to specific paths by giving #on a URL matching argument, an array where the elements correspond to path components.  E.g. @[ "hello", "sailor" ]@ matches a path of 
+  <nobr>@/hello/sailor@</nobr>
+  
+  p(commit). "commit f63b3b9":http://github.com/waves/compact-tutorial/tree/f63b3b9/startup.rb
+  
+  <pre>
+  on( :get, [ "hello" ] ) { "Hello World!" }
+  </pre>
+  
+  Restart the waves server, and you should now get the cheery Hello only on requests to @/hello@.
+  
+  In a URL matching array, symbols match anything and capture the value of their URL components.  Add another mapping declaration to the application:
+  
+  p(commit). "commit 1dbf48a":http://github.com/waves/compact-tutorial/tree/1dbf48a/startup.rb
+  
+  <pre>
+  on( :get, [ 'hello' ] ) { "Hello World!" }
+  on( :get, [ 'hello', :name ] ) { "Hello, #{captured.name}!" }
+  </pre>
+  
+  Restart the waves server, and visit @/hello/friend@.  You should be greeted with "Hello, friend!".  @captured@ is an openstruct-like object containing any values that were, erm, captured from the URL. We could have used @captured[:name]@ or @captured['name']@ to the same effect.
+  
+  Note that the order of declarations matters: later declarations take precedence over earlier ones. This follows from Ruby method declarations - a later declaration will override earlier ones - and allows us to use inheritance of Resources in a predictable way.  Consider these declarations:
+  
+  <pre>
+  on( :get, [ 'hello' ] ) { "Hello World!" }
+  on( :get, [ 'hello', 'sailor' ] ) { "Ew!" }
+  on( :get, [ 'hello', :name ] ) { "Hello, #{captured.name}!" }
+  </pre>
+  
+  With these mappings, you will never see an "Ew!".  The last declaration catches requests to <nobr>@/hello/sailor@</nobr>.
+  
+  h2.  Code Reloading and Resource Delegation
+  
+  By now you're probably tired of restarting the server after every change.  The classic foundation handles code reloading automatically, and it isn't hard to add that reloading to compact apps.
+  
+  Edit your @startup.rb@ file so that it looks like this:
+  
+  p(commit). "commit 2449bac":http://github.com/waves/compact-tutorial/tree/2449bac/startup.rb
+  
+  <pre>
+  require 'foundations/compact'
+  require 'autocode'
+  
+  module Spitball
+    include Waves::Foundations::Compact
+  
+    module Resources
+      include AutoCode
+      auto_load true, :directories => '.'
+  
+      class Map
+        on( true ) { to( :greeting ) }
+      end
+    end
+  
+    module Configurations
+      class Development
+        reloadable [ Resources ]
+      end
+    end
+  
+  end
+  </pre>
+  
+  Several things are happening here.
+  
+  * "AutoCode":http://autocode.rubyforge.org/ gives us flexible code-reloading.  We configure it here to cause missing constants under @Spitball::Resources@ load from a matching file in the current directory.  E.g. @Spitball::Resources::Greeting@ will load from @./greeting.rb@.  AutoCode looks for files using the snake-case of the constant name ("BlogPost" becomes "blog_post").  
+  * We reopen the Development configuration to specify @Spitball::Resources@ as reloadable.  Any auto-loaded constants under @Resources@ will be reloaded from file for each request.
+  * The @on@ declaration in Resources::Map now matches all HTTP requests and delegates them to the Greeting resource.  Greeting isn't defined, is the classic example of an only child ...er... missing constant, and will therefore be autoloaded from a file named @greeting.rb@ in the current directory.  Assuming that file exists.
+  
+  So then, create @greeting.rb@ in your application directory:
+  
+  p(commit). "commit 2449bac":http://github.com/waves/compact-tutorial/tree/2449bac/greeting.rb
+  
+  <pre>
+  module Spitball
+    module Resources
+      class Greeting
+        include Waves::Resources::Mixin
+        on( :get, [ 'hello' ] ) { "Hello World!" }
+        on( :get, [ 'hello', :name ] ) { "Hello, #{captured.name}!" }
+      end
+    end
+  end
+  </pre>
+  
+  @Spitball::Resources::Greeting@ is the same as the Map resource in the previous iteration, except that it must explicitly include @Waves::Resources::Mixin@ to get the goodies that allow it to act as a Resource.
+  
+  Restart the server again and make sure everything is working.  Changes you make to the @Greeting@ resource now take effect immediately, without having to restart the server.
+  
+  Continue to "Part 2":/compact-tutorial-2
+summary: ""
+key: tutorial-1

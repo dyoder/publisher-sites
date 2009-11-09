@@ -1,0 +1,21 @@
+--- 
+twitter_password: ""
+name: laquila
+twitter_account: ""
+title: Geeks For Abruzzo
+domain: geeksforabruzzo.org
+Admin: 
+- property
+- story
+- image
+- blog
+- gallery
+description: TBD
+authors: 
+- Dan
+- Amy
+- Roberto
+- KK
+key: site
+roles: 
+- Admin

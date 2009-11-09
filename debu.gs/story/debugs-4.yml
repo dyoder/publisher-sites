@@ -1,0 +1,71 @@
+--- 
+name: debugs-4
+format: wysiwyg
+blog: debugs
+title: Symbol#to_proc
+author: Pete Elmore
+published: 2006-10-04 00:00:00 -07:00
+content: |-
+  <p>I've never seen anyone use this, only recently read about it when I came across a blog.&nbsp; It's part of 
+  <a href="http://extensions.rubyforge.org/rdoc/index.html">Ruby/Extensions</a>, 
+  which has 
+  <a href="http://extensions.rubyforge.org/rdoc/classes/Class.html#M000014">
+    some useful method definitions
+  </a>, 
+  as well as a few 
+  <a href="http://extensions.rubyforge.org/rdoc/classes/Binding.html#M000022">
+    cool but possibly evil
+  </a> 
+  ones. The reason 
+  <a href="http://extensions.rubyforge.org/rdoc/classes/Symbol.html#M000003">
+    Symbol#to_proc 
+  </a>
+  is worth noting, though, is that it saves quite a bit of typing/punctuation for common tasks. 
+  I think the examples from their docs sum up what it does the best:</p>
+  
+  <pre>
+  %{john terry fiona}.map(&amp;:capitalize)&nbsp;&nbsp; # -&gt; %{John Terry Fiona}<br/>
+  sum = numbers.inject(&amp;:+)<br/>
+  </pre>
+  <p>The explanation is pretty simple: when you pass an object as a block, #to_proc is called on the object, just like the way #to_str is called when you try to concatenate a string with something, in order to coerce the object into the class you need. So if you were to do something like this:</p>
+  <pre>
+  class Symbol
+    def to_proc
+      proc { |obj, *args| obj.send(self, *args) }
+    end
+  end
+  </pre>
+  <p>Then you'd have exactly what's described above, a clean way to use coercion to your advantage. On the other hand, if you're feeling a little perverse, and want to abuse your newfound knowledge, you can even define it for strings:</p>
+  <pre>
+  class String
+    def to_proc
+      eval "proc { |obj, *args| obj.send(#{self}, *args) }"
+    end
+  end
+  [1, 2, 3].send(&':+, 4') # => [5, 6, 7]
+  </pre>
+  
+  <h2>See Also:</h2>
+  <ul>
+    <li>
+      <a href="http://www.rubyinside.com/19-rails-tricks-most-rails-coders-dont-know-131.html">
+        http://www.rubyinside.com/19-rails-tricks-most-rails-coders-dont-know-131.html
+      </a>
+    </li>
+    <li>
+      <a href="http://blogs.pragprog.com/cgi-bin/pragdave.cgi/Tech/Ruby/ToProc.rdoc">
+        http://blogs.pragprog.com/cgi-bin/pragdave.cgi/Tech/Ruby/ToProc.rdoc
+      </a>
+    </li>
+    <li>
+      <a href="http://extensions.rubyforge.org/rdoc/index.html">
+        http://extensions.rubyforge.org/rdoc/index.html
+      </a>
+    </li>
+  </ul>
+summary: |-
+  <code>[1, 2, 3].inject { |c,i| c + i }</code>
+  becomes
+  <code>[1, 2, 3].inject(&amp;:+)</code>
+  with just one extra method for Symbol.
+key: debugs-4

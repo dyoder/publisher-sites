@@ -1,0 +1,112 @@
+--- 
+name: module_eval-versus-instance_eval
+format: textile
+blog: mousetrap-2
+title: module_eval Versus instance_eval
+author: Dan Yoder
+published: 2008-05-10 00:00:00 -07:00
+domain: dev.zeraweb.com
+tags: ""
+content: |-
+  Recently, doing some work on "autocode":http://autocode.rubyforge.org/ (a new version of which is imminent), as well as some cool new features for "Waves":http://rubywaves.com/ (more on this soon on the Waves blog), we found ourselves trying to grok the difference between @module_eval@ and @instance_eval@. There didn't seem to be a whole lot of definitive information available on the 'net, I thought I'd take a stab at it here.
+  
+  For starters, both variants bind self to the target:
+  
+  <pre><code>>> module A ; end
+  => nil
+  >> A.instance_eval { self }
+  => A
+  >> A.module_eval { self }
+  => A
+  </code></pre>
+  
+  The difference, in purely technical terms, is that @instance_eval@ binds the _class_ scope to the target's meta-class (aka, singleton class), while @module_eval@ binds it to the target itself.
+  
+  <pre><code>>> class A ; end 
+  => nil
+  >> A.instance_eval { def foo ; 'foo' ; end }
+  => nil
+  >> A.foo
+  => "foo"
+  >> A.new.foo
+  NoMethodError: undefined method `foo' for #<A:0x363a08>
+  	from (irb):4
+  >> A.module_eval { def foo ; 'foo'; end }
+  => nil
+  >> A.new.foo
+  => "foo"
+  >> 
+  </code></pre>
+  
+  In this example, @def@ relies on the class scope, so when we use @instance_eval@, we get a method on A's meta-class class because @instance_eval@ binds class scope to the meta-class. When we use @module_eval@, however, we get a method on A itself, just as though we had defined it by re-opening A. Which brings us to the design rationale for the difference.
+  
+  Being able to evaluate something in the context of an instance is what @instance_eval@ is for; this includes setting class scope to the instance meta-class. This allows me to trivially do interesting things like access instance variables or define instance methods on a single instance.
+  
+  <pre><code>>> a = A.new
+  => #<A:0x35e2ec>
+  >> a.instance_eval { def bar ; 'bar' ; end }
+  => nil
+  >> a.bar
+  => "bar"
+  >> a2 = A.new
+  => #<A:0x358f90>
+  >> a2.bar
+  NoMethodError: undefined method `bar' for #<A:0x358f90>
+  	from (irb):11
+  >> A.module_eval { attr_accessor :bar }
+  => nil
+  >> a2.bar = 'bar'
+  => "bar"
+  >> a2.instance_eval { @bar }
+  => "bar"
+  </code></pre>
+  
+  However, sometimes I just want to operate on a class or module, not the meta-class, and @instance_eval@ won't let us do that. So Ruby gives us @module_eval@ (@class_eval@ is the same thing) to operate directly on modules and classes. 
+  
+  Note that this only affects things that pay attention to class scope, like @def@. If I were to use @define_method@, I would get different results because @define_method@ is just a method and defines methods on @self@.
+  
+  <pre><code>>> class A ; end
+  => nil
+  >> A.instance_eval { define_method(:foo) { 'foo' } }
+  => #<Proc:0x00365ac4@(irb):2>
+  >> A.foo
+  NoMethodError: undefined method `foo' for A:Class
+  	from (irb):3
+  >> A.new.foo
+  => "foo"
+  </code></pre>
+  
+  In this example, our use of @instance_eval@ is pointless because @define_method@ does not care about class scope. So it just operates on @self@, which is the class A. Thus, we get an instance method on A, not on A's meta-class.
+  
+  These methods give you some really powerful options for meta-programming. A great example is _why's "metAid":http://code.whytheluckystiff.net/metaid/ library, which uses @instance_eval@ on the meta-class to define @meta_eval@, a variation where self is the meta-class and the class scope is actually the meta-meta-class, which allows you to operate directly on a meta-class.
+  
+  An interesting gotcha when using @const_eval@ and @module_eval@ is that constants, as with any block, are not resolved as they would be if you were simply re-opening a class or module. If you want a class or module constant, you must fully qualify it, as you would with any block.
+  
+  <pre><code>>> X = :top
+  => :top
+  >> class C ; X = :C ; end
+  >> C.module_eval { X }
+  => :top
+  >> C.module_eval { const_get(:X) }
+  => :C
+  </code></pre>
+  
+  This obviously doesn't apply when you are using a string argument:
+  
+  <pre><code>>> C.module_eval("X")
+  => :C
+  </code></pre>
+  
+  (A tip of the hat to "_why and Koichi":http://redhanded.hobix.com/bits/koichiSBriefRubyCertification.html for this tip.)
+  
+  In general, you can think of @instance_eval@ as re-opening an instance and @module_eval@ as reopening a class or module, which is perfectly logical. They will actually do the same thing in many cases, since they both bind self to the target. However, instances that are not classes or modules typically will not have @module_eval@ defined, while @instance_eval@ will also bind the class scope used by @def@ to define new methods.
+  
+  This leads us to three simple rules:
+  
+  # Use @def@ directly to add class methods rather than using @module_eval@ or @instance_eval@. It is just easier to understand.
+  
+  # Use @module_eval@ when operating on a class or module, unless it is a meta-class. For example, use @module_eval@ to add a new instance method to a class.
+  
+  # Use @instance_eval@ otherwise. For example, use @instance_eval@ to define methods for a specific instance of a class (via the meta-class) using @def@.
+summary: Recently, doing some work on "autocode":http://autocode.rubyforge.org/ (a new version of which is imminent), as well as some cool new features for "Waves":http://rubywaves.com/ (more on this soon on the Waves blog), we found ourselves trying to grok the difference between @module_eval@ and @instance_eval@. There didn't seem to be a whole lot of definitive information available on the 'net, I thought I'd take a stab at it here.
+key: module_eval-versus-instance_eval

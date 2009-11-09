@@ -1,0 +1,64 @@
+--- 
+name: liveconsole-020-released
+format: html
+blog: debugs
+author: Pete Elmore
+title: LiveConsole 0.2.0 Released
+published: 2008-10-16 00:00:00 -07:00
+tags: ""
+content: |-
+  <h2>LiveConsole 0.2.0 Released</h2>
+  <p>Hey, uh, here's a long-overdue new release of LiveConsole.  If you've
+  never heard of it, it is a library for providing IRB over a TCP or Unix
+  socket so that you can interact with a running application.  </p>
+  <ul>
+  <li>Unix Domain Socket support (Works under Linux and OS X, apparently; not likely to work under Windows)</li>
+  <li>The ability to supply bindings to LiveConsole </li>
+  <li>A program for interacting with the Unix socket (installed in your bin directory as udscat), as some versions of netcat don't include this functionality.</li>
+  </ul>
+  <p>It's useful for debugging, for hot-patching code that you don't want to
+  interrupt, for interactive monitoring, and for looking cool.</p>
+  
+  <h3>For the impatient:</h3>
+  <pre>
+  	# Run a LiveConsole with IRB bound to the toplevel:
+  	lc = LiveConsole.new :socket, :port =&gt; 30303
+  	lc.start
+  
+  	# Fire up a second terminal, and 
+  	you@your-box:~$ netcat localhost 30303
+  	irb(main):001:0&gt; puts &quot;Hello, world!&quot;
+  
+  	# This shows up in the terminal of the program that created the
+  	# LiveConsole:
+  	Hello, world!
+  
+  	# Run a LiveConsole for the current process, and pass it the
+  	# local binding (Unix only):
+  	lc = LiveConsole.new :unix_socket, :path =&gt; '/tmp/live-console.sock',
+  	                     :bind =&gt; binding
+  	lc.start
+  
+  	# Fire up a second terminal, and 
+  	you@your-box:~$ udscat /tmp/live-console.sock
+  	irb(main):001:0&gt; puts &quot;Hello, world!&quot;
+  
+  	# Similar results.  See the example code or the README for
+  	# details.
+  </pre>
+  
+  <h3>Installation:<h3>
+  <pre>
+  
+    gem install live_console
+  </pre>
+  
+  <h3>Sites:</h3>
+  
+    <ul>
+  	<li><a href="http://debu.gs/live-console">LiveConsole
+  	README</a></li>
+  	<li><a href="http://rubyforge.org/projects/live-console">The
+  	Rubyforge</li>
+summary: LiveConsole 0.2.0 released with support for Unix Domain Sockets and arbitrary bindings.
+key: liveconsole-020-released

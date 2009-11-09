@@ -1,0 +1,36 @@
+--- 
+name: mousetrap-2
+author: Dan Yoder
+title: Mousetrap 2.0
+published: 2009-02-25 00:00:00 -08:00
+domain: dev.zeraweb.com
+subtitle: Building A Better Web
+tags: ""
+entries: 
+- blog-relaunch
+- att-interactive
+- introducing-datejs
+- site-and-blog-reorg
+- top-10-reasons-to-avoid-component-libraries
+- ruby-meta-programming-gotchas
+- functors-in-javascript
+- introducing-autocode
+- introducing-autocode-0-9-9
+- introducing-waves
+- facets-versus-extensions
+- threading-in-ruby
+- module_eval-versus-instance_eval
+- introducing-functor
+- functors
+- top-10-reasons-resource-oriented-architecture-matters
+- the-ethics-of-innovation
+- technology-and-art
+- la-rubyconf-kills-it
+- speaking-at-goruco
+- rest-ftw-part-1
+- rest-ftw-part-2
+- rest-ftw-part-3
+- the-myth-of-the-business-model
+summary: ""
+key: mousetrap-2
+feed: http://feeds.feedburner.com/MouseTrap20

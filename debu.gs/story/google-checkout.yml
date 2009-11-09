@@ -1,0 +1,12 @@
+--- 
+name: google-checkout
+format: textile
+title: Google Checkout
+author: Pete Elmore
+published: 2006-09-29 16:31:46 -07:00
+content: |-
+  google-checkout is, very simply, a Ruby module that acts as an interface to the "Google Checkout API":http://code.google.com/apis/checkout/developer/index.html#checkout_api.  
+  
+  It's hopefully easy to use and functional.  It's currently available only as a "gem":/google-checkout-download.  If you want more information, check out the "readme":/google-checkout-howto.  If that bores you, you can test it out by -giving me a dollar-.  <b>Update:</b>  Actually, you can't.  I just noticed that Google Checkout's checkout page puts my home address and phone number at the top of the page, so I kinda had to take it off.
+summary: ""
+key: google-checkout

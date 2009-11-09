@@ -1,0 +1,34 @@
+--- 
+format: mab
+published: 2009-04-25 12:12:20.650741 -07:00
+content: |
+  div.sidebar do
+  
+    div.item do
+      h1 'Gem Version'
+      p '0.8.3 (edge) - Install from github!'
+      p do
+        code do
+          text 'gem install waves-edge -s http://gems.github.com/'
+        end
+      end
+      p "We're working on getting waves-stable up to date. In the meantime, please note that RubyGem version (0.8.2) is no longer compatible with the latest version of Rack."
+    end
+  
+    div.item do
+      story( :presentations )
+    end
+  
+    div.item do
+      div.feed do
+        a :href => 'http://feeds2.feedburner.com/HangTen' do
+          img :src => '/images/feed.png'
+          label 'Subscribe ...'
+        end
+      end
+      view( :blog, :content, :blog => find( :blog, 'hang-ten' ) )
+    end
+  
+  end
+
+key: sidebar

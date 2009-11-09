@@ -1,0 +1,37 @@
+--- 
+format: textile
+title: Autocode
+blog: ""
+author: Dan Yoder
+published: 2008-01-05
+tags:
+content: "Welcome to the Autocode home page. Autocode makes is easy to dynamically load (and reload) code for server processes. You can even automatically generate new classes and modules using Autocreate.\r\n\
+  \r\n\
+  h2. Installation\r\n\
+  \r\n\
+  Autocode is available as a Ruby Gem. Just:\r\n\
+  \r\n\
+  <pre><code>\r\n\
+  sudo gem install autocode\r\n\
+  </code></pre>\r\n\
+  \r\n\
+  and you're good to go.\r\n\
+  \r\n\
+  h2. Documentation\r\n\
+  \r\n\
+  See the \"RDoc\":http://autocode.rubyforge.org/ for an introduction, examples, and reference documentation.\r\n\
+  \r\n\
+  h2. Support\r\n\
+  \r\n\
+  * \"Issue Tracking\":http://code.google.com/p/ruby-autocode/issues/list\r\n\
+  * \"Wiki\":http://code.google.com/p/ruby-autocode/wiki/TipsAndTricks\r\n\
+  * \"Source\":http://github.com/dyoder/autocode/tree/master \r\n\
+  h2. License\r\n\
+  \r\n\
+  Autocode is released under the \"MIT License\":http://www.opensource.org/licenses/mit-license.php, \xC2\xA9 2007 Dan Yoder.\r\n\
+  \r\n\
+  h2. Acknowledgments\r\n\
+  \r\n\
+  Special shout out to \"why\":http://whytheluckystiff.net/ for \"metaid\":http://whytheluckystiff.net/articles/seeingMetaclassesClearly.html, which not only helped tremendously to make the code for Autocode manageable, but was a great learning tool.              "
+summary: "                                                                                    "
+key: autocode

@@ -1,0 +1,123 @@
+--- 
+format: textile
+title: Introducing Functor
+author: Dan Yoder
+published: 2008-06-16
+tags: javascript
+content: |-
+  I was supposed be to working on our rewrite of the request lambda mapping code in "Waves":http://rubywaves.com. Somehow instead, I ended up with "functor":http://functor.rubyforge.org. It actually started because I was thinking it would be cool to have a Resource class with overloaded methods for @get@, @put@, et al. I discarded that idea (I think ... here we go again), but we also have numerous places where we have overloaded interfaces. You know, where, if you pass a string, this happens; but if it is a hash, that other thing happens. Usually, this means you end up with a bunch of nested if-then and / or case statements and either really long, rambling method definitions or private methods with names like @foo_with_hash@.
+  
+  h2. Down The Rabbit Hole We Go
+  
+  Topher Cyll wrote a "clever little gem":http://multi.rubyforge.org/ and wrote an "even cleverer little article":http://www.artima.com/rubycs/articles/patterns_sexp_dsls.html about it. Originally, my plan was just to use the multi gem directly, but I ran into a couple little things that bothered me. One was that, in order to overload method definitions, you had to put them inside the @initialize@ method for the class (or, really, any instance method, so I thought about defining the method to redefine itself using multi the first time you call it). I decided to try and hack it so I could define them like ordinary methods, which led me to the second problem, which was that the dispatching was based on the object ID, not the class.
+  
+  So I decided to write a simple variation that I could just use inside a method that would basically substitute for all the nested conditionals. I will use the Fibonacci sequence as an example, since that is canonical example used in functional programming (and, not coincidentally, also the one used by Topher).
+  
+  <pre><code>
+  fib = Functor.new do
+    given( 0 ) { 0 }
+    given( 1 ) { 1 }
+    given( Integer ) { |n| self.call( n - 1 ) + self.call( n - 2 ) }
+  end
+  </code></pre>
+  
+  This is pretty self-explanatory. Basically, it says, "given 0, return 0; given 1, return 1; given an Integer return the value of the block." Now, I can actually call this as though it was a Proc:
+  
+  <pre><code>
+  fib.call( 7 ) # => 13
+  </code></pre>
+  
+  In fact, you can use to_proc and the handy @&@ operator to generate a whole sequence:
+  
+  <pre><code>
+  [ *0..10 ].map( &fib )  # => [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+  </code></pre>
+  
+  Pretty nifty.
+  
+  h2. A Veritable Bounty Of Patterns
+  
+  Note that the argument is matched based on the order of the declarations: first against 0, then 1, then finally against Integer. This isn't as sophisticated as "real" pattern-based dispatch, but has the advantage of being faster and more predictable. 
+  
+  The matching is done first using @==@, then using @===@ (case equality, which will work for classes and regexps, among other things), and finally using @call@ (if the object responds to that method). This allows you to include "guards," intelligent matchers that allow you to implement arbitrarily sophisticated pattern matching. 
+  
+  Take the classic case of needing to format table rows using alternate colors for clarity:
+  
+  <pre><code>
+  stripe ||= Functor.new do
+    given( lambda { |x| x % 2 == 0 } ) { 'white' }
+    given( lambda { |x| x % 2 == 1 } ) { 'silver' }
+  end
+  
+  # ... sometime later ...
+  rows.each_with_index { |row,i| tr :style => "color: #{stripe.call(i)}" }
+  </code></pre>
+  
+  Granted, that is overkill for that particular requirement, but hopefully that illustrates the power of using lambda guards. We could also implement our Fibonacci functor this way:
+  
+  <pre><code>
+  fib = Functor.new do
+    given( 0 ) { 0 }
+    given( 1 ) { 1 }
+    given( lambda { |n| n > 1 } ) { |n| self.call( n - 1 ) + self.call( n - 2 ) }
+  end
+  </code></pre>
+  
+  which is technically more correct, since it will raise an @ArgumentError@ for negative values (which is what always happens if no match is found).
+  
+  h2. Functor Gets Some Class
+  
+  All that was fine, and I was pretty happy with it. (Actually, not everything above was originally in there. Topher and Lawrence Pit independently implemented lambda guards a bit later.) I really tried to go back to hacking the Waves mapping code. But in the back of my brain, an object-oriented plot was hatching. How hard could it be, I asked myself, to simply add a hash of named functors to a class? Famous last words, of course, but I couldn't quiet the voices in my head, and one fine Sunday morning, they got the best of me.
+  
+  <pre><code>
+  class View
+    include Functor::Method
+    def initialize( response ) ; @response = response ; end
+    functor( :render, String ) { |s| @response.write(s) }
+    functor( :render, Proc ) { |p| render( p.call ) }
+    functor( :render, Object ) { |k| render( k.to_s ) }
+    functor( :render, Object, Hash ) { |k,h| @response.headers.merge!( h ); render(k) }
+  end
+  </code></pre>
+  
+  Here we have a simple inversion-of-control scenario for an imaginary @View@ class. We've overloaded the @render@ method to handle various different types of objects. They've all been implemented recursively, with the terminal condition being a simple string input. We've even added an optional hash to write the headers. We could easily extend this approach to handle status codes (overloading on Exception for example) or any number of other variations.
+  
+  The @Functor::Method@ module, to begin with, defines two class methods for us: @functor@ and @functors@. This allows us to (a) create a functor method, as we've done in the example above; and (b) access the functors directly for a given class by name. Behind the scenes, each class that calls @functor@ will get an instance variable <code>@__functors</code> that will keep track of the functors defined for that class. The @functor@ method itself also defines a method with the name of the functor. Thus,
+  
+  <pre><code>
+  view = View.new( response )
+  view.respond_to? :render # returns true
+  </code></pre>
+  
+  This method will actually do the dispatch against the functor of the same name. It uses a special variation of the @call@ method, called @apply@. So, if you wanted to you could do this:
+  
+  <pre><code>
+  # these two lines do more or less the same thing ...
+  view.render( "hello" )
+  View.functors[:render].apply( view, "hello" )
+  </code></pre>
+  
+  The big difference is that the @render@ method will actually call @super@ for you if nothing matches, just in case @render@ is also implemented in base class. If no match is found (either in the derived or base class) an @ArgumentError@ will be raised. So you wouldn't normally want use the second technique.
+  
+  The one case you _would_ want to use it, however, is when you want to call super in the base class from within the functor's lambda. Since you can't actually do that (because the lambda is actually called _from_ the method and so @super@ gets confused -- it's kind of a long story), the best you can do is explicitly call the base class functor.
+  
+  <pre><code>
+  # functor equivalent of super - a bit less elegant!
+  self.superclass.functors[ :foo ].apply( self, "bar" ) 
+  </code></pre>
+  
+  I've toyed with the idea of making this a method to clean it up a bit - say, @super_fun@, or, less whimsically, @functor_delegate@ - but they don't seem to really help that much and they add another method to the class that isn't used very often. Another approach would be to use continuations, but I can't figure a clean way to pass it into the block.
+  
+  The nice thing is that inheritance is supported reasonably well, except for @super@, and you can even re-open a class and redefine things. (Keep in mind, when you do that, your redefinition goes to the back of the line when it comes time to match.) Functors generally behave just like methods, actually.
+  
+  It is worth pointing out that using @apply@ (or using a Functor as a method, generally) binds @self@ differently than using a stand-alone Functor. In our Fibonacci examples, @self@ referred back to the Functor itself. When using @apply@, however, it refers to the object the method was being invoked upon.
+  
+  h2. Odds And Ends
+  
+  The project is up on "RubyForge":http://functor.rubyforge.org and, probably more significantly, on "GitHub":http://github.com/dyoder/functor/tree/master, in the event you want to muck around with the source or "even send me a patch.":mailto:dan@zeraweb.com. Don't hesitate to "send me questions or comments":mailto:dan@zeraweb.com, as well.
+  
+  With this foundation, is there more you can do? In particular, given a functor, can we curry them, compose them, etc.? I haven't added any of these things. While they are relatively easy to do in straight Ruby, it could still be rather convenient. I have avoided adding these methods to Proc in the past because it might possibly conflict with other libraries. However, with Functor, I can do whatever I like, so that's a possibility.
+  
+  I'd be very interested in hearing from the Ruby community if there are cool ways to use this little library or features to add that I haven't yet considered. I am rather hoping that is the case, actually. I know we are using it within Waves, so perhaps we will discover enough to justify another blog entry.
+summary: I was supposed be to working on our rewrite of the request lambda mapping code in "Waves":http://rubywaves.com. Somehow instead, I ended up with "functor":http://functor.rubyforge.org. It actually started because I was thinking it would be cool to have a Resource class with overloaded methods for @get@, @put@, et al.
+key: introducing-functor

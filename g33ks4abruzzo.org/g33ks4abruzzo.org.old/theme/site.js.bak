@@ -1,0 +1,7 @@
+$(document).ready( function() { 
+  $.ajax({ type: 'get', url: '/donate',
+    beforeSend : function(xhr) {  xhr.setRequestHeader('Accept','text/html-fragment') },
+    success: function( html ) {
+      $('div.donate-form').replaceWith( html ); 
+  }});
+});

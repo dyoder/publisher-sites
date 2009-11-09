@@ -1,0 +1,12 @@
+--- 
+name: header
+format: textile
+title: Header
+author: Pete Elmore
+published: 2005-07-25 13:13:38 -07:00
+content: |-
+  h1. "Debu.gs":/home
+  
+  It's user error.<br/>
+summary: ""
+key: header

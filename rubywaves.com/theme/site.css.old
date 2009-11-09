@@ -1,0 +1,85 @@
+/* Things for the whole family */
+
+* { margin: 0; padding: 0; }
+body { font-family: "Trebuchet MS", helvetica, arial, sans-serif; background: white; }
+
+
+/* Default styles for basic formatting elements */
+
+h1,h2,h3,p,li { margin-bottom: 20px; }
+li { margin-left: 1em; padding-left: 0.5em; }
+a, a:visited { color: #369; text-decoration: none; font-weight: bold; }
+a:hover { border-bottom: 1px dotted #369; }
+pre { margin-bottom: 20px; padding: 10px; background: #036; color: #ccc; 
+  font-family: 'Lucida Sans Typewriter', courier; font-size: 12px; }
+img { border: none; }
+code { font-size: 16px; background: #eee; padding: 0px 4px; border-left: 1px solid #ddd; border-right: 1px solid #ddd;}
+
+/* Main page */
+div.page { width: 1100px; margin-left: 20px; margin-top: 10px; border-top: 10px solid #003; }
+
+
+/* The banner */
+div.banner { height: 175px;
+  border: 1px solid #369; background-color: white; padding: 5px;}
+  
+/* The menu */
+div.menu { height: 45px; color: white; background: #036; }
+div.menu a, div.menu a:visited { display: block; float: left; 
+  padding: 13px 1px 2px 1px; margin-left: 50px; 
+  font-family: 'Trebuchet MS', helvetica, arial, sans-serif;
+  text-align: center; text-decoration: none;
+  font-size: 15px; font-weight: bold; color: white; }
+div.menu a:hover { border-bottom: 2px solid white; } 
+
+/* The logo element in the banner */
+
+
+/* Main content of the page ... */  
+
+div.main { padding: 30px 40px; margin-top: 10px;
+  border: 1px solid #369; background-color: white; 
+  width: 580px; min-height: 800px; color: #333; }
+div.main h1, div.main h2, div.main h3 { text-transform: uppercase; color: #369; letter-spacing: 2px; }
+div.main h1 { font-size: 22px; border-bottom: 1px solid #369; 
+  text-align: right; padding-bottom: 5px; }
+div.main h2 { font-size: 18px; border-bottom: 1px solid #369; 
+  text-align: right; padding-top: 10px; padding-bottom: 5px; }
+div.main h3 { font-size: 17px; padding-top: 10px; }
+div.main p, div.main li { font-family: 'Georgia', times; font-size: 18px; color: #333; }
+
+/* The page's sidebar content ... */
+
+div.sidebar { float: right; width: 350px;
+  margin-top: 10px; margin-bottom: 10px; padding: 10px; border: 1px solid #369;
+  background-color: #036 }
+div.sidebar h1, div.sidebar h2, div.sidebar h3 { color: #eee; margin-bottom: 10px; } 
+div.sidebar h1 { letter-spacing: 1px; }
+div.sidebar h1 { font-size: 22px; }
+div.sidebar h2 { font-size: 14px; }
+div.sidebar h3 { font-size: 10px; }
+div.sidebar p, div.sidebar li { color: #eee; font-size: 14px; margin-bottom: 10px; }
+div.sidebar li { list-style: square; }
+div.sidebar a, div.sidebar a:visited { color: #eee; }
+div.sidebar p a, div.sidebar p a:visited { font-weight: bold; text-decoration: underline; }
+div.sidebar div.item { margin-bottom: 20px; }
+
+/* The page footer */
+div.footer { clear: both; border-top: 1px solid #ccc; margin-top: 20px; padding-top: 20px;
+  font-size: 11px; color: #69c; text-align:center; margin-bottom: 20px; }
+  
+/* Resource-specific styles */
+div.feed a, div.feed a:visited { text-decoration: none; }
+div.feed { margin-top: 5px; line-height: 10px;
+  font-family: verdana, arial, sans-serif; font-size: 9px; }
+div.feed img { height: 16px; width: 16px; margin: 0; padding: 0; margin-right: 2px; }
+div.feed label { margin: 0; padding: 0; font-weight: normal;}
+
+div.sidebar p.byline { margin-top: -10px; font-size: 10px; 
+  font-family: 'Trebuchet MS', helvetica, arial, sans-serif; }
+div.main p.byline { margin-top: -15px; font-size: 13px; 
+  font-family: 'Trebuchet MS', helvetica, arial, sans-serif; }
+p.byline span.author, p.byline span.date { font-weight: bold; }
+
+p.commit { margin: 0px; }
+p.commit a { padding: 0px 10px; font-size: 12px; font-weight: normal; color: #036; background-color: #ccc; }

@@ -1,0 +1,4 @@
+title: My Calendar
+format: html
+content: |-
+  <iframe src="http://www.google.com/calendar/hosted/janetjoseph.com/embed?src=jj%40janetjoseph.com&ctz=America/Los_Angeles" style="border: 0" width="560" height="420" frameborder="0" scrolling="no"></iframe> 

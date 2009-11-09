@@ -1,0 +1,15 @@
+--- 
+name: google-checkout-menu
+format: wysiwyg
+title: google-checkout
+author: Pete Elmore
+published: 2006-09-29 16:23:42 -07:00
+content: |-
+  <ul>
+      <li><a href="/google-checkout">About google-checkout</a></li>
+      <li><a href="/google-checkout-howto">Documentation</a></li>
+      <li><a href="/google-checkout-faq">FAQ</a></li>
+      <li><a href="/google-checkout-download">Download google-checkout</a></li>
+  </ul>
+summary: <p>&nbsp;</p>
+key: google-checkout-menu

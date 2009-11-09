@@ -1,0 +1,18 @@
+--- 
+format: mab
+author: Dan Yoder
+blog: ""
+title: ""
+published: 2009-04-13 00:00:00 -07:00
+tags: ""
+content: |-
+  div.banner do 
+    div.title do
+      a( :href => '/home' ) { h1 "g33ks4abruzzo" }
+    end
+    div.menu { story 'menu' }
+    div.header {}
+  
+  end
+summary: ""
+key: banner

@@ -1,0 +1,38 @@
+--- 
+format: mab
+published: 2009-04-25 12:12:19.888357 -07:00
+content: |
+  blog = find('blog', 'debugs')
+  story( :feed, :feed => blog.feed ) if blog.feed
+  
+  h1 blog.title
+  
+  p.subtitle((blog.summary || '' ) + "  (#{blog.entries.size} entries)")
+  div.entries do
+  
+   	(blog.entries||[]).compact.
+  	sort_by(&:published).reverse.each do | entry |
+  	
+  	  h2 do
+  	    a entry.title, :href => "/#{entry.name}/"
+  	  end
+  	  
+      author = entry.author || "Pete Elmore"
+      datestr = 
+        if entry.published.respond_to? :strftime
+          entry.published.strftime('%Y-%m-%d')
+        else
+          "Unknown date"
+        end
+      p.byline { "by #{author} (#{datestr})" }
+  	  
+      format( :content => entry.summary, :format => entry.format )
+  
+      p do
+        a 'More ...', :href => "/#{entry.name}/"
+      end
+    end
+  
+  end
+
+key: debugs

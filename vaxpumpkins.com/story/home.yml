@@ -1,0 +1,16 @@
+--- 
+name: home
+format: html
+title: Welcome
+author: Vax
+published: 2008-03-07 00:00:00 -08:00
+domain: dan.local
+tags: ""
+content: "<div style='float:right; padding-left: 10px'>\r\n  <img src=\"/images/IMG_3147_JPG?size=small\" alt='Vax with some of his amazing pumpkins!'/>\r\n\
+  </div>\r\n\
+  \r\n\
+  <p>Welcome to Art Glass Mini-Pumpkins by Vax Bowes!</p>\r\n\
+  \r\n\
+  <p>Due to the painstaking craftmanship used in the production process, each art glass pumpkin has its own \"personality\" and style. You can be sure that <span style=\"font-style: italic;\">your</span>\xC2\xA0pumpkin will be totally unique, like no other in the world!</p>"
+summary: ""
+key: home

@@ -1,0 +1,86 @@
+--- 
+name: hoshi-010-released
+format: html
+blog: debugs
+author: Pete Elmore
+title: Hoshi 0.1.0 Released...Soon
+published: 2008-11-06 00:00:00 -08:00
+tags: ""
+content: |-
+  <p>You can check it out at github right now (<a
+  	href="http://github.com/pete/hoshi">http://github.com/pete/hoshi</a>), or
+  you can wait for the official release, but Hoshi is here, and it's incredible.
+  It's everything you've ever wanted and more.  It's...well, actually it's just
+  a first-class view library.</p>
+  
+  <p><a href="/hoshi">Hoshi</a> fills a gap in Ruby MVC applications, namely the
+  V part.  Templates don't count as first-class views, don't allow you to take
+  advantage of Ruby's fancy object system (Inheritance is back again!) and
+  mixing languages is annoying and makes validation/syntax checking harder.
+  With <a href="http://haml.hamptoncatlin.com/">HAML</a> and <a
+  	href="http://ruby-doc.org/stdlib/libdoc/erb/rdoc/index.html">ERB</a>, you
+  are mixing Ruby and HTML and in most cases, also CSS and Javascript, not to
+  mention that the templating engine has its own syntactical rules.  On top of
+  that, with HAML you don't know if you have valid HTML until you hit the page
+  that loads that file, and with ERB you don't know until you run the file, and
+  even then it might be valid with some values and invalid with others.  Ouch.</p>
+  
+  <p>Hoshi solves this problem in a way similar to the way the very clever and
+  very cool <a
+  	href="http://code.whytheluckystiff.net/markaby/">Markaby</a> does:  by
+  making HTML tags Ruby methods.  The main difference between Hoshi and Markaby
+  is that Hoshi::View sub-classes <em>are</em> view objects.  You instantiate
+  them, call methods on them, and eventually toss the output of one of these
+  methods over to a browser (or whatever).  Hoshi::View isn't a module, there's
+  no funny instance_eval or parsetree business going on behind the scenes, and
+  method_missing isn't used unless you set the permissive flag in your view.
+  And because it guarantees valid HTML/XHTML/XML if you give it valid Ruby,
+  you'll know if it's wrong when your code loads, and you can make sure it's
+  valid with ruby -c.</p>
+  
+  
+  <p>And there is one more cool piece of functionality provided with Hoshi:
+  html2hoshi.  This is a little program (really, a command-line front-end to
+  lib/html2hoshi.rb) that takes a big, scary, poorly-indented ball of HTML and
+  generates a nice, clean, readable, manageable Ruby file that uses Hoshi to
+  generate equivalent HTML.  Want to read some obfuscated or compressed HTML?</p>
+  <pre>
+  	curl http://www.google.com/ | html2hoshi - | less
+  </pre>
+  <p>Or maybe you have a web designer that emails you HTML files, and whatever
+  WYSIWYG HTML editor he/she uses generates awful, unreadable code.  Maybe the
+  disigner where you work generates the unreadable code
+  himself/herself<strong>*</strong>.  Either way, your job of cutting up the
+  pieces for use in your web app can be a pain.  Well, try this out:</p>
+  <pre>
+  	html2hoshi index.html index.rb
+  </pre>
+  <p>I bet that when you do that, you'll feel great.  Now the code is readable,
+  and you move chunks around and cut it into pieces like you would any other
+  Ruby code.  Wow.</p>
+  
+  <p>Anyway, to summarize, Hoshi:  The Web Can Be Awesome.</p>
+  
+  <hr />
+  <p><strong>*</strong>Web designers reading this:  most of you are cool, please
+  don't take this personally, and I'm sure you know the ones I'm talking about.
+  But I don't feel that way about you.  You're, like, my BFF.  I've always
+  looked up to you and admired your work.  The cleanliness of your purely
+  semantic markup, when married to your elegant CSS has often brought tears to
+  my eyes.  I'm not talking about <em>your</em> code.  I'm talking about the
+  muddled markup manufactured by that guy two cubes down from you.  You know who
+  I mean.  The one who has worn down the keys he uses to copy and paste, and who
+  always smells oddly like sawdust.</p>
+  
+  <p>Not that it's a bad smell, just that it's very odd, especially considering
+  that he doesn't do any woodworking.  He's got a studio apartment on the third
+  floor of that apartment building just down the street from the office, he
+  can't possibly own a table saw.  Where would he put it?  But that smell is
+  distinctly sawdust.  I mean, I'd ask him about it myself, but honestly, how do
+  you bring it up?  And my mind always goes blank when I talk to the guy, you
+  know?  All I can think of is sawdust, and it's such a strong scent.  I've
+  never smelled actual sawdust that smelled that much like sawdust.</p>
+  
+  <p>Anyway, web designers, to summarize:  We cool?</p>
+summary: Bringing first-class views to Ruby.
+key: hoshi-010-released

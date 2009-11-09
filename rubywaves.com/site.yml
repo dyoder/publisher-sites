@@ -1,0 +1,27 @@
+--- 
+name: rubywaves.com
+title: Ruby Waves
+domain: rubywaves.com
+description: Waves is an open source framework for building Ruby-based Web-applications.
+authors: 
+- Dan Yoder
+- Matthew King
+administrators: 
+- name: Dan Yoder
+  password: zigzag9
+  email: dan@zeraweb.com
+- name: Matthew King
+  email: automatthew@gmail.com
+  password: ctfoeb
+- name: KayKay
+  email: kitti.k@gmail.com
+  password: deepthi
+roles:
+- Admin
+
+Admin:
+- property
+- story
+- image
+- blog
+- gallery

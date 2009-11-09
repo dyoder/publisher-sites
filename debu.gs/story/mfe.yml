@@ -1,0 +1,19 @@
+--- 
+name: mfe
+format: wysiwyg
+title: MFE, the Meta Front-End
+author: Pete Elmore
+published: 2006-09-18 14:00:48 -07:00
+content: |-
+  <h2>What is MFE?</h2>
+  <p>MFE essentially just remembers commands for you, has powerful argument handling facilities, can make use of&nbsp; Ruby embedded in the commands, and can manage them without having to edit rc files.&nbsp; <br />
+  </p>
+  <p>MFE in brief is the solution to the problems of an ever-increasing number of one-line scripts in /bin and having too much to remember and type.&nbsp; Aliases and shell functions clutter up tab-completion and are not as easy to manage automatically (and aliases don't have intelligent handling of arguments).&nbsp; <br />
+  </p>
+  <p>Let me explain a little less briefly.  I often find myself typing the same lengthy commands, almost character-for-character, over and over again.  This was especially true with nmap, qemu, and ssh.  They were one-liners, so they didn&rsquo;t seem to warrant their own script in my /bin (which is already full of scripts, many of which I fail to recall the use for).</p>
+  <p>So resigned myself to typing things like &ldquo;sudo qemu-system-x86_64 /dev/hdb -cdrom /home/pete/images/crux-x86_64-2.1.iso&rdquo;, &ldquo;wget -erobots=off -U &lsquo;Mozilla/4.0 (compatible; <span class="caps">MSIE 7</span>.0; Windows <span class="caps">NT 5</span>.1; <span class="caps">SV1</span>; .NET <span class="caps">CLR 1</span>.1.4322)&rsquo;&rdquo;, &ldquo;sudo nmap -O -sV -T4 -vv -oN localnet 192.168.0.1/24&rdquo;, or something even worse over and over again.  Some of these are a pain to remember in addition to being a pain to type, but a little too trivial to warrant a shell script.</p>
+  <p><span class="caps">MFE</span> solves this problem.  It is a tool for managing trivial, one-line, throwaway scripts.  It doesn&rsquo;t clog up any bin directories, and lets you keep typing to a minimum.  So &lsquo;ls ~/bin&rsquo; can fit on one screen, your tab-completion for real commands isn&rsquo;t full of one-line scripts you wrote a year ago and can&rsquo;t remember the reason for, and you don&rsquo;t have to remember or type crap like &ldquo;make -j3 &amp;&amp; strace -v -s 1024 -o strace_probe_`date +%s` ./fnprobe -i 0 -l stdout ; xmessage -nearmouse &lsquo;exited:  $?&rsquo;&rdquo;.<br />
+  </p>
+  <p>You can <a href="/mfe-doc">read more</a> or head to the <a href="/mfe-download">download section</a>.</p>
+summary: <p>About <span class="caps">MFE</span>.</p>
+key: mfe

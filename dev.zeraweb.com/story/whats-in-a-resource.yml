@@ -1,0 +1,96 @@
+--- 
+format: textile
+author: Dan Yoder
+title: What's In A Resource?
+published: 2009-03-12
+tags: rest
+summary: |-
+  In my last post, we explored "why resource-oriented architecture (ROA) matters":/top-10-reasons-resource-oriented-architecture-matters. Given that context, we can now explore in more detail what ROA really means. In what follows, I am going to make the argument that, in essence, REST defines a set of ideal constraints for implementing a platform and protocol neutral system for distributed objects; and ROA is about building upon that to actually specify an implementation. That, in turn, not only helps us define _what_ a resource is, but why ROA is so compelling.
+content: |-
+  In my last post, we explored "why resource-oriented architecture (ROA) matters":/top-10-reasons-resource-oriented-architecture-matters. Given that context, we can now explore in more detail what ROA really means. In what follows, I am going to make the argument that, in essence, REST defines a set of ideal constraints for implementing a platform and protocol neutral system for distributed objects; and ROA is about building upon that to actually specify an implementation. That, in turn, not only helps us define _what_ a resource is, but why ROA is so compelling.
+  
+  h2. No Religion Here
+  
+  What ROA doesn't mean is "an excuse to be religious." That is, we don't want to devolve the discussion into an exercise in pedantry. And I think because some of the concepts and terms are either unfamiliar or overloaded in other contexts, it becomes all too easy to give at least _the appearance_ of pedantry. In order to avoid that, we want to be as clear as we can be and focus on providing common-sense definitions.
+  
+  h2. REST, ROA, and HTTP
+  
+  We can start by clarifying the relationship between REST, ROA, and HTTP. REST is really a collection of architectural constraints. It doesn't really define an architecture. This is one reason why ROA is so open to interpretation (ask ten architects what it means, you'll likely get ten answers). Within the REST constraints, there are a lot of possibilities. So if we start by saying ROA must satisfy REST, we have only just begun defining it. Similarly, HTTP is a protocol that supports REST-based architecture. But, in theory, you don't need to use HTTP to have a REST architecture. (In fact, "protocol independence is a constraint of REST":protocol-independence.)
+  
+  h2. Start With The Web
+  
+  I say "in theory" because I think a large part of the appeal of REST is that we have a great working example of REST at work in the form of the Web. We don't really need to reinvent the wheel here. So, in practice, we're almost always talking about HTTP, which allows us to leverage all the existing infrastructure that already more or less knows how to deal with HTTP. "More or less" because, in many cases, HTTP isn't really used the way it was intended, but it is still a pretty good starting point.
+  
+  h2. Throw The First One Away
+  
+  The question that ROA must answer is how to use this infrastructure most effectively. At least, that is my opinion, based, again, largely on the idea that we're already halfway home just because the Web is already there. We just need to adapt it so that it works a little better for building applications other than serving documents. And the most obvious way to start is to be more consistent in conforming to REST, since that is the basis for a large part of the design of the Web. In turn, the most obvious way to do that is to make better use of the HTTP protocol itself. The argument here is that new Web applications can learn from the mistakes made by browsers and document servers and build on their success.
+  
+  h2. Provide Compelling Abstractions
+  
+  This is a very practical approach, but it still doesn't really answer the question, at least not fully. More profoundly, it leaves a lot of people wondering about what _exactly_ they're implementing. This is because, again, REST is just a set of constraints. It is not defined in terms of an abstraction and the terminology (what exactly is a "resource"?) is intentionally vague _for exactly that reason_. Similarly, HTTP is a specification, so, again, it does not talk to abstractions. So ROA must not only tell us how to use the Web as an applications infrastructure, but also provide us some useful abstractions. Ideally, it gives us some insight into why REST is so powerful.
+  
+  h2. Servers, Resources, And Representations
+  
+  We do have some useful starting points, of course. We have this notion of a resource, which may have multiple representations. For example, a movie can be represented as a Web page, a data structure, or a video stream. It helps me to think of this as extending the object-oriented paradigm with this notion of representations. This is intuitive if you've worked with distributed object systems where you must marshall objects across machine and process boundaries. Then you have two representations, one in memory, and one over the wire. You can even have three if the client and server are different platforms. REST goes beyond this, and allows or as many representations as we want.
+  
+  h2. Servers As Meta-Objects
+  
+  What is missing is the counterpart to class. It's actually there in the form of the server. For example, the server is responsible for responding to a GET request for a given resource. However, this is a bit confusing since _server_ is such an overloaded term. In HTTP, the server is whatever is on the other end of the socket. In practice, it is a program running on a machine. For REST, it is the thing that knows how to provide me with a resource in a given representation. But since it may know about many different and otherwise unrelated resources, this isn't very helpful.
+  
+  I like to think of a REST server as being a class or meta-object. The HTTP server knows to delegate (conceptually, although in Waves this is implemented literally) to the appropriate meta-object for a given type of resource. In turn, the meta-object knows how to find that resource and construct the appropriate representation. In OOP terms, a movie request would be first handled by the server, which delegates to a movie resource object, which in turn, finds a movie object, serializes it to XML (if that is what was requested), and returns it. The movie resource object is essentially a meta-object for the movie object.
+  
+  h2. Platform-Independence
+  
+  REST goes well-beyond this, however, and that is what makes it so compelling. We've hinted at this already, but a very important part of REST is that it is "representation-centric", for lack of a better phrase. The client specifies what representation(s) they want and/or can understand. The server does its best to provide a desirable representation. 
+  
+  Notably, the client does not use the URI to do this, nor does the server get to make assumptions about what the client wants. Instead, the protocol itself provides a way for the client to tell the server what it needs (the @Accept*@ headers), and the server tells the client what it came up with (the @Content-Type@) header. 
+  
+  The benefit of doing this is that, just by providing a wide-variety of possible published representations, the server is decoupled from any specific client implementation. This doesn't matter so much if you can assume only one type of client (which is what a lot of folks are doing when they ask why they should care about REST), but the more broadly you expect an API to be used (or, put another way, the more you want to reuse parts of an application), the more important it becomes. 
+  
+  Ideally, new types of clients can come along without requiring any changes to the server besides (maybe) adding support for new representation(s). This loose coupling is a core tenet of distributed systems generally and is a big part of why the Web works - it's highly tolerant of change.
+  
+  h2. Why Not MVC?
+  
+  MVC die-hards at this point are saying, "Wait a minute. This is just MVC with different terminology. The controller is the server (or meta-object), the model is the resource, and the views are the representations." Fair enough, except that we're using HTTP, _not the URI_ to specify which representation we want. We're also using HTTP caching to push our caching policies out beyond our server. 
+  
+  "Okay, fine," says our MVC apologist, "but MVC doesn't _prevent_ me from using HTTP caching or having my controller inspect the request to determine which view to call. There's not enough there to make me want to abandon MVC for ROA." Again, fair points, but Java apologists used to make arguments like this when criticizing Rails. It isn't that you _can't_ do something, it is whether it is easy and natural. 
+  
+  What's more, these are the simply the parts of REST that are most familiar to MVC programmers. We've covered just the basics: resources, representations, and self-describing requests.
+  
+  h2. Self-Describing Resources
+  
+  It turns out, if you want to make things really dynamic and tolerant of change, you not only need self-describing messages, but also self-describing interfaces. SOA accomplishes this with WSDL, which makes it possible (for example) to dynamically generate a client stub with methods that correspond to services. In ROA, the equivalent of this is "RDF":rdf. In the Ruby idiom, we want to duck-type our APIs. We don't want to make our clients fixed and rigid and completely dependent on some arbitrary URI scheme which may change and evolve over time. 
+  
+  Even better, we can also dynamically combine resources (or compose services, if you prefer) this way because a client can simply use shared RDF schemas and media-types to access an API _without ever knowing the URI scheme_. Instead of each client having to know the intimate details of each server, clients and servers, clients and servers become loosely coupled by relying on a shared vocabulary. 
+  
+  This is part of what makes RSS so successful: instead of every blog in the world having to adapt the same URI structure and media-type, RSS describes the blog interface, which allows any arbitrary client to use it. That also made it trivial to accommodate new media types like podcasts. 
+  
+  Notably, there simply is no way to capture this _within_ the MVC abstraction. MVC simply does not address dynamically describing resources (or models) for purposes of making it easier to access them.
+  
+  h2. Cookies And Security
+  
+  There's a clear theme here, which is that we want to minimize the number of assumptions made by clients and servers about how they should interact. We define a shared vocabulary (media types and schemas) and a shared understanding of how to communicate (protocols) and we base everything we do on those. This way, the clients and servers can vary independently and nothing breaks. For the same reason, we want client state to be stored on the client, not the server, because that introduces another layer of potential interdependencies that we'll just have to deal with later. In other words, ROA does not depend on (or, ideally, even allow) cookies.
+  
+  A great example of how these kinds of dependencies introduce problems is the area of security. "Virtually all of the major security risks":security for Web applications are based on the failure to properly decouple (encapsulate) the server from potential clients. For example, using cookies to provide authentication credentials makes the server vulnerable to a spoofed request, should a malicious client somehow get a hold of the cookie. _There is no way for the server to know_ whether the client is malicious or not unless _the message itself_ provides the necessary information. Again, we're removing assumptions about the communications between the client and server and placing them in the message itself.
+  
+  h2. The Value Of Proxies
+  
+  By provide rich self-describing messages that don't rely on shared state or out-of-band assumptions, we open up another possibility: the use of smart proxies. This principal is applied everywhere on the Web: firewalls, load-balancers, caching proxies, and so on. ROA makes it easier for us to more effectively leverage this idea in our applications. For example, we can construct a smart proxy that provides generic OpenID services and OAuth support, which can then be leveraged across all applications, without requiring each of them to implement any authentication at all. This is similar in principal to a firewall: servers behind the firewall don't have to know anything about the firewall rules, or even know that it is there at all. OpenID proxies can verify the identify of the client and then modify the message that they pass on to the server to simply use HTTP Basic Auth. This same principal can be applied for a variety requirements, ranging from transaction management to reliable messaging.
+  
+  h2. So ... What's A Resource Again?
+  
+  Tying this all together, our definition of ROA essentially states that a resource is data that we:
+  
+  * Can describe using RDF using shared schemas, without relying on a specific URI structure.
+  * Identify using a generic URI that can be treated purely as a global identifier by clients.
+  * Access using a well-defined protocol, like HTTP of FTP.
+  * Request from a server, which may implement a meta-object interface (such as @GET@, @PUT@, and so on).
+  * Represent in the form of a well-defined media-type, based on the request from the client.
+  * Manage (implement security, caching, and so on), through self-describing messages, which in turn, enables us to use smart proxies and simplify our server implementations.
+  
+  Many of these features are based on REST, such as the use of proxies (a "layered system") or the use of a uniform interfaces. Some of them we've added on to provide our specific instantiation of REST, such as the use of RDF (although that that helps us satisfy other REST constaints, such as using URIs as identifiers) or HTTP Caching.
+  
+  I like to think of ROA as essentially describing a highly generic distributed object system, complete with considerations for caching, security, platform and protocol independence, and meta-objects. Many of the REST constraints, like the use of URIs or uniform interfaces, are actually _secondary_ artifacts of providing a well-conceived system for handling distributed objects. It just so happened that most of the "objects" were initially documents, but the same system will work for anything. All we have to do is _use_ it.
+  
+  [protocol-independence]http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm#sec_5_3
+  [rdf]http://www.w3.org/TR/REC-rdf-syntax/

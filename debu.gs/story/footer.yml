@@ -1,0 +1,14 @@
+--- 
+name: footer
+format: html
+title: 
+author: Pete Elmore
+published: 2008-07-25 00:00:00 -07:00
+domain: debu.gs
+tags: ""
+content: |-
+  <p>In the year three thousand and thirty, everybody wants to be a DJ.</p>
+  
+  <p>Contact:  pete dot elmore at gmail dot com</p>
+summary: <p> </p>
+key: footer

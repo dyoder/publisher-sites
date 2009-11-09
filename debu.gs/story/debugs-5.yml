@@ -1,0 +1,24 @@
+--- 
+name: debugs-5
+format: textile
+title: Re-implementing Gloves
+author: Pete Elmore
+blog: debugs
+published: 2007-01-26 00:00:00 -08:00
+content: |
+  "Those who do not understand Unix are condemned to reinvent it, poorly." --Henry Spencer
+  
+  "The Daily WTF":http://thedailywtf.com/ is one of those computer humor sites that pokes fun at coders who seem not to understand development.  It's sometimes good for "a laugh":http://thedailywtf.com/Articles/Virtudyne_0x3a__The_Founding.aspx , but mostly full of people implementing 'isTrue()' functions in C# or stories of massive VBA scripts running mission-critical systems.  However, it recently ran an article that strikes at the heart of one of the universal developer tendencies:  "The Complicator's Gloves":http://thedailywtf.com/Articles/The_Complicator's_Gloves.aspx .
+  
+  To summarize the article, someone on a developer forum complains of having cold hands from biking, and suggests that bikes should have heated handlebar grips.  This triggers a discussion of possible implementations of a wire mesh system powered by a battery that is charged by a dynamo in the pedals, which begins to spiral out of control, culminating in a design that (ignoring the bike) consists of water heated by the torso under the jacket and delivered to the extremeties by a "series of one-way tubes":http://en.wikipedia.org/wiki/Series_of_tubes .  
+  
+  Finally, someone ends the discussion with some out-of-the-box thinking:  just buy a pair of gloves.
+  
+  The Daily WTF usually highlights obvious mistakes made by incompetent coders, but this is something that everyone reading this has probably done.  Hackers love complicated solutions, and will often over-engineer solutions to problems that never needed solutions.  We (and that's not the editorial 'we'.  I mean you, too.) love tinkering, endlessly adjusting, adding capabilities that no one asked for or will ever need.  Sometimes you come up with something brilliant, and sometimes you re-implement gloves--poorly.
+  
+  Not that this tendency is bad.  It's important to "exercise your creativity":http://www.madore.org/~david/programs/unlambda/ when you can get the chance; the actual danger is that those unfortunate coders didn't realize they were re-implementing gloves.  I've done it, you've done it, and everyone you know who has written software has done it.  You write 'i = 5', frown at it, define it as a constant (taking time to carefully name the constant), decide to stuff '5' in a config file and allow the user to override the config file with an environment variable, furrow your brow at that, get rid of the file and stuff the 5 into a MySQL database, change that so it will run on Postgres, too, write an abstraction layer so you can use a database /or/ a flat file, and you've successfully spent four hours on a for loop.  
+  
+  So, obviously, if you had realized what was going on and just left it at 'i = 5', you'd have been able to put that energy into the hard part of the problem.  A lot of the small projects I've done for fun died a similar death, and a lot of time I've wasted at work has gone towards over-engineering.  It's important to stop once in a while and make sure you're not re-implementing gloves.
+
+summary: Over-engineering is the most fun and most counterproductive part of coding.
+key: debugs-5

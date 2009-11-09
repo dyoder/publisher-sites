@@ -1,0 +1,11 @@
+--- 
+title: dev.zeraweb.com
+description: An R&D perspective on the evolution of technology.
+stylesheet: default
+layout: default
+authors: 
+- Dan Yoder
+administrators: 
+- name: Dan Yoder
+  password: zigzag9
+  email: dan@zeraweb.com

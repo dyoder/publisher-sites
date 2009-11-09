@@ -1,0 +1,11 @@
+--- 
+name: live-console-alpha
+format: textile
+title: LiveConsole Alpha Release
+author: Pete Elmore
+published: 2007-10-20 11:24:13 -07:00
+content: |
+  Releasing the brand new alpha version of "LiveConsole":/live-console today.  It's a "Ruby":http://www.ruby-lang.org/ library that essentially provides IRB over TCP.  You can do things like inspect or patch running code, or even create a giant security hole for no reason.  Sound like fun?  Yeah, I thought so, too.  So you can check out the "main page":/live-console or the "Rubyforge project page":http://www.ruby-forge.org/projects/live-console (where the files are), or just "gem install live_console" if you prefer to install software without even knowing what it does.
+
+summary: Get your commemorative plates today!  Operators are standing by to take your call.
+key: live-console-alpha

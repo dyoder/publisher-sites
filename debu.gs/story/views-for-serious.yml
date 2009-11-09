@@ -1,0 +1,35 @@
+---
+name: views-for-serious
+format: textile
+blog: debugs
+author: Pete Elmore
+published: 2009-07-23 11:59:51.135590 -07:00
+title: Views, for Serious
+summary: |-
+  Templating versus DSLs, first-class views, and what is different about Hoshi.
+content: |
+  It seems views are all wrong nowadays.  It is time to do views for serious, and then get the party started.
+
+  I wrote "Hoshi":http://github.com/pete/hoshi a while back.  It is sort of like "Markaby":http://markaby.rubyforge.org/ , but there are a few differences, and I'll highlight them so the rest of this article makes sense.  One of the main ones is that (with the exception of the one-off block version) there's no instance_eval, and very, very little magic involved at all.  Calls to tag methods have no fanciness, and the code really just sort of looks like Ruby.
+
+  This was the whole idea for Hoshi, incidentally.  The view should be a first-class object, with inheritance and instance methods and all of those things that allow you to actually put all of your Ruby knowledge to use.  Without instance_eval intermittently confusing the semantics, you get to use blocks and closures and local variables and your context is always the instance of the view.
+
+  That having been said, Hoshi looks close enough to Markaby (and was largely inspired by Markaby) to muddy things a bit.  I've been asked by at least two really smart guys if there's a way to get Hoshi to allow "div.foo!" to generate "&lt;div class='foo'&gt;".  The answer is that although it would be nice to have, I don't know of a way to get that to happen without breaking the parts that actually make Hoshi nicer than Markaby.
+
+  And this is where I actually get to the point.  To pick on that CSS class example again, those classes are there to describe the type of thing that the tag represents.  That div up there belongs to the foo class, and the accompanying CSS describes how a .foo ought to look, and sometimes how a div.foo ought to look.  This separation of the document (semantic HTML) from its presentation logic (the CSS) is nearly univerally considered the Right Thing to do when on the web.  Are you spotting an analogue to Hoshi and expressive domain-specific languages yet?  If not, don't worry, I'll do my best.
+
+  If you've done a lot of ERB/HAML/etc., then this basically the opposite approach.  Even Markaby (and I love _why, he's a genius, so hopefully *we still cool* in the off chance that he reads this) is really like a templating language in Ruby syntax, and that's the opposite of what you really want.  The idea isn't to make tags convenient to write; it's to make sure that you don't write tags very often.  You want to build a document by describing it, not by putting a bunch of tags in it.
+
+  Code works best when a given piece only solves one problem.  You want some of your view methods to describe the document and provide the content, and you want some other private methods squirreled away at the bottom to handle all of the tag logic.  You want to talk about your document not in terms of HTML tags, but in terms of what it actually is, and build a very DRY DSL for describing the document in some private methods down near the bottom of your class or in a superclass.
+
+  I know you want it, because I can see it in your eyes.
+
+  I generate my resume with Hoshi.  Any heavy or repetitive tag-lifting got pushed out of the parts where I talk about what I want it to say, and section headers are not done by "h3('Section Name', :class =&gt; 'section-header-or-whatever-i-forgot-the-css-class-actually')", but by a call to the section method:  "section 'Section Name'".  I'm free to change it from an h3 to an h2, or to make the text BOLD, ITALIC, UNDERLINED, AND BLINKING to maximize my professionalism.  This DRYing out of code, pulling repetitive things or complex logic or even ugliness into a method somewhere else is common sense, but doesn't seem to occur even to really smart guys.
+
+  In fact, I think we get trained by templating.  Who would ever define a method in an ERB template?  Rails /sort of/ has a method for dealing with this, in that technically you can pull logic out of templates and into Helpers, but you still don't have first-class views, and templates are still "HTML with a little Ruby".  HTML is static, and even loops and conditionals are excessively weird and ugly in ERB.  Even if you add "helper methods", it's an approach that actively discourages all of the common programming practices that are common sense everywhere except templating languages.
+
+  And that's what Hoshi really is for.  Everything you know about programming?  You get to use that.  Inheritance.  Methods.  Instance variables.  Closures.  You love these things, right?  I do, too, and that's why, rather than making tags easy to write, Hoshi tries to push tags and other tag logic out of the way.
+
+  h4. Footnote
+
+  Actually, all of this is where the name for Hoshi came from, via a somewhat indirect route.  I was sick of HTML:  "I'm Sick Of Html" -&gt; "ISOH" -&gt; "HOSI" -&gt; "ほし" (which can be written in Roman letters as either 'hoshi' or 'hosi') -&gt; "Hoshi".  It's also Japanese for "star" (sorta).

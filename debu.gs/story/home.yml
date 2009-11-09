@@ -1,0 +1,15 @@
+--- 
+name: home
+format: textile
+title: 
+author: Pete Elmore
+published: 2005-07-25 13:13:38 -07:00
+content: |-
+  "Pete":/about-pete uses this page to talk (infrequently) about software.  There's a lot more activity on the "github":http://github.com/pete account.
+  
+  <img src="/images/mainimage" />
+  
+  "Any verbose and tedious solution is error-prone because programmers get bored."
+  -- Bjarne Stroustrup, S 9.4 of C++, 2nd edition
+summary: ""
+key: home

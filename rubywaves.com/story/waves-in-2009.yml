@@ -1,0 +1,116 @@
+--- 
+format: textile
+title: Roadmap Update
+author: Dan Yoder
+published: 2008-07-06 00:00:00 -07:00
+content: |
+  It has been five months now since the original release of Waves. We've come a long way and there are some really exciting things still to come. So it seemed like a good time to review the original roadmap. The new "roadmap" is now "at the same place as our bug tracking, Lighthouse":http://waves.lighthouseapp.com/projects/10707-waves/milestones. Just look at the Milestone view.
+  
+  h3. Template Engines
+  
+  * -Haml- and Sass
+  * Tenjin
+  
+  We have working Haml support, but still no Sass.
+  
+  h3. Web Servers
+  
+  * -Support for other rack handlers in config-
+  * -Server config parameter: @server :mongrel@-
+  
+  The configuration paramater is actually called @handler@, and you pass in the full class name of the handler, but this is done.
+  
+  h3. Caching
+  
+  * Better caching support
+  
+  We still don't have a formal cacheing feature.
+  
+  h3. Controller Mixins
+  
+  * -Treat default controller impl as mixin. *Ex:* @PrettyUrlController@-
+  
+  This is done, although it is done through the Layers mechanism. More on that in a future blog entry.
+  
+  h3. Enhanced request mapping syntax
+  
+  * -Use actual @lambdas@ and @Proc#|@.-
+  
+  We implemented this in edge and then starting fiddling and came up with something way better than the original plan. In fact, it was so much better, it actually changed the focus of Waves. Both the Resource-oriented approach that has now become fundamental to Waves, and the more sophisticated approach to request mappings that resulted will be explored in more depth soon.
+  
+  h3. Filebase Support
+  
+  * Default model adapter for Filebase.
+  
+  Still on the roadmap. Filebase has become a real project on GitHub, but not yet an official Gem. And the integration with Waves still remains to be done.
+  
+  h3. Sample App
+  
+  * Add login / session example.
+  
+  Mostly, with the sample app we've just focused on trying to make sure it stays up with edge.
+  
+  h3. Use Facets Libraries
+  
+  * English: inflector
+  * Stick: for units (bytes, mbytes, etc.)
+  
+  We've included this code in Waves, but have yet to depend instead on the Gem.
+  
+  
+  h3. URI-based Filters
+  
+  -Right now you can only apply filters based on the path.-
+  
+  h3. Magic Templates
+  
+  * Port DrySQL code to build reflection layer
+  * Schema repository (generated or otherwise)
+  * Build "naked" HTML templates based on schema
+  * "Ext"ize magic templates
+  
+  Not finished, but definitely still on the roadmap.
+  
+  h3. Testing Support
+  
+  * Favor a testing framework? Which one?
+  * Best way to handle mock data sets?
+  
+  This has been an interesting area to study. We have been using Bacon as the basis of our tests on Waves.
+  
+  h3. Form Helpers
+  
+  * Include basic set in default application?
+  
+  We have a very nice set of form helpers, but they aren't well documented and are not included by default. This is still an issue in the current version.
+  
+  h3. Integration Tasks
+  
+  * -Next version of Sequel fixes primary key problem-
+  * -Next version of Rack fixes problem with Lint, plus app.new-
+  
+  We are up to date on both Rack and Sequel.
+  
+  h3. Sessions
+  
+  * Session storage: database and in-memory
+  * "Flash" session variable?
+  
+  Session support is still pretty basic in Waves.
+  
+  h3. Undo / Redo Support
+  
+  Inspired by Pascal's Rails plugin. The idea would be to introduce a simple controller-DSL for defining actions and then their undo / redo actions. A variety of helpers would be made available for common scenarios, such as database updates to make it easier to implement.
+  
+  Still on the roadmap.
+  
+  h3. @mod_waves@ Apache Module
+  
+  Inspired by another idea of Pascal's, to take advantage of Waves' thread-safety and code-reloading to create a PHP-like (or Tomcat-like) ability to drop an app into an apache directory and automatically load it. Development could proceed as in PHP or Tomcat (the Tomcat model requiring an explicit reload, but also being a little easier to implement with minimal blocking ...).
+  
+  Passenger already moves in this direction and our focus right now is more on JRuby. So this will be taken off the roadmap.
+
+summary: |
+  It has been five months now since the original release of Waves. We've come a long way and there are some really exciting things still to come. So it seemed like a good time to review the original roadmap.
+
+key: waves-in-2009

@@ -1,0 +1,12 @@
+--- 
+format: mab
+published: 2009-04-25 12:12:20.530181 -07:00
+content: |
+  title "#{ site['title'] }: #{ @title }"
+  link :type => 'text/css', :rel => 'stylesheet', :href => '/css/site.css'
+  script :type => 'text/javascript', :src => '/javascript/jquery-1.2.1.pack.js'
+  script :type => 'text/javascript', :src => '/javascript/jquery.flash.js'
+  script :type => 'text/javascript', :src => '/javascript/jquery.cycle.pack.js'
+  script :type => 'text/javascript', :src => '/javascript/site.js'
+
+key: head

@@ -1,0 +1,26 @@
+--- 
+format: html
+blog: mousetrap-2
+author: Dan Yoder
+title: REST FTW, Part 1
+published: 2009-04-21
+tags: rest
+content: |-
+  <p>Lately, in my talks on Waves and how it supports RESTful architectures, I've found I've had to take a step back and talk more about what REST is and why it matters.</p>
+  
+  <p>This is a bit surprising, since REST has been on the buzzword bingo card for years now. However, it turns out that most of what has passed for RESTful is really what I have come to call <em>REST-lite</em>. Essentially, REST-lite focused on the verbs of the HTTP protocol and (more or less) ignores ... well, the rest.</p>
+  
+  <div class='inset'>
+    <p class='caption'>This is not MVC.</p>
+    <img src='http://farm4.static.flickr.com/3282/2738164183_f36b00cb5f.jpg' alt='Tim Berners-Lee's original proposal for the Web.'/>
+  </div>
+  
+  <p>So I talk a bit about linked data and content negotiation and edge-caching and the next question is why do we need those things? What problem does it solve? "After all," many developers will say, "Rails seems to work fine for my requirements." There is nothing really wrong with this, mind you. Except that I'm not sure it's true.</p>
+  <p>Let me go with an analogy here. At the time Rails came out, I don't recall anyone complaining about how gosh-darn hard it was to build simple Web-based database applications. It was more that Rails made it so <em>easy</em>. In other words, Rails solved a problem we didn't really even know we had.</p>
+  
+  <p>I think REST is like that, or, at least, it has the potential to be that, given the right tools and framework support. So I thought I'd try writing a few articles to dive a bit deeper into some of the advantages of REST and why they are useful in just about any context. I've taken several tries at some of this now, but I think I'm getting the hang of it. Hopefully, this series will be the one where it starts to come together.</p>
+summary: |-
+  <p>Lately, in my talks on Waves and how it supports RESTful architectures, I've found I've had to take a step back and talk more about what REST is and why it matters.</p>
+  
+  <p>This is a bit surprising, since REST has been on the buzzword bingo card for years now. However, it turns out that most of what has passed for RESTful is really what I have come to call <em>REST-lite</em>. Essentially, REST-lite focused on the verbs of the HTTP protocol and (more or less) ignores ... well, the rest.</p>
+key: rest-ftw-part-1

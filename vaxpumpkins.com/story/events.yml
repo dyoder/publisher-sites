@@ -1,0 +1,26 @@
+--- 
+name: events
+format: wysiwyg
+title: Events
+author: Vax
+published: 2008-03-07 00:00:00 -08:00
+domain: dan.local
+tags: ""
+content: |-
+  <h2>Upcoming Events</h2>
+  
+  <p></p>
+  <ul>
+  <li>
+  <p>End of September and throughout October in the Bay Area:&nbsp;</p>
+  </li>
+  
+  </ul>
+  <p>Complete list of events can be found at <a href="http://www.walkerandbowes.com/events_current.html"><span style="color: #666666; text-decoration: none;">WalkerAndBowes.com</span></a>.</p>
+  <h2>Recent Events<br /></h2>
+  <p>Put some recent event stuff here.</p>
+  <p>&nbsp;</p>
+  
+  <p>&nbsp;</p>
+summary: ""
+key: events

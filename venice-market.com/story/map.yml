@@ -1,0 +1,13 @@
+--- 
+name: credits
+format: wysiwyg
+title: Map And Directions
+author: Vax
+published: 2008-03-07 00:00:00 -08:00
+domain: dan.local
+tags: ""
+content: |-
+  <iframe width="500" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?oe=UTF-8&amp;ie=UTF8&amp;q=venice+market,+ca&amp;fb=1&amp;split=1&amp;gl=us&amp;cid=9656492045539345971&amp;li=lmd&amp;ll=34.035550,-118.382081&amp;spn=0.006295,0.006295&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps?client=safari&amp;oe=UTF-8&amp;ie=UTF8&amp;q=venice+market,+ca&amp;fb=1&amp;split=1&amp;gl=us&amp;cid=9656492045539345971&amp;li=lmd&amp;ll=34.033218,-118.382081&amp;spn=0.006295,0.006295&amp;source=embed" style="color:#0000FF;text-align:left">View Larger Map</a></small>
+  
+summary: ""
+key: credits

@@ -1,0 +1,21 @@
+--- 
+format: mab
+published: 2009-04-25 12:12:20.531591 -07:00
+content: |-
+  div.menu do
+    [ ['/home','Home'], 
+    [ '/blog/official-blog','Blog'],
+      [ '/features','Features' ], 
+      [ '/pricing','Pricing' ],
+      [ 'http://help.vixby.com/','User Guide'], 
+      ['http://groups.google/com/group/vixby-pages', 'Forum'], 
+      [ '/about', 'About' ],  ].each do |item|
+      n,t = item
+      if n.to_s == @name
+        a.selected t, :href =>"#{n}"
+      else
+        a t, :href=>"#{n}"
+      end
+    end
+  end
+key: menu

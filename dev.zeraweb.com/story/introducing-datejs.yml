@@ -1,0 +1,57 @@
+--- 
+format: textile
+title: Introducing DateJS
+author: Dan Yoder
+published: 2007-11-29
+tags: javascript
+content: "\r\n\
+  Well, we finally reached alpha status on one of the mysterious projects I keep referring to ... this one is called \"DateJS\":http://datejs.com/, and, if you haven't heard, \"it rocks\":http://www.ajaxian.com/archives/mad-cool-date-library. The date parsing is based on our our own \"Cruiser Parse\":http://code.google.com/p/cruiser/wiki/Parse library, which has evolved considerably since the last official release. And, in fact, we will be documenting and announcement this new version shortly, along with a major revision of the Cruiser library as a whole. But I can blog about all that later. Let me first introduce the DateJS library a bit.\r\n\
+  \r\n\
+  h2. Overview\r\n\
+  \r\n\
+  DateJS is a new JavaScript library for parsing, processing, and formatting dates that substantially augments the native Date support in JavaScript. You can find a nice \"overview\":http://code.google.com/p/datejs/, \"source code\":http://datejs.googlecode.com/svn/trunk/src/, and \"test cases\":http://www.datejs.com/test/index.html at the \"DateJS Google Code site\":http://code.google.com/p/datejs/. We are actively seeking feedback and contributers: we hope you'll participate in the \"discussion forums\":http://groups.google.com/group/datejs.\r\n\
+  \r\n\
+  *Examples*\r\n\
+  <pre>\r\n\
+  // creating dates\r\n\
+  var d1 = Date.today();\r\n\
+  var d2 = Date.parse('2007.07.17 22:30 PM EST');\r\n\
+  var d3 = (6).months().ago();\r\n\
+  \r\n\
+  // modifying dates\r\n\
+  d1.set({ hour: 12, minute: 30 });\r\n\
+  d2.add({ years: 5, months: 3 });\r\n\
+  \r\n\
+  // common date tasks\r\n\
+  d2.is().weekend();\r\n\
+  \r\n\
+  // chaining\r\n\
+  var d4 = d3.clone().last().week();\r\n\
+  </pre>\r\n\
+  \r\n\
+  h2. Motivation\r\n\
+  \r\n\
+  The native JavaScript Date object is relatively limited in what it can do. It can't parse many common date formats, lacks internationalization support, and provides minimal support for date calculations and common functions, among other drawbacks. \r\n\
+  \r\n\
+  Although various other JavaScript Date libraries do exist, none were comprehensive enough for our requirements. On other platforms, we found plenty of inspiration, but nothing we wanted to just port directly.\r\n\
+  \r\n\
+  Dealing with dates is something almost every application must do, so it was surprising that the subject has not received more attention. Considering that JavaScript is the programming language of the Web, and thus poised to become the most widely used programming language in the history of computing, it certainly deserves a first-class treatment for Dates. There must be literally millions of hours of productivity lost by now because of the lack of good Date support.\r\n\
+  \r\n\
+  Curiously, the ECMA specification for JavaScript 2 spec hardly touches Date. It seems to be an area where the JavaScript folks have designated the domain of library authors. The domain is certainly (deceptively) complex enough to warrant such treatment. The need for globalization support in date parsing alone is problematic enough from a standardization standpoint.\r\n\
+  \r\n\
+  At any rate, what was clear was that JavaScript was in dire need of a comprehensive and straightforward Date library. And now it has one.\r\n\
+  \r\n\
+  h2. Limitations\r\n\
+  \r\n\
+  We aren't done, of course. First, this is an alpha release. We need feedback, in terms of bug fixes, feature requests, and patches. While we have support now for over 150 cultures, it would benefit significantly from real world testing and use. Second, there are some areas we haven't yet addressed in order to get a first version out the door. For example, we haven't yet taken on durations or calendars. Third, there are a number of performance enhancements we are planning / exploring, crucial for dealing with larger datasets.\r\n\
+  \r\n\
+  In some cases, we've held off on extending the library further simply because it isn't yet clear how to do that \"right\". I think it's fair to say that we are pretty happy with the API as it stands. Everything we've added so far has reasonably clear requirements and rationale. For example, we chose to make Date objects mutable in order to be consistent with the native implementation and because date semantics are complex enough (leap years, time zones, etc.) that they don't really seem like an atomic or \"primitive\" type (like integers, for example).\r\n\
+  \r\n\
+  Durations are a good example of where we've held off and are seeking input before we move forward. Durations that go beyond weeks (that is, of months or years) are inherently approximate: they can only take on a precise value relative to a starting or ending point. It isn't clear how best to handle that yet, so we've held off.\r\n\
+  \r\n\
+  h2. Other Platforms / Languages\r\n\
+  \r\n\
+  Aside from solidifying and enhancing the JavaScript Date library, we would love to see it ported to other platforms and languages. Our hope is that JavaScript, through DateJS, can set the bar for other languages in the future, and that we can all enjoy comprehensive support for dealing with Dates in the near future. We have ports to Ruby and C# already planned. If you're interested in this effort, please let us know.              "
+summary: "\r\n\
+  DateJS is a new JavaScript library for parsing, processing, and formatting dates that substantially augments the native Date support in JavaScript. You can find a nice \"overview\":http://code.google.com/p/datejs/, \"source code\":http://datejs.googlecode.com/svn/trunk/src/, and \"test cases\":http://www.datejs.com/test/index.html at the \"DateJS Google Code site\":http://code.google.com/p/datejs/. We are actively seeking feedback and contributers: we hope you'll participate in the \"discussion forums\":http://groups.google.com/group/datejs.\r\n              "
+key: introducing-datejs

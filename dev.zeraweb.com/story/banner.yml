@@ -1,0 +1,11 @@
+--- 
+format: mab
+published: 2009-04-25 12:12:19.983925 -07:00
+content: |
+  div.banner do 
+    a :href => '/home' do
+      img.logo :src => "/images/banner.png"
+    end
+  end
+
+key: banner

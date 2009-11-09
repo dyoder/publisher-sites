@@ -1,0 +1,23 @@
+--- 
+format: mab
+title: ""
+blog: ""
+author: Janet Joseph
+published: 2007-12-17 00:00:00 -08:00
+tags: ""
+content: |-
+  div.menu do
+    [ [ '/home', 'Home' ], 
+      [ '/blog/cooking-jjs-way','Epicurean'],
+      [ '/spa', 'Spa Therapy' ], 
+      [ '/gallery/my-photos', 'Photography' ], 
+      [ '/contact', 'Keep In Touch' ] ].each do |link,title|
+      if link == request.url.gsub(%r|/$|,'')
+        a.selected title, :href => '#'
+      else
+        a title, :href=> link
+      end
+    end
+  end
+summary: ""
+key: menu

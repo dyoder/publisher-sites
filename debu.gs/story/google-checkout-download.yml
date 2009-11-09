@@ -1,0 +1,12 @@
+--- 
+name: google-checkout-download
+format: textile
+title: Google Checkout Download
+author: Pete Elmore
+published: 2006-09-29 17:15:57 -07:00
+content: |-
+  The google-checkout gems are now downloaded via rubygems:
+  <pre>gem install google_checkout</pre>
+  Wow!
+summary: ""
+key: google-checkout-download

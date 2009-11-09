@@ -1,0 +1,50 @@
+--- 
+name: mfe-doc
+format: wysiwyg
+title: MFE Documentation
+author: Pete Elmore
+published: 2006-09-18 14:56:43 -07:00
+content: |-
+  <h2>Installation </h2>
+  <p> Currently, only installing via a Ruby gem is supported.  </p>
+  <pre>  gem install mfe </pre>
+  <h2>How to use <a href="../../classes/MFE.html"><span class="caps">MFE</span></a></h2>
+  <p> <a href="../../classes/MFE.html"><span class="caps">MFE</span></a> has two main modes: command mode, and execution mode. </p>
+  <p> Here&lsquo;s the quick version of this <span class="caps">README</span>, because seriously, you&lsquo;re not going to read this until you get confused: </p>
+  <pre>  mfe - add say-hi echo hi   <br />  mfe say-hi<br />  =&gt; hi   <br />  mfe - add say-whatever echo ARGS   <br />  mfe say-whatever it can be whatever <br />  =&gt; it can be whatever <br /></pre>
+  <p> Also, several variations of &lsquo;mfe -h&rsquo;, &lsquo;mfe &mdash;help&rsquo;, &lsquo;mfe help&rsquo;, etc., do what you expect.  </p>
+  <h3>Command Mode</h3>
+  <p> In command mode, you can add, edit, remove, or otherwise manipulate the user-defined commands.  </p>
+  <h4>To add a new command</h4>
+  <pre>  mfe - add cmdname command-and-args </pre>
+  <p> This is the format for adding a command to <a href="../../classes/MFE.html"><span class="caps">MFE</span></a>. The first argument to mfe is &rsquo;-&rsquo;, the command character. This signals to <a href="../../classes/MFE.html"><span class="caps">MFE</span></a> that we will be running an <a href="../../classes/MFE.html"><span class="caps">MFE</span></a> command, as opposed to executing a command we have defined. After that comes &lsquo;add&rsquo;, the keyword that tells <a href="../../classes/MFE.html"><span class="caps">MFE</span></a> which command to perform. &lsquo;cmdname&rsquo; is the name given to the command. It can be whatever you want, but must be legal as a filename. The &lsquo;command-and-args&rsquo; part is the command you actually want to run when you type &lsquo;mfe cmdname&rsquo;. As a more concrete example, have a look at this: </p>
+  <pre>  mfe - add hgr grep ARGS /usr/log/httpd.log </pre>
+  <p> Which creates a command named &lsquo;hgr&rsquo; that greps /usr/log/httpd.log for whatever arguments you pass it: </p>
+  <pre>  mfe hgr -i googlebot </pre>
+  <p> Executing the previous command is equivalent to running </p>
+  <pre>  grep -i googlebot /usr/log/httpd.log </pre>
+  <p> As you might have guessed, <span class="caps">ARGS</span> is replaced by whatever arguments you pass when you execute the command. There are two other special strings: <span class="caps">EVAL</span>[] and <span class="caps">ARGEVAL</span>[]. <span class="caps">EVAL</span>[] is replaced with the value of the Ruby code inside the brackets. The Ruby inside <span class="caps">ARGVEVAL</span>[] is evaluated once for each argument (bound to &lsquo;arg&rsquo;) and its value replaces the argument.  The variable &lsquo;argv&rsquo; is exposed to both constructs. A couple of examples should make it clearer: </p>
+  <pre> mfe - add reverse-args echo 'ARGEVAL[ arg.reverse ]' ARGS<br />&nbsp;mfe reverse-args Hello, World.<br />&nbsp;=&gt; ,olleH .dlroW<br />&nbsp;mfe - add reverse-argv echo 'EVAL[ argv.reverse.join(&quot; &quot;) ]'<br />&nbsp;mfe reverse-argv Hello, World.<br />&nbsp;=&gt; World. Hello,<br />&nbsp;mfe - add reverse-both echo 'ARGEVAL[ arg.reverse ]' 'EVAL[ argv.reverse.join(&quot; &quot;) ]'<br />&nbsp;mfe reverse-both Hello, World.<br />&nbsp;=&gt; .dlroW ,olleH<br />&nbsp;mfe reverse-both $(mfe reverse-args $(mfe reverse-argv Hello, World.))<br />&nbsp;=&gt; Hello, World.   </pre>
+  <h4>To edit a command</h4>
+  <pre>  mfe - edit cmdname </pre>
+  <p> This brings up the <span class="caps">YAML</span> representing the command in your editor. This is likely to change when bugs are fixed with non-YAML command editing.  </p>
+  <h4>To remove a command</h4>
+  <p> Simply do </p>
+  <pre>  mfe - rm cmdname1 cmdname2 </pre>
+  <h4>To generate a shell script from a command</h4>
+  <pre>  mfe - add echo-args echo ARGS <br />  mfe - to-shell echo-args A S D F<br /> &nbsp;=&gt; echoargs.sh </pre>
+  <p> Or, a little more creatively, </p>
+  <pre>  mfe - to-shell useful-command | ssh user@host-without-ruby 'cat &amp;gt; bin/cmd' </pre>
+  <h3>Execution Mode</h3>
+  <pre>  mfe cmdname args </pre>
+  <p> Execution mode refers to the loading and evaluation of a command. Execution mode is invoked by running mfe followed by the name of a command and (optionally) any arguments you wish to pass to it. For example: </p>
+  <p> Add a command, </p>
+  <pre>  mfe - add testcommand for i in ARGS\; do indent \$i\; done </pre>
+  <p> then execute it: </p>
+  <pre>  mfe testcommand *.c  </pre>
+  <h2>Environment Variables</h2>
+  <p> There are two relevant environment variables: <span class="caps">MFE</span>_HOME and <span class="caps">MFE</span>_COMMAND_SIG . <span class="caps">MFE</span>_HOME can be used to change the location of your <a href="../../classes/MFE.html"><span class="caps">MFE</span></a> command directory (the default is ~/.mfe). <span class="caps">MFE</span>_COMMAND_SIG changes the string used for signaling command mode (default &rsquo;-&rsquo;). For example, </p>
+  <pre>  MFE_HOME=/tmp/foo MFE_COMMAND_SIG=c_mode mfe c_mode add hi echo hi </pre>
+  <p> creates a command named &lsquo;hi&rsquo; which executes &lsquo;echo hi&rsquo;, and places it in /tmp/foo/hi . Note that the mfe home is created automatically, with permissions set to 0700.  </p>
+summary: <p>&nbsp;</p>
+key: mfe-doc

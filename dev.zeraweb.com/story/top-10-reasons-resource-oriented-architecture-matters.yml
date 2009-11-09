@@ -1,0 +1,97 @@
+--- 
+format: textile
+author: Dan Yoder
+tags: rest
+title: Top 10 Reasons Resource-Oriented Architecture Matters
+published: 2009-03-03
+content: |-
+  One of the emerging themes in our work at AT&T Interactive R&D is Resource-Oriented Architecture (ROA). However, there is a lot of confusion about what ROA is and why it's important. Sometimes, it's just easier to talk to the "why it's important" part and not worry so much about the definition. If you know what it _does_, then what it _is_ becomes more of an intuition rather than "an abstract concept":roa.
+  
+  So, without further ado, here are the Top 10 reasons ROA matters.
+  
+  h2. 10. Resources Are Data
+  
+  Check out "Freebase":freebase if you haven't already, and a lot will become clear to you really quickly. In short, the Web has the potential to be a massive database, not just a bunch HTML limited by full-text search. This is what "Tim Berners-Lee":tim (who knows a thing or two about the Web) is talking about when he refers to the "semantic Web":semantic-web - or, at least, it is a big part of it. Consider how useful Google is today, working essentially with unstructured text. Now imagine that you could search the world's data using more refined methods. How useful would that be?
+  
+  h2. 9. Resources Are APIs
+  
+  We've already seen an explosion of new APIs and mashups that combine them together into interesting applications. However, to date, these APIs are generally not uniform, leading to a "Tower Of Babel" problem. Each API operates just a bit differently, slowing adoption and making it difficult to "build tools to leverage them":exhibit. ROA provides a uniform approach to defining and interacting with resources and does away with the "tower of Babel" problem. You could argue that it would never work, except that ...
+  
+  h2. 8. The Web Is Based On ROA
+  
+  "Roy Fielding":roy literally wrote the book (okay, it was a "paper":rest-paper) on REST, which became a part of geek buzzword bingo with the emergence of Ajax and as an antidote to the complexities associated with Service Oriented Architecture (aka, SOA). But lost in the hype was the fact that Roy was also one of the "principal authors of the HTTP protocol":http-spec. And while HTTP isn't always used by Web servers, browsers, and proxies exactly the way it was designed, it is still fair to say HTTP is _the_ canonical example of REST principles. And thus that the Web - the most scalable application ever! - is based on REST. Since ROA is itself based entirely on REST, the potential of ROA is amply demonstrated by the success of the Web.
+  
+  h2. 7. Universal Identity
+  
+  One of the biggest obstacles to ROA is that a lot of the content of the Web is buried in the "deep Web":deep-web - that is, you need to be authenticated to access it. Since virtually every application uses its own authentication mechanism, the benefit of uniform interfaces for resources is substantially diminished. But with the emergence of "OpenID":openid and "OAuth":oauth, this is changing - rapidly. Virtually "all the top Web properties":openid-adopters either honor these standards or have plans to, which means that accessing resources across application boundaries will no longer be an obstacle. Instead, we'll have agents that will aggregate _your_ data on your behalf - personal search engines, if you will.
+  
+  h2. 6. Widely Adopted Standards
+  
+  Resources can be described using a powerful standard called the "Resource Description Framework (RDF)":rdf, allowing for automated discovery and access of resources. In fact, this is what "Freebase":freebase uses to define schemas and store data. However, far from being an obscure standard known only within the ROA community, RDF is the basis for "RSS":rss and "Atom":atom, standards used to describe the contents of blogs and podcasts. Any feed reader or mashup tool, from Google Reader to iTunes to Yahoo! Pipes, that knows these formats automatically can consume any content that uses them. This is a powerful illustration of what is possible with RDF and will help stimulate more experimentation around its use and the development of ...
+  
+  h2. 5. Powerful Tools
+  
+  There is a lot of interesting development going on around ROA. One of the best examples of this is a "mature set of C libraries with bindings for popular agile languages":redland for dealing with RDF. This in turn has lead to libraries like "ActiveRDF":activerdf, a Rails-compatible library for access RDF data stores, and "experiments mapping social networks to RDF":foaf, among "many other things":haystack. We are reaching a tipping point in terms of making ROA accessible to application developers. All that is missing is the frameworks to help them tie it all together. (In fact, our own "Waves":waves framework is intended to do exactly that.)
+  
+  h2. 4. Cloud Computing
+  
+  The emergence of "mature virtualization technologies":xen and the "increasing availability":azure of "utility-based cloud computing":cloud-computing services has simultaneously reduced the cost of providing and consuming information via the Web. Over the next few years, this will lead to "massive amounts of data":data-cloud being placed in the cloud. Today, the content of the Web is mostly hypertext but, because it is so inexpensive and easy to do, this will gradually shift until the Web is "mostly data":tipping-point. As this shift happens, cloud technologies will evolve to better support publishing data feeds. And the technologies that will be best suited to do that on the Web will be resource-oriented.
+  
+  h2. 3. Consumer Demand
+  
+  Consumers are coming to rely more and more on the Web. Google has trained them to think of the Web as a giant resource for information. Anything from the their bank account balance to travel itineraries to the "Federal budget":federal-budget is available almost instantly somewhere on the Web. Increasingly, consumers will come to expect everything to work that way. But the thing is that a lot of this information is really just _data_. Which is why "search engines are exploring ways":searchmonkey to use ROA technologies like RDF to enhance their search results with real data, not just hypertext. Furthermore, specialized aggregators are emerging that rely on being able to access data from a wide variety of sources. We see this trend in everything from "social networking":friendfeed to "banking":mint.
+  
+  h2. 2. Natural Language And Voice
+  
+  Having all this data on the Web is only valuable if you know how to ask for things. Typically, this has meant "learning a query language":query-language or providing an "advanced search":advanced-search option for your Web site. For some applications, such as airline reservation sites, this has been a "constant struggle":fare-search. However, recent advances in natural language processing and speech recognition will radically change the expected interface for "advanced search." 
+  
+  Already, "consumers are using longer search queries":queries-get-longer as they get used to more powerful query processors. In addition, "voice search is clearly coming into its own":speak4it. What this means is that you will soon be able to simply say to your computer _find me the most affordable yet romantic Italian restaurant that has reservations available Friday around 8_ and expect that you'll be understood. Of course, this is only useful if the data is out there. Conversely, putting it out there becomes a lot more appealing if it is easy for people to find it.
+  
+  h2. 1. The Mobile Web
+  
+  Finally, the biggest thing that will drive all this is the personalization of the Web itself. The Web is no longer something that is only accessible from your desk - now you'll carry it with you at all times on your mobile phone. This shift will make the way we currently use the Web seem clunky and primitive by comparison. 
+  
+  Although Web browsing has been available on mobile phones for some time, you didn't _really_ get the Web, you got this really stripped down WAP version, and it was _slow_. Today's so-called smart phones, however, bring you the _real_ Web, and it is getting faster all the time as telecoms race to acquire customers. This vastly increases the value of resources that are available via the Web because of the sheer number of people that will be able to take advantage of them. 
+  
+  In turn, this will increase competitive incentives, forcing companies to become more consumer-centric. Consumers will tire quickly of applications that don't interoperate seamlessly with the "data cloud," as they become exposed to more and more that do. At the same time, they will learn to see their data as _theirs_, and expect that applications "share it rather than hoard it":facebook-eula.
+  
+  So there you have it, a powerful, proven architecture, with rich emerging standards and tools that support it, and a convergence of technologies that can leverage it. And _that_ is why ROA matters. In a future post, we'll infer from this a good operational definition of ROA.
+  
+  [roa]http://en.wikipedia.org/wiki/Resource_oriented_architecture
+  [freebase]http://freebase.com  
+  [tim]http://www.w3.org/History/1989/proposal.html
+  [semantic-web]http://www.youtube.com/watch?v=mVFY52CH6Bc
+  [exhibit]http://simile.mit.edu/exhibit/
+  [roy]http://roy.gbiv.com/untangled/
+  [rest-paper]http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm
+  [http-spec]http://www.w3.org/Protocols/rfc2616/rfc2616.html
+  [deep-web]http://www.nytimes.com/2009/02/23/technology/internet/23search.html?_r=1&th&emc=th
+  [openid]http://openid.net/what/
+  [oauth]http://oauth.net/
+  [openid-adopters]http://www.techcrunch.com/2008/07/21/myspace-to-join-openid-bringing-total-enabled-accounts-to-over-a-half-billion/  
+  [searchmonkey]http://developer.yahoo.com/searchmonkey/
+  [rdf]http://www.w3.org/RDF/
+  [rss]http://web.resource.org/rss/1.0/
+  [atom]http://www.atomenabled.org/
+  [activerdf]http://activerdf.org/
+  [foaf]http://xml.mfd-consult.dk/foaf/explorer/
+  [haystack]http://groups.csail.mit.edu/haystack/
+  [waves]http://rubywaves.com/  
+  [friendfeed]http://friendfeed.com/
+  [mint]http://mint.com/
+  [federal-budget]http://www.gpoaccess.gov/usbudget/  
+  [query-language]http://www.google.com/support/websearch/bin/answer.py?hl=en&answer=136861
+  [advanced-search]http://www.google.com/advanced_search
+  [fare-search]http://www.kayak.com/
+  [speak4it]http://speak4it.com/  
+  [xen]http://blog.xen.org/
+  [azure]http://www.microsoft.com/azure/default.mspx
+  [cloud-computing]http://www.techcrunch.com/2009/02/27/live-stream-techcrunch-cloud-computing-roundtable/
+  [data-cloud]http://dbpedia.org/sparql
+  [tipping-point]http://aws.amazon.com/publicdatasets/#1
+  [facebook-eula]http://www.techcrunch.com/2009/02/17/facebook-backtracks-under-community-pressure-goes-back-to-old-tos-for-now/
+summary: |-
+  One of the emerging themes in our work at AT&T Interactive R&D is Resource-Oriented Architecture (ROA). However, there is a lot of confusion about what ROA is and why it's important. Sometimes, it's just easier to talk to the "why it's important" part and not worry so much about the definition. If you know what it _does_, then what it _is_ becomes more of an intuition rather than "an abstract concept":roa.
+  
+  [roa]http://en.wikipedia.org/wiki/Resource_oriented_architecture
+key: top-10-reasons-resource-oriented-architecture-matters

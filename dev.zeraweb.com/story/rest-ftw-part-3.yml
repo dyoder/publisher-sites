@@ -1,0 +1,48 @@
+--- 
+format: html
+blog: mousetrap-2
+author: Dan Yoder
+title: REST FTW, Part 3
+published: 2009-05-03
+tags: rest
+content: |-
+  <p><em>This is part of a <a href="/rest-ftw-part-1">series of articles</a> on REST.</em></p>
+   
+  <p>In <a href="/rest-ftw-part-2">my last post</a>, I suggested thinking about REST and ROA in the context of an object-based platform and protocol neutral approach to distributed computing. The "objects" are the specific representations (MP3, JSON, HTML) of a resource. The semantics of a resource itself are intentionally vague because you never interact with them directly, at least from the standpoint of ROA. This ensures that the "platform neutral" part of the bargain is never compromised.</p>
+   
+  <div class="inset">
+  <h1>REST is platform and protocol neutral.</h1>
+   <img src="http://farm4.static.flickr.com/3108/3124740749_4796b9771f.jpg" alt="" /></div>
+   
+  <p>In this post, let's take a closer look at HTTP. The "protocol neutral" part of REST means we're now talking about a specific architecture, namely ROA. All REST cares about is that we use a particular protocol in a uniform way across all types of resources. <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">REST says nothing</a> about how to use HTTP, per se. Unfortunately, a lot of discussion around HTTP is conflicted and confused on this point, which leaves us with the spec. But the spec is ... well, it's a spec. It isn't a developer guide.</p>
+   
+  <h2>The Web Is A Distributed Hash<br /></h2>
+   
+  <p>One thing we can get from the spec is that HTTP is <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">not talking about CRUD</a>. There is not mention of CRUD at all, nor in Fielding's dissertation. That clears away a lot of the confusion right there and frees us from the burden of trying to figure out whether POST or PUT is for create or update or whatever. So free your mind of any baggage you might have picked up along the way about CRUD and HTTP verbs.</p>
+   
+  <p>Instead, let's look at GET, PUT, DELETE, and HEAD. Collectively, these define an interface for a distributed hash, where the keys are URIs and the values are representations of resources. I can add (PUT) and remove (DELETE) entries. I can retrieve them (GET) or test to see if they exist (HEAD). In other words, a distributed hash is arguably the central abstraction of HTTP, and thus the entire Web.</p>
+   
+  <p>But what about POST? The spec is, putting it generously, vague on this point. <a href="http://roy.gbiv.com/untangled/2009/it-is-okay-to-use-post">Fielding's blog provides an important clue</a>, but let me cut to the chase to save you the trouble of deciphering it. POST is basically just a catch all for things aren't covered by GET, PUT, DELETE, and HEAD. It is the wildcard operator, because, well, the real world doesn't always look like a distributed hash.</p>
+   
+  <div class="inset">
+  <h1>Do I PUT or POST? Or just eat?</h1>
+   <img src="http://farm4.static.flickr.com/3022/2676302290_22ed77dd29.jpg" alt="" /></div>
+   
+  <p>Remember, we want uniform interfaces so we can hide implementation details behind the endpoints on the network. That way, everything in between, particularly smart intermediaries, can be generic, no matter what our applications are really doing. But that uniformity comes at a price: no generic interface can possibly meet the requirements of every possible application. How do we resolve this tension?</p>
+   
+  <p>The authors of HTTP chose to use a very powerful but simple abstraction (a distributed hash) in combination with a fall-back method for anything that doesn't fit within it. That fall-back is POST. This is Pareto Principal design at its best. Most of the time, a distributed hash works fine. When it doesn't, POST gives us the flexibility we need. This is why the spec says, "the actual function performed by the POST method is determined by the
+     server" instead of defining it clearly, as is done with the other methods.</p>
+   
+  <h2>An Example Of Using POST<br /></h2>
+   
+  <p>Sometimes an example helps. Let's suppose I'm building a social networking API and I want to provide a way to add and remove friends for a given person. I can have a resource for each person and another for their friends. I can GET a person and then GET their friends. I can do the same with PUT and DELETE. If I add a new friend, I just GET the friends resource, add the new friend to it, and PUT it back. Deletion works basically the same way. So far, so good, right?</p>
+   
+  <p>But then I find I have a lot of people who have thousands and thousands (or even <a href="http://twitter.com/aplusk">millions</a>) of friends. Using GET and PUT in this case just to add a single new friend is very inefficient. Thankfully, I can instead simply POST the add / remove requests to the friends resource. This keeps my overall design nice and simple without making it impossibly inefficient.</p>
+   
+  <p>I think this might by why browsers are so POST-centric. Remember, in the early days of the Web, basically the browser was an interface to running a CGI script on the server. You weren't adding or updating a distributed hash; you were calling a script with a bunch of parameters. Which is about all you can say about the semantics of POST. Which is why Fielding writes:</p>
+   
+  <p class="quote">POST serves many useful purposes in HTTP, including the general purpose of &ldquo;this action isn&rsquo;t worth standardizing.&rdquo;</p>
+   
+  <p>So there you go. Protocol and platform neutral distributed computing based on a distributed hash. That is the foundation of REST and ROA.</p>
+summary: <p>In <a href="/rest-ftw-part-2">my last post</a>, I suggested thinking about REST and ROA in the context of an object-based platform and protocol neutral approach to distributed computing. The "objects" are the specific representations (MP3, JSON, HTML) of a resource. The semantics of a resource itself are intentionally vague because you never interact with them directly, at least from the standpoint of ROA. This ensures that the "platform neutral" part of the bargain is never compromised.</p>
+key: rest-ftw-part-3

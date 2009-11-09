@@ -1,0 +1,53 @@
+--- 
+format: html
+blog: mousetrap-2
+author: Dan Yoder
+title: REST FTW, Part 2
+published: 2009-04-22
+tags: rest
+content: |-
+  <p><em>This is part of a series of articles on the benefits of REST. See <a href="/rest-ftw-part-1">the introduction</a> for more.</em></p>
+  
+  <p>REST is
+  not an architecture, but a set of constraints for an architecture. I
+  like to use the phrase <em>Resource-Oriented Architecture</em> to talk
+  about the specific Web-based architecture that satisfies those
+  constraints. But the main thing to remember is that these are
+  constraints <em>for a bandwidth-optimizing object-based distributed computing architecture that is both platform and protocol neutral</em>.
+  In that light, one thing that should be clear is that REST therefore
+  applies to pretty much everything Web developers do these days.</p>
+  
+  <div class="inset">
+  <p class="caption">ROA is distributed computing on top of a<br/>proven infrastructure.</p>
+   <img src="http://farm4.static.flickr.com/3129/2885482695_9963f01c15.jpg" alt="" /></div>
+  
+  <p>REST obviously does not talk about objects or object-orientation,
+  but rather resources. I don't really know why, although I can guess.
+  For one thing, there have already been numerous failed attempts to
+  implement "distributed objects," from CORBA to DCOM. For another, the
+  concept of "objects" carries with it a lot of baggage, including
+  notions of inheritance, polymorphism, and so forth. REST does not
+  attempt to define, even implicitly, the semantics of a resource, a fact
+  that seems to frustrate a lot of developers. But that is part of the
+  genius of it: an "object" in REST can be anything from JSON to an MP3
+  file.</p>
+  
+  <p>And perhaps that is the most important distinction: an object is a
+  specific representation of a resource. The main thing is that you can
+  always deal with these objects the same way, no matter the form they
+  take. Thus, the emphasis on <em>uniform interfaces.</em> This is more
+  than just using a standard set of verbs; it also motivates the need for
+  many other REST constructs, in particular, URIs and standardized media
+  types. What is really going on here is we are keeping any
+  object-specific (representation-specific) hanky panky <em>behind the endpoints</em> of the client and server. That way, everything in between them can be completely generic.</p>
+  <p>We'll explore more about what that means, including going through some specific examples, in our next installment.</p>
+summary: |-
+  <p>REST is
+  not an architecture, but a set of constraints for an architecture. I
+  like to use the phrase <em>Resource-Oriented Architecture</em> to talk
+  about the specific Web-based architecture that satisfies those
+  constraints. But the main thing to remember is that these are
+  constraints <em>for a bandwidth-optimizing object-based distributed computing architecture that is both platform and protocol neutral</em>.
+  In that light, one thing that should be clear is that REST therefore
+  applies to pretty much everything Web developers do these days.</p>
+key: rest-ftw-part-2

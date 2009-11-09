@@ -1,0 +1,51 @@
+--- 
+format: textile
+title: Giving Credit Where Credit Is Due
+published: 2009-04-25 12:12:20.658680 -07:00
+content: |-
+  A framework like Waves can only exist because of the work of a whole lot of folks. Here I've made an attempt to give them the credit they deserve.
+  
+  h2. Contributors
+  
+  Those who have contributed to Waves, directly or indirectly:
+  
+  * Krishna (kaykay), Claude, Jay, and Hemant, my collegues in R&D at YPC, who have fixed numerous little things and generally made sure Waves was a solid foundation for developing Web-based applications.
+  
+  * "Matthew King":http://www.automatthew.com/ (automatthew), core contributor.
+  
+  * "Pascal":http://blog.nanorails.com (psq), core contributor.
+  
+  * Lawrence Pitt (copawaves), core contributor.
+  
+  * Johan Friis, added inflector support via "English":http://english.rubyforge.org/.
+  
+  * John Haltiwanger (ab5tract), wrote our initial caching implementation, got us set up on IRC (#waves on freenode.net), and serves as our resident poet.
+  
+  * Jerry West, famous point-guard for the Laker - er, no. Wrong one. Jerry patched Autocode, which initiated a rewrite of Autocode, resulting in a much-improved foundation for Waves class / module loader.
+  
+  * "Keiichi Matsunaga":http://d.hatena.ne.jp/ma2/20080312/p1, who translated the main tutorial "into Japanese":http://d.hatena.ne.jp/ma2/20080312/p1.
+  
+  * Mel Riffe, who provided bug reports and suggested edits to the documentation.
+  
+  * Jay (jayco437), who provided early feedback and bug reports.
+  
+  * Daniel Brumbaugh Keeney, who helped ensure the Web site looked good on all browsers.
+  
+  * Ben, of "DuckTyped":http://ducktyped.com, who pointed me to Rack at a crucial moment.
+  
+  * Pete Elmore, author of "LiveConsole":http://live-console.rubyforge.org, originator (if not always committer) of numerous crucial bug fixes, and the first contributor. And, no, your variation of Configurations was not better than mine. :)
+  
+  (Hopefully, this list will grow with contributors - please don't hesitate to "get involved":http://groups.google.com/group/rubywaves!)
+  
+  h2. Rails
+  
+  The Rails community, DHH in particular, helped put Ruby on the map and gave us a blueprint for what was possible for a Web application framework. Without their insights and pioneering spirit, Waves would not be possible.
+  
+  h2. Ruby
+  
+  To all the folks making Ruby go - from the language itself (thanks Matz!) to RubyGems and RubyForge, to people like Dave Thomas and _why who help us all learn - well, none of this would be possible without you. Thank you for making software development fun again.
+  
+  h2. The Ruby Community
+  
+  A lot of incredible work has been done in the Ruby community recently that has made Waves and "frameworks like it":/other-frameworks much more viable. These include efforts like JRuby and YARV, with amazing new Gems coming out every day.
+key: credits

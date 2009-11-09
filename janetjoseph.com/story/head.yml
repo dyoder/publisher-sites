@@ -1,0 +1,12 @@
+--- 
+format: mab
+published: 2009-04-25 12:12:20.286040 -07:00
+content: |
+  title "#{site.title}: #{@title}"
+  meta :name => 'description', :content => site.description
+  meta :name => 'verify-v1', :content => '8YjQ5TZmk2IlbU1CptGPIIIz2EJotQuTHDF6t5pWjOM='
+  link :type => 'text/css', :rel => 'stylesheet', :href => '/css/site.css'
+  script :type => 'text/javascript', :src => '/javascript/jquery-1.2.1.pack.js'
+  script :type => 'text/javascript', :src => '/javascript/site.js'
+
+key: head

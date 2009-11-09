@@ -1,0 +1,8 @@
+--- 
+format: mab
+content: |
+  div.banner do 
+    a :href => '/home' do
+      img.logo :src => "/images/banner.jpg"
+    end
+  end
