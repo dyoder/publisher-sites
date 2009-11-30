@@ -3,8 +3,8 @@ name: debugs-6
 format: textile
 title: Old Technology Wins and Loses Simultaneously
 author: Pete Elmore
-blog: debugs
-published: 2007-02-11 00:00:00 -08:00
+tags: blog
+published: 2007-02-11
 content: |
   I'm using "mozex":http://mozex.mozdev.org/ so that I can write this article with vi, using a deprecated version of "Blackbox":http://blackboxwm.sourceforge.net/ because I can't stand the 0.7 series, and to top it all off, using Mozilla instead of Firefox.
   

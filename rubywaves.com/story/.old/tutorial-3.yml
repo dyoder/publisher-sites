@@ -1,0 +1,135 @@
+--- 
+name: tutorial-3
+format: textile
+title: Tutorial, Part 3
+author: Dan Yoder
+published: 2008-01-29 00:00:00 -08:00
+domain: dan.local
+tags: ""
+content: |-
+  So far, we've done the classic "Hello World":/tutorial-1 application in a single file and then "extended it":/tutorial-2 to add code reloading for resources along with a URL-based greeting. We've learned about Resources, Foundations and Layers, request functors, and the @captured@ method.
+  
+  So now let's create a simple Pastie clone. "Pastie":http://pastie.org is a simple application that allows you to post nicely formatted code listings for other geeks to peruse. Very handy when you are on the "Waves IRC channel":irc:freenode.net#waves and want to share a great idea.
+  
+  So code listings are simple things. We'll use Syntax to format them. So the first thing you need to do is install it:
+  
+  <pre>
+  sudo gem install syntax
+  </pre>
+  
+  Next, let's create a new app for our pastie clone. Let's call it @code-review@, after the time-honored practice of improving our code by sharing it and having other's rip it to shreds. Go back to your projects directory and create the new app. We'll use the compact Foundation again. This time, we'll use the short version of the arguments:
+  
+  <pre>
+  waves generate -n code-share -t compact
+  cd code-share
+  </pre>
+  
+  We'll use the same trick that we used in the "last tutorial":/tutorial-2 for adding code reloading features. Open up your startup.rb and edit it so that it looks like this:
+  
+  <pre>
+  require 'foundations/compact'
+  require 'autocode'
+  
+  module CodeReview
+    include Waves::Foundations::Compact
+  
+    module Resources
+      include AutoCode
+      auto_load true, :directories => '.'
+      class Map
+        on( true ) { to( :listing ) }
+      end
+    end
+  
+    module Configurations
+      class Development
+        reloadable [ Resources ]
+      end
+    end
+  
+  end
+  </pre>
+  
+  Basically, this is just like our Hello World Remix, except instead of a Greeting Resource, we are defining a Listing Resource. And, of course, the application module is called CodeReview instead of HelloWorld.
+  
+  Next, let's create our listing.rb file that will define the Listing resource. This is pretty much just like our HelloWorld Remix, except this time we also @include Filebase::Model@. This will give a bunch of simple methods for saving objects to and from files. We'll store those in the @db@ directory.
+  
+  <pre>
+  module CodeShare
+  
+    module Models
+      class Listing
+        include Filebase::Model[ :db ]
+      end
+    end
+  
+    module Resources
+      class Listing
+        include Waves::Resources::Mixin
+      end
+    end
+  end
+  </pre>
+  
+  We know that we need to handle basic crud operations for a listing. So let's stub those out. After the @include@ statement, we need to add our resource functors. Let's start with a functor that will give us a form to add a new listing.
+  
+  <pre>
+  on( :get, [ 'add' ] ) { form }
+  </pre>
+  
+  The @add@ method will give us a nice form for adding new listings. We'll write that shortly. Next, let's provide way to create the listing. The @put@ method is the REST way to do this. We'll also check to make sure the query parameters are provided for us. Also, we'll use a named path by calling @paths.show@. The @paths@ method always gives us an object we can call to generate paths for us.
+  
+  <pre>
+  on( :put, [ 'add' ], :query => { :title => true, :code => true } ) do
+    listing = create( query.to_h )
+    redirect paths.show( listing.key )
+  end
+  </pre>
+  
+  Easy enough. Next up, I want to view our new listing. We'll give it name, like this:
+  
+  <pre>
+  on( :get, :show => [ :key ] ) do
+    show( find( captured.key ) || not_found )
+  end
+  </pre>
+  
+  What about updating a listing? First, we need to be able to edit it.
+  
+  <pre>
+  on( :get, [ 'edit', :key ] ) do
+    form( find( captured.key ) || not_found )
+  end
+  </pre>
+  
+  And then update it.
+  
+  <pre>
+  on( :post, [ :key ], :query => { :title => true, :code => true } ) do
+    listing = find( key ) || not_found
+    listing.update( query.to_h )
+    redirect paths.show( listing.key )
+  end
+  </pre>
+  
+  We'll leave out delete for now. Let's move on to our model and view methods. We'll use Markaby in combination with the syntax gem.
+  
+  <pre>
+  
+  private 
+  
+  def form( listing = Models::Listing.new )
+    html do
+      form :method => :post, 
+        :action => ( listing.key ? paths.update : paths.create ) do
+        text "Title"
+        input :type => :text, :value => listing.title, :width => 80
+        textarea listing.code, :rows => 8, :cols => 80
+      end
+    end
+  end
+  
+  
+  end
+summary: ""
+key: tutorial-3

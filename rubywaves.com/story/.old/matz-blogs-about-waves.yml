@@ -1,0 +1,23 @@
+--- 
+format: textile
+title: Matz Blogs About Waves!
+author: Dan Yoder
+published: 2008-02-07 00:00:00 -08:00
+content: |-
+  
+  *Update:* My friend Giles got a "rough translation":http://gilesbowkett.blogspot.com/2008/02/matz-blog-new-ruby-web-app-framework.html. We think the gist of the post is that competition - including alternatives to Rails - is healthy for Ruby. (As an aside, Waves is a long way from really being competition to Rails, but the fact is that early adopters now have a variety of choices for building Web apps. Waves is already running several, and I'm sure "it's not alone":http://rbazinet.wordpress.com/2008/01/14/10-alternative-ruby-web-frameworks/.)
+  
+  I am probably way more excited about this than I should be, but I don't care. "Matz has a blog entry about Waves!":http://www.rubyist.net/~matz/20080206.html Unfortunately, it's in Japanese, so I only have a vague idea what it says (thanks to "Google translator":http://translate.google.com/translate?u=http%3A%2F%2Fwww.rubyist.net%2F%7Ematz%2F&langpair=ja%7Cen&hl=en&ie=UTF-8&oe=UTF-8). Hopefully, someone who can read Japanese can translate it for me.
+  
+  For the record, the reason I'm so excited is that I love using Ruby. Ruby made programming fun again for me. I can still remember back in - oh, I don't know, maybe 1999? - looking at Ruby and thinking, _man that looks interesting. I wish I could use it on real projects._ At the time, there was only a handful of libraries and database support was just emerging. But Matz and the emerging Ruby community kept moving the platform forward.
+  
+  I sadly missed the "tipping point" for Ruby, when the library support had reached a level where something like Rails was possible. In fact, I hate to admit it, but I had become so cynical that I had sort of given up on Ruby. And programming in general. Then Rails exploded onto the scene and suddenly Ruby started looking like it might have legs. I jumped on board and haven't looked back. And Ruby made me believe again that good things were possible in the software world.
+  
+  That probably sounds really melodramatic. But it is largely also true. I literally stopped programming there for awhile because I just found it too hard to translate my ideas into code. Ruby, on the other hand, makes it almost embarrasingly easy sometimes. I actually feel guilty sometimes when I code something up that my years of software development experience tells me is supposed to be really hard and then it ends up being two lines of code in Ruby.
+  
+  So, anyway, for Matz to even acknowledge work that _I've_ done, that is one of the best feelings I've ever had in the software business, and I'm not ashamed to admit it. I know he mentions lots and lots of projects and blog posts and so on, but it still feels great!
+summary: |
+  
+  I am probably way more excited about this than I should be, but I don't care. "Matz has a blog entry about Waves!":http://www.rubyist.net/~matz/20080206.html
+
+key: matz-blogs-about-waves

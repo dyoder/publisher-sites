@@ -1,0 +1,13 @@
+--- 
+format: textile
+title: Waves Begins The New Year
+author: Dan Yoder
+published: 2009-01-20 00:00:00 -08:00
+content: |-
+  Looking at the blog, it would be easy to think that nothing much was happening with Waves, but, happily, "the commits":http://github.com/dyoder/waves/commits/master tell another story. That said, we _are_ a bit behind the roadmap we published at RubyConf. I've "updated it":/roadmap to reflect our current expectations.
+  
+  We have an active team on it here at "AT&T Interactive":/att-announcement in R&D and are using Waves on several projects. In fact, Waves powers the services tier behind our recent iPhone apps, "Speak4It":http://speak4it.com/ and "Have2P":http://have2p.com/. Expect to see a lot more activity and news going forward. We'll be posting some entries here, highlighting some how-to type docs and also talking about some of the new features.
+  
+  Finally, you can watch my "RubyConf presentation":http://is.gd/gDpf now, or just "go through the slides":http://www.slideshare.net/dyoder/rubyconf-preso to better understand what we're doing here!
+summary: You can watch my "RubyConf presentation":http://is.gd/gDpf now, or just "go through the slides":http://www.slideshare.net/dyoder/rubyconf-preso to better understand what we're doing here.
+key: updated-roadmap

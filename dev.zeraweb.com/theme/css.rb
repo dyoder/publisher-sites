@@ -19,18 +19,15 @@ Module.new do
 
   def page_styles
     body {
+      width '100%'
       padding 0 ; margin 0
       border_top '20px solid #390'
     	background colors[:background]
     	label_attributes
     }
     selector('div.page') {
-      width '800px'
-      margin '20px auto'
-    }
-    div.banner {
-      margin_top '10px'
-      float :left
+      width '50%'
+      margin '10px auto'
     }
   end
 
@@ -59,7 +56,8 @@ Module.new do
 
   def sidebar_styles
     div.sidebar {
-      width '200px'
+      float :left
+      width '20%'
       margin '20px 20px'
       p {
         label_font
@@ -68,7 +66,7 @@ Module.new do
         text_align :left
       }
       div.block {
-        margin '10px 0'
+        margin '15px'
         padding '0 10px'
         border '1px solid silver'
         rounded_corner_attributes

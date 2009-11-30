@@ -1,15 +1,8 @@
 --- 
 name: header
-format: mab
-title: 
-author: Pete Elmore
-published: 2005-07-25 13:13:38 -07:00
+format: view
 content: |-
-  div.banner do
-    p.tag "It's user error."
-    a :href => '/home' do
-      h1 'Debu.gs'
-    end
+  p "It's user error."
+  a( :href => '/home' ) do
+    h1 'Debu.gs'
   end
-summary: ""
-key: banner

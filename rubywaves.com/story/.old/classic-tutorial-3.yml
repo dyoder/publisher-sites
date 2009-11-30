@@ -1,0 +1,159 @@
+--- 
+format: textile
+blog: ""
+author: Matthew King
+title: Classic Applications, part 3
+published: 2009-01-01 00:00:00 -08:00
+tags: ""
+content: "h2. Back to the dog house\r\n\
+  \r\n\
+  Now that requests are appropriately delegated, we can hook up the processor for individual entry pages.  Capture the name of the blog entry from the URL path, ask the controller to fetch the entry, and tell the view to render a template named @show@, handing it the entry.\r\n\
+  \r\n\
+  p(commit). \"resources/entry.rb @ b2a0d76\":http://github.com/waves/classic-tutorial/tree/b2a0d76/resources/entry.rb\r\n\
+  \r\n\
+  <pre>\r\n  on( :get, [ 'entry', :name ] ) do\r\n    entry = controller.find( captured.name )\r\n    view.show( :entry => entry )\r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  Create the @show@ template, wrapping the @full@ template we wrote earlier in the default layout:\r\n\
+  \r\n\
+  p(commit). \"templates/entry/show.mab @ b2a0d76\":http://github.com/waves/classic-tutorial/tree/b2a0d76/templates/entry/show.mab\r\n\
+  \r\n\
+  <pre>\r\n  layout :default, :title => @entry.title do\r\n\
+  \r\n    div.entry do\r\n      view :entry, :full, :entry => @entry\r\n    end\r\n\
+  \r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  The Blog application now handles all the GET requests from our application scheme:\r\n\
+  \r\n\
+  * *a GET to @/entries@ displays a list of blog entries*\r\n\
+  * a POST to @/entries@ creates a new blog entry\r\n\
+  * *a GET to @/entry/:name@ displays the blog entry identified by @:name@*\r\n\
+  * a PUT to @/entry/:name@ updates the blog entry\r\n\
+  * a DELETE to @/entry/:name@ deletes the blog entry\r\n\
+  * a POST to @/entry/:name@ adds a comment to the blog entry\r\n\
+  \r\n\
+  Now, strictly speaking, this is all we need to manage the blog.  We can use an HTTP client like curl to POST and PUT the appropriate data.  But if that level of communion with nature is not for you, you're likely to want some facility for adding and editing entries with a browser.  Start with a layout-less form template, so that we can render it flexibly in other templates.\r\n\
+  \r\n\
+  p(commit). \"templates/entry/form.mab @ 366d361\":http://github.com/waves/classic-tutorial/tree/366d361/templates/entry/form.mab\r\n\
+  \r\n\
+  <pre>\r\n  form :action => \"/entry/#{@entry.name}\", :method => 'POST' do\r\n    input :name => '_method', :type => 'hidden', :value => 'put'\r\n    label 'Title'; br\r\n    input :type => :text, :value => @entry.title, \r\n      :name => 'entry.title', :size => 50; br\r\n    label 'URL name'; br\r\n    input :type => :text, :value => @entry.name, \r\n      :name => 'entry.name', :size => 50; br\r\n    label 'Content'; br\r\n    textarea @entry.content, :name => 'entry.content', \r\n      :rows => 20, :cols => 70; br\r\n    input :type => :submit, :value => 'Save'\r\n    a 'Cancel', :href => \"/entry/#{@entry.name}\"\r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  Browsers don't PUT, so we collude with Waves in pretending that a field named \"_method\" can turn a POST into a PUT.  The target URL is @/entry/<name>@, as per our scheme, and we use straightforward Markaby throughout.\r\n\
+  \r\n\
+  Create an edit template to use the form:\r\n\
+  \r\n\
+  p(commit). \"templates/entry/edit.mab @ 366d361\":http://github.com/waves/classic-tutorial/tree/366d361/templates/entry/edit.mab\r\n\
+  \r\n\
+  <pre>\r\n  layout :default, :title => 'Edit Entry' do\r\n\
+  \r\n    view :entry, :form, :entry => @entry\r\n\
+  \r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  Add an @on@ declaration to @Blog::Resources::Entry@ to handle the PUT request:\r\n\
+  \r\n\
+  p(commit). \"resources/entry.rb @ 366d361\":http://github.com/waves/classic-tutorial/tree/938e934/resources/entry.rb\r\n\
+  \r\n\
+  <pre>\r\n  on :put, [ 'entry', :name ] do\r\n    # controller.update( name ) magically extracts the\r\n    # model attributes from the request params\r\n    entry = controller.update( captured.name )\r\n    redirect \"/entry/#{entry.name}\"\r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  Now we only need a way to get to the edit page.  We could append \"edit\" to the end of the path for an entry, e.g. @/entry/whatsit/edit@, but that dirties up our clean, RESTy scheme.  For that reason, and to show another feature of the dispatching DSL, we will use a GET to the individual entry URL, but with a query param of @mode=edit@.\r\n\
+  \r\n\
+  p(commit). \"resources/entry.rb @ 366d361\":http://github.com/waves/classic-tutorial/tree/938e934/resources/entry.rb\r\n\
+  \r\n\
+  <pre>\r\n  on :get, [ 'entry', :name ], :query => { :mode => 'edit' } do\r\n    entry = controller.find( captured.name )\r\n    view.edit( :entry => entry )\r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  The value given as a query param matcher can be a string, a regexp, @true@, or even a lambda.  Here's a stupid example of a lambda:\r\n\
+  \r\n\
+  <pre>\r\n  on :get, [ 'entry', :name ], :query => { :mode => lambda { |x| x.reverse == 'tide' } } do\r\n    entry = controller.find( captured.name )\r\n    view.edit( :entry => entry )\r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  You can now edit entries by adding \"?mode=edit\" to the end of the URL in your browser's address bar.  Not the best UI, some might say, and to placate them, we'll add helpful links to the @show@ template:\r\n\
+  \r\n\
+  p(commit). \"templates/entry/show.mab @ 1fa9a4c\":http://github.com/waves/classic-tutorial/tree/1fa9a4c/templates/entry/show.mab\r\n\
+  \r\n\
+  <pre>\r\n  layout :default, :title => @entry.title do\r\n\
+  \r\n    div.entry do\r\n      view :entry, :full, :entry => @entry\r\n      p do\r\n        a 'Edit', :href => \"/entry/#{@entry.name}?mode=edit\"\r\n        text '\xC2\xA0'\r\n        a.delete 'Delete', :href => \"/entry/#{@entry.name}\"\r\n      end\r\n    end\r\n\
+  \r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  Browsers DELETE no more than they PUT, not to mention the absence of any server-side logic to handle entry deletion.  The latter is easy to address, but the former requires some Javascript.  Add this to your @site.js@:\r\n\
+  \r\n\
+  p(commit). \"public/javascript/site.js @ ce00400\":http://github.com/waves/classic-tutorial/tree/ce00400/public/javascript/site.js\r\n\
+  \r\n\
+  <pre>\r\n  $(document).ready( function() {\r\n    $('a.delete').click( function() {\r\n      if ( confirm(\"Are you sure?\") ) {\r\n        var href = $(this).attr('href');\r\n        $.ajax({ type: 'delete', url: href,\r\n          success: function() { window.location = '/entries'; }\r\n        });\r\n      }\r\n      // Stop the browser from processing the click.\r\n      return false;\r\n    });\r\n  });\r\n\
+  </pre>\r\n\
+  \r\n\
+  The default layout already imports JQuery and your site.js, so this takes effect on the next refresh. For the JQuery-deprived, this code attaches a function to all anchors with CSS class \"delete\".  The function intercepts clicks and turns them into background DELETE requests aimed at the anchor's @href@.\r\n\
+  \r\n\
+  Next, add a DELETE handling declaration to the @Entry@ resource:\r\n\
+  \r\n\
+  p(commit). \"resources/entry.rb @ ce00400\":http://github.com/waves-classic/tree/ce00400/resources/entry.rb\r\n\
+  \r\n\
+  <pre>\r\n  on :delete, [ 'entry', :name ] do\r\n    controller.delete( captured.name )\r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  Individual entry pages now have working edit and delete links, but we still haven't provided a way to create new entries. The @on@ declaration is easy enough:\r\n\
+  \r\n\
+  p(commit). \"resources/entry.rb @ ce00400\":http://github.com/waves-classic/tree/ce00400/resources/entry.rb\r\n\
+  \r\n\
+  <pre>\r\n  on( :post, [ 'entries' ] ) do\r\n    entry = controller.create\r\n    redirect \"/entry/#{entry.name}\"\r\n  end\r\n\
+  </pre> \r\n\
+  \r\n\
+  We still need a way to display a form for the creation of an entry.  Request matching is LIFO, so we could add an @on@ declaration after all the others that catches @/entry/form@.  This would prevent you from having a blog entry with the URL name \"form\", and it's also a bit of a hack.  The application scheme isn't using @/entry@, though, and that makes me squirm less.\r\n\
+  \r\n\
+  The @on@ declaration:\r\n\
+  \r\n\
+  p(commit). \"resources/entry.rb @ b0ea4e2\":http://github.com/waves/classic-tutorial/tree/b0ea4e2/resources/entry.rb\r\n\
+  \r\n\
+  <pre>\r\n  on( :get, [ 'entry' ] ) do\r\n    view.new\r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  The template:\r\n\
+  \r\n\
+  p(commit). \"templates/entry/new.mab @ 8454e8a\":http://github.com/waves/classic-tutorial/tree/8454e8a/templates/entry/new.mab\r\n\
+  \r\n\
+  <pre>\r\n  layout :default, :title => 'New Entry' do\r\n\
+  \r\n    form :action => \"/entries\", :method => 'POST' do\r\n      label 'Title'; br\r\n      input :type => :text, :name => 'entry.title', :size => 50; br\r\n      label 'URL name'; br\r\n      input :type => :text, :name => 'entry.name', :size => 50; br\r\n      label 'Content'; br\r\n      textarea :name => 'entry.content', :rows => 20, :cols => 70; br\r\n      input :type => :submit, :value => 'Save'\r\n      a 'Cancel', :href => \"/entries\"\r\n    end\r\n\
+  \r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  Add a link to the entry form in the @list@ template:\r\n\
+  \r\n\
+  p(commit). \"templates/entry/list.mab @ 8454e8a\":http://github.com/waves/classic-tutorial/tree/8454e8a/templates/entry/list.mab\r\n\
+  \r\n\
+  <pre>\r\n  layout :default, :title => 'Blog Entries' do\r\n    div.create do\r\n      h2 { a 'Create a new entry', :href => \"/entry\" }\r\n    end\r\n    @entries.each do |entry|\r\n      div.entry do\r\n        view :entry, :full, :entry => entry\r\n        p do\r\n          a entry.comment_number, :href => \"/entry/#{entry.name}\"\r\n        end\r\n      end\r\n    end\r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  \r\n\
+  h2. No comment\r\n\
+  \r\n\
+  The \"No Comments\" links are taunting us, aren't they?  Real blogs have comments.  Why don't we have comments?\r\n\
+  \r\n\
+  This is easy.  Add a declaration to @Blog::Resources::Entry@.\r\n\
+  \r\n\
+  p(commit). \"resources/entry.rb @ 8d3deef\":http://github.com/waves/classic-tutorial/tree/8d3deef/resources/entry.rb\r\n\
+  \r\n\
+  <pre>\r\n  on :post, :comment => [ 'entry', :name ] do\r\n    entry = controller.find( captured.name )\r\n    entry.add_comment( Models::Comment.create( query.comment.to_hash ) )\r\n    redirect request.path\r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  Then add comments display and a form to the @show@ template.\r\n\
+  \r\n\
+  p(commit). \"templates/entry/show.mab @ 72b9396\":http://github.com/waves/classic-tutorial/tree/72b9396/templates/entry/show.mab\r\n\
+  \r\n\
+  <pre>\r\n  layout :default, :title => @entry.title do\r\n\
+  \r\n    div.entry do\r\n      view :entry, :full, :entry => @entry\r\n      p do\r\n        a 'Edit', :href => \"/entry/#{@entry.name}?mode=edit\"\r\n        text '\xC2\xA0'\r\n        a.delete 'Delete', :href => \"/entry/#{@entry.name}\"\r\n      end\r\n    end\r\n\
+  \r\n    h2 @entry.comment_number\r\n\
+  \r\n    @entry.comments.each do |comment|\r\n      div.comment do\r\n        textile comment.content\r\n        p.info \"#{ comment.attribution }, at #{ comment.time }\"\r\n      end\r\n    end\r\n\
+  \r\n    form :action => \"/entry/#{@entry.name}\", :method => 'POST' do\r\n      input :type => :hidden, :name => 'comment.entry_id', :value => @entry.id\r\n      label 'Name'; br\r\n      input :type => :text, :name => 'comment.name', :size => 35; br\r\n      label 'Email'; br\r\n      input :type => :text, :name => 'comment.email', :size => 35; br\r\n      label 'Comment'; br\r\n      textarea :name => 'comment.content', :rows => 6, :cols => 70; br\r\n      input :type => :submit, :value => 'Save'\r\n    end\r\n\
+  \r\n  end\r\n\
+  </pre>\r\n\
+  \r\n\
+  All the major application features are now in place.\r\n\
+  \r\n\
+  h2. Path generation\r\n\
+  \r\n\
+  _More to come_"
+summary: ""
+key: classic-tutorial-3

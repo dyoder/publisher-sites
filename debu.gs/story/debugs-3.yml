@@ -3,11 +3,10 @@ name: debugs-3
 format: textile
 title: Google Checkout Support
 author: Pete Elmore
-blog: debugs
-published: 2006-09-29 00:00:00 -07:00
+published: 2006-09-29
 content: |-
   Google Checkout support, which is available for "Vixby":http://vixby.com/ users is now available to integrate into your own Ruby app.  Additionally, I got to do this on company time!  Everybody wins.
   
   "Check it out":/google-checkout.
 summary: "\"Brought\":/google-checkout to the masses."
-key: debugs-3
+tags: blog

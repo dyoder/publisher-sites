@@ -1,0 +1,36 @@
+--- 
+format: textile
+blog: hang-ten
+author: Dan Yoder
+title: LA RubyConf Kills It
+published: 2009-04-05 00:00:00 -07:00
+tags: ""
+content: |-
+  The inaugural LA RubyConf was a bit hit. I am proud to have kicked things off as the first speaker, given the line-up that followed, which included "cats and dogs living together":johnson, "flying robots":flying-robots, "cloud comedy":poolparty and a "unified theory of hacking":jim-w. 
+  
+  I focused a bit more on motivating our focus on resource-oriented architecture and REST than I did in my RubyConf talk. (You can "take a look at the slides":slides for either / both if you're interested.) I think the talk was well-received. It was light on code, but there was plenty of that in the other sessions, so I think it made for a nice balance. That said, we do need to come up with more hands-on examples of using Waves.
+  
+  One thing this talk has really driven home, though, is how much of a mind-shift ROA is really going to require for most developers. So I think we also need some concrete examples of services using ROA and show how those could be implemented in Waves. That's what's missing right now. It's a paradigm shift, but without clear examples.
+  
+  Afterwards, "Jeremy Evans":jeremy-evans (lead on "Sequel":sequel, who I am happy to report recalls "our early enthusiasm":sequel-rocks for it) talked to me about how most of his projects are just silos, and his clients would have it no other way. While I think Rails works well for those kinds of sites, so does Waves. It just gives you a lot of other flexibility as well. I guess in my enthusiasm for REST, I am making it sound like that is all Waves does.
+  
+  At any rate, LA RubyConf was a "tremendous success":ron-larubyconf. "Coby Randquist":coby and "JR Fent":jr-fent did a fantastic job of putting it together. It's amazing to think that it was only a year ago that an LA Ruby group was still nothing more than an idea. I am proud to have been a part of it becoming a reality, even if it was mostly as a spectator and cheerleader.
+  
+  [johnson]http://github.com/jbarnette/johnson/tree/master
+  [flying-robots]http://deadprogrammersociety.blogspot.com/2009/03/project-flying-robot-i-believe-i-can.html
+  [poolparty]http://poolpartyrb.com/
+  [jim-w]http://onestepback.org/
+  [slides]http://www.slideshare.net/dyoder/la-rubyconf-2009-waves-and-resourceoriented-architecture
+  [jeremy-evans]http://on-ruby.blogspot.com/2009/01/sequel-interview-with-jeremy-evans.html
+  [sequel]http://sequel.rubyforge.org/
+  [ron-larubyconf]http://deadprogrammersociety.blogspot.com/2009/04/larubyconf-2009-was-big-success.html
+  [coby]http://www.randquist.us/blog/
+  [jr-fent]http://www.jrfent.com/blog/
+summary: |-
+  The inaugural LA RubyConf was a bit hit. I am proud to have kicked things off as the first speaker, given the line-up that followed, which included "cats and dogs living together":johnson, "flying robots":flying-robots, "cloud comedy":poolparty and a "unified theory of hacking":jim-w.
+  
+  [johnson]http://github.com/jbarnette/johnson/tree/master
+  [flying-robots]http://deadprogrammersociety.blogspot.com/2009/03/project-flying-robot-i-believe-i-can.html
+  [poolparty]http://poolpartyrb.com/
+  [jim-w]http://onestepback.org/
+key: la-rubyconf-kills-it

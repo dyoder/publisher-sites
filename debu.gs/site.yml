@@ -1,7 +1,6 @@
 --- 
 name: debugs
 title: Debu.gs
-domain: debu.gs
 description: The next step in the evolution of user error.
 authors: 
 - Pete Elmore
@@ -9,12 +8,4 @@ administrators:
 - name: Pete Elmore
   password: fr33c0k3
   email: pete.elmore@gmail.com
-roles:
-- Admin
-
-Admin:
-- property
-- story
-- image
-- blog
-- gallery
+stylesheet: default

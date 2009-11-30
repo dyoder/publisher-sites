@@ -1,10 +1,10 @@
 --- 
 name: debugs-4
-format: wysiwyg
-blog: debugs
-title: Symbol#to_proc
+format: html
+tags: blog
+title: 'Symbol#to_proc'
 author: Pete Elmore
-published: 2006-10-04 00:00:00 -07:00
+published: 2006-10-04
 content: |-
   <p>I've never seen anyone use this, only recently read about it when I came across a blog.&nbsp; It's part of 
   <a href="http://extensions.rubyforge.org/rdoc/index.html">Ruby/Extensions</a>, 
@@ -64,8 +64,10 @@ content: |-
     </li>
   </ul>
 summary: |-
+  <p>
   <code>[1, 2, 3].inject { |c,i| c + i }</code>
   becomes
   <code>[1, 2, 3].inject(&amp;:+)</code>
   with just one extra method for Symbol.
+  </p>
 key: debugs-4

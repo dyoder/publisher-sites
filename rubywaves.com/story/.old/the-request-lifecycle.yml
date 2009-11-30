@@ -1,0 +1,132 @@
+--- 
+format: textile
+blog: hang-ten
+author: Matthew King
+title: The Request Lifecycle
+published: 2008-12-04 00:00:00 -08:00
+tags: ""
+content: |-
+  This article describes the request lifecycle as of Waves 0.8.2
+  
+  h2. The Dispatcher
+  
+  Pick a client, any client.  Send an HTTP request to an address and port where a Rack-enabled web server is listening.  Rack exploits the information in the request to create an env object, then passes the env to an application as the argument to @application#call@.  This is the way of Rack.
+  
+  In Waves, Rack application objects are instances of Waves::Dispatchers::Default, which is a subclass of Waves::Dispatchers::Base, which is where @call@ is actually defined.
+  
+  p(commit). "lib/dispatchers/base.rb":http://github.com/dyoder/waves/tree/0.8.2/lib/dispatchers/base.rb
+  
+  <pre>
+    def call( env )
+      response = if Waves.synchronize? or Waves.debug?
+        Waves.synchronize { Waves.reload ; _call( env )  }
+      else
+        _call( env )
+      end
+    end
+  </pre>
+  
+  @call@ decides whether to wrap the request processing in a mutex or not, then passes the @env@ along to @_call@, which is also defined in the Base dispatcher.  This method uses the @env@ to create instances of Waves::Request and Waves::Response, then wraps basic benchmarking, logging, and redirect handling around a call to @safe@.
+  
+  p(commit). "lib/dispatchers/base.rb":http://github.com/dyoder/waves/tree/0.8.2/lib/dispatchers/base.rb
+  
+  <pre>
+    def _call( env )
+      request = Waves::Request.new( env )
+      response = request.response
+      t = Benchmark.realtime do
+        begin
+          safe( request )
+        rescue Dispatchers::Redirect => redirect
+          response.status = redirect.status
+          response.location = redirect.path
+        end
+      end
+      Waves::Logger.info "#{request.method}: #{request.url} handled in #{(t*1000).round} ms."
+      response.finish
+    end
+  </pre>
+  
+  We defer to the @safe@ method in this way to allow the use of variant dispatchers, though the Default dispatcher is the only one that currently exists.  As defined in Waves::Dispatchers::Default, @safe@ sets the response content type, creates an instance of the primary resource, and kindly asks it to process the request.
+  
+  p(commit). "lib/dispatchers/default.rb":http://github.com/dyoder/waves/tree/0.8.2/lib/dispatchers/default.rb
+  
+  <pre>
+    def safe( request  )
+      # set a default content type -- this can be overridden by the resource
+      request.response.content_type = request.accept.default
+      resource = Waves.config.resource.new( request )
+      if request.response.body.empty?
+        request.response.body << resource.process.to_s
+      else
+        resource.process
+      end
+      # okay, we've handled the request, now write the response unless it was already done
+      request.response.finish
+    end
+  </pre>
+  
+  The return value of @request.process@ becomes the response body, and the dispatcher hands the response off to Rack, thence to the Rack handler, thence to the client.
+  
+  
+  h2. Resource Processing
+  
+  The "primary resource" mentioned above is whatever class happens to be the value of Waves.config.resource.  In most cases, this will be SomeApp::Resources::Map.  The dispatcher creates an instance of this resource, offering up the request object as its argument, then tells the resource to go forth and @process@.  In the @process@ method, aside from the response processing, the resource runs any filters that match the request, handles exceptions, and cleans up with an @always@ block, should one exist.
+  
+  # before filter
+  # response processing
+  # after filter
+  # exception handling
+  # always filter
+  
+  p(commit). "lib/resources/mixin.rb":http://github.com/waves/tree/0.8.2/lib/resources/mixin.rb
+  
+  <pre>
+    def process
+      begin
+        before ; body = send( request.method ) ; after
+      rescue Waves::Dispatchers::Redirect => e
+        raise e
+      rescue Exception => e
+        response.status = ( StatusCodes[ e.class ] || 500 )
+        ( body = handler( e ) ) rescue raise e
+        Waves::Logger.warn e.to_s
+        e.backtrace.each { |t| Waves::Logger.debug "    #{t}" }
+      ensure
+        always
+      end
+      return body
+    end
+  </pre>
+  
+  The actual response processing takes the form of a call to the resource method corresponding to the HTTP method.  E.g. for an HTTP GET, the resource instance calls @get@ on itself.  In the simplest cases, the app developer might define @#get@ in the usual Ruby way.  Waves provides a request matching DSL that is more flexible, and more like the routing tables used in other frameworks.
+  
+  The rescue clause has three responsibilities:  to re-raise Redirect exceptions for the Dispatcher, to attempt to save any other exceptions using developer-defined handlers, and to ensure that the always filter gets evaluated.  Exception handling is similar to response processing.  The resource calls its @handler@ method with the exception as the argument.  Developers may define @handler@ directly, or they may use a DSL for flexibility.
+  
+  h2. Resource Delegation
+  
+  Resource processing is potentially recursive, as a resource may delegate the request to another resource using the @to@ method.  
+  
+  p(commit). "lib/resources/mixin.rb":http://github.com/waves/tree/0.8.2/lib/resources/mixin.rb
+  
+  <pre>
+    def to( resource )
+      resource = case resource
+      when Base
+        resource
+      when Symbol, String
+        begin 
+          Waves.main::Resources[ resource ]
+        rescue NameError
+          raise Waves::Dispatchers::NotFoundError
+        end
+        Waves.main::Resources[ resource ]
+      end
+      r = traits.waves.resource = resource.new( request )
+      r.process
+    end
+  </pre>
+  
+  If the argument to @to@ is a string or symbol, the request is passed to the corresponding resource in the current application.  Developers can also give @to@ the actual class name of a resource, which allows for the interweaving of Waves applications.  However the resource class is determined, the delegating resource creates an instance of the delegatee and calls @process@, starting the processing cycle anew in the delegatee.
+summary: ""
+key: the-request-lifecycle

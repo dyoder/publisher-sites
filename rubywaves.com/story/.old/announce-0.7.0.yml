@@ -1,0 +1,13 @@
+--- 
+format: textile
+title: Waves Goes To Beta
+blog: hang-ten
+author: Dan Yoder
+published: 2008-02-04 00:00:00 -08:00
+content: |
+  It's taken a bit longer than I'd hoped, but Waves is finally at beta status, ready to find its way out in the world. The "screencast":/screencast is done, the tutorial is done, everything at least has some documentation; and I've beaten on Waves using my own personal CMS project (more on that later). I know it isn't perfect and "there is still quite a lot to do":/roadmap, but I think it is at a point where the foundation is solid and it is quite useful for building Web apps. So update your gem (or install if you haven't) to 0.7.0 and let me know what you think!
+
+summary: |
+  It's taken a bit longer than I'd hoped, but Waves is finally at beta status, ready to find its way out in the world.
+
+key: announce-0.7.0

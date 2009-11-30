@@ -1,34 +1,42 @@
 --- 
-format: mab
+format: textile
 published: 2009-04-25 12:12:20.650741 -07:00
 content: |
-  div.sidebar do
+  h3. What Is Waves?
   
-    div.item do
-      h1 'Gem Version'
-      p '0.8.3 (edge) - Install from github!'
-      p do
-        code do
-          text 'gem install waves-edge -s http://gems.github.com/'
-        end
-      end
-      p "We're working on getting waves-stable up to date. In the meantime, please note that RubyGem version (0.8.2) is no longer compatible with the latest version of Rack."
-    end
-  
-    div.item do
-      story( :presentations )
-    end
-  
-    div.item do
-      div.feed do
-        a :href => 'http://feeds2.feedburner.com/HangTen' do
-          img :src => '/images/feed.png'
-          label 'Subscribe ...'
-        end
-      end
-      view( :blog, :content, :blog => find( :blog, 'hang-ten' ) )
-    end
-  
-  end
+  Today's Web applications must embrace a wide variety of scenarios that don't really fit the Sun MVC paradigm that has dominated Web-based application architecture in the past. Think Ajax, Adobe Air, mashups, OpenID, rich-client mobile apps, and so on.
 
-key: sidebar
+  Waves helps you meet these challenges by providing a rich DSL for dealing with HTTP instead of trying to hide it from you. Waves Resource classes are faster and more flexible than Rails-style routing. And our mixin approach provides just the architectural magic that your applications need, and nothing more.
+
+  h3.  Try It Out
+  
+  Waves is currently at version @0.9.3@. (You'll need "gemcutter":gemcutter.)
+  
+  <pre>
+  sudo gem install waves
+  waves generate -t classic -n myapp
+  cd myapp
+  waves server
+  </pre>
+  
+  You can also "run from source":/working-from-source if you like.
+    
+  h3. On The Web
+
+  * "Code":http://github.com/waves
+  * "Reference":http://waves.rubyforge.org
+  * "Discussion":http://groups.google.com/group/rubywaves
+  * "Chat: #waves on irc.freenode.net":irc://irc.freenode.net/waves
+  
+  [gemcutter]http://gemcutter.org
+  
+  h3. Presentations On Waves
+  
+  I've given enough talks on Waves now that it seems worthwhile making it easier to find them. Fortunately, "Coby Randquist":http://www.confreaks.com/ has basically been stalking me (or, possibly, vice-versa, hard to say which) and, as a result, all of my talks are available on-line. In order of recent-ness:
+  
+  * "GoRuCo 2009":http://goruco2009.confreaks.com/30-may-2009-12-50-resource-oriented-architecture-with-waves-dan-yoder.html
+  * "LA RubyConf 2009":http://larubyconf2009.confreaks.com/04-apr-2009-10-10-resource-oriented-architecture-and-why-it-matters-and-how-waves-make-it-easier-dan-yoder.html 
+  * "RubyConf 2008":http://rubyconf2008.confreaks.com/waves-a-resource-oriented-framework.html
+  * "LoneStar RubyConf 2008":http://lsrc2008.confreaks.com/11-dan-yoder-resource-driven-web-development-with-waves.html
+  
+  

@@ -1,0 +1,16 @@
+--- 
+name: contribute
+format: textile
+title: Contribute!
+author: Dan Yoder
+published: 2008-06-16 00:00:00 -07:00
+domain: rubywaves.com
+tags: ""
+content: |-
+  Waves welcomes "contributors":/credits! Waves was designed to be extended, so there are literally countless ways for you to participate. 
+  
+  The API is already "pretty darn well documented":http://waves.rubyforge.org, and "the source is available":http://github.com/dyoder/waves on GitHub. 
+  
+  So if you have any ideas for how you can make Waves better, please introduce yourself. We're often on "IRC":irc://freenode.net#waves or you can drop us a line on our "discussion forum":http://groups.google.com/group/rubywaves list.
+summary: ""
+key: contribute

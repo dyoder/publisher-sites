@@ -28,19 +28,15 @@ Module.new do
 
       }
       body {
-        banner {
+        sidebar {
           img( :src => paths(:image).get( 'banner.png' ) )
-          sidebar {
-            block {
-              welcome = model(:story).find(:sidebar)
-              h4 welcome.title
-              p { textile( welcome.content ) }
-            }
+          block {
+            welcome = model(:story).find(:sidebar)
+            h4 welcome.title
+            p { textile( welcome.content ) }
           }
         }
-        page {
-          yield
-        }
+        page { yield }
       }
     }
   end

@@ -3,8 +3,8 @@ name: debugs-5
 format: textile
 title: Re-implementing Gloves
 author: Pete Elmore
-blog: debugs
-published: 2007-01-26 00:00:00 -08:00
+tags: blog
+published: 2007-01-26
 content: |
   "Those who do not understand Unix are condemned to reinvent it, poorly." --Henry Spencer
   

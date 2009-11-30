@@ -1,0 +1,66 @@
+--- 
+format: textile
+blog: hang-ten
+title: "Waves: HTTP Beyond MVC"
+author: Dan Yoder
+published: 2009-01-26 00:00:00 -08:00
+tags: ""
+content: |-
+  In "HTTP":http://www.ietf.org/internet-drafts/draft-ietf-httpbis-p1-messaging-04.txt, a _Method_ is defined as "the method to be performed on the resource ..." Waves implements this literally.
+  
+  <pre>
+  class Dog < Waves::Resources::Base
+    def get
+      "Ruff!" if request.path == '/bark'
+    end
+  end
+  </pre>
+  
+  h2. The Request DSL
+  
+  Waves calls methods on resources based on the HTTP method. Of course, if that was all it did, it wouldn't be terribly useful. But Waves also provides a nice DSL for matching these requests. In Rails, these are called "routes." In Waves, the DSL is a bit more sophisticated and ultimately just defines methods for you on the resource.
+  
+  <pre>
+  class Dog
+    include Waves::Resources::Mixin
+    on( :get, [ 'bark' ] ) { "Ruff!" }
+  end
+  </pre>
+  
+  This request DSL has a number of features, including allowing you to capture path components, set defaults, match against regular expressions or even lambdas, do wild-card matching against any number of components, define path generation methods (named paths), and more.
+  
+  <pre>
+  class Dog
+    include Waves::Resources::Mixin
+    on( :get, [ 'name' ] ) { "Fido" }
+    on( :get, [ 'breed' ] ) { "Mutt" }
+  end
+  </pre>
+  
+  (Keep in mind, these will be matched in last-in-first-out order, just as if you had re-defined the @get@ method, which is actually what you've done.)
+  
+  
+  h2. Request Functors
+  
+  What if we have several @GET@ methods for a given resource? Well, the request DSL actually creates _request functors_, which are essentially overloaded methods (aka, multi-method dispatch). They use the "functor gem":http://functor.rubyforge.org gem to allow you to have as many of each method as you need.
+  
+  h2. Resource Delegation
+  
+  Another very important feature is the notion of resource delegation. The idea here is that an application itself essentially acts as a proxy for a group of resources. The application resource simply inspects the request to the extent that it knows where to delegate it.
+  
+  <pre>
+  class Animal
+    include Waves::Resources::Mixin
+    on( true, [ :animal, true ] ) { to( captured.animal ) }
+  end
+  </pre>
+  
+  What this simple rule will do is map requests of the form @/dog/...@ or @/cat/...@ and route them to the appropriate animal resource. There are some really nice advantages to doing this. 
+  
+  * It keeps things manageable. With route-based approaches, you often can end up with a rather large number of routes. With request functors, they are broken down into separate classes, just like any other kind of method invocation.
+  
+  * It actually can offer some performance advantages since, for applications with a large number of resources / methods, you are actually matching on far fewer request patterns.
+  
+  * You can take full advantage of Ruby, including use of mixins and inheritance, or even extending the DSL to add common patterns used in your own applications.
+summary: ""
+key: resource-oriented

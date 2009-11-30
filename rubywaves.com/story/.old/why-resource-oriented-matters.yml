@@ -1,0 +1,27 @@
+--- 
+format: textile
+blog: hang-ten
+title: Why Resource-Oriented Matters
+author: Dan Yoder
+published: 2008-11-06 00:00:00 -08:00
+tags: ""
+content: |-
+  *Update.* I've gone into a bit "more detail on this topic":http://dev.zeraweb.com/ on my personal blog.
+  
+  It is one thing to say that Waves strives to make resource-oriented development easier. But, what is the bottom-line here? Why is that important?
+  
+  * It is the "architecture of the Web itself":http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm. So if you are writing Web apps, that matters. As it happens, the Web has proven to be remarkably scalable and extensible. So by architecting your applications along the same lines, you pick up those attributes as well. Why reinvent the wheel?
+  
+  * You can leverage a lot of existing Web infrastructure. Not only are resource-oriented applications intrinsically more scalable, they can leverage a broad array of existing technologies, from edge caching to proxies to standards like RSS.
+  
+  * You are building your applications on a variety of existing and open standards. This obviously makes it much more likely that your applications will be able to easily interoperate with other applications with, at most, minor changes. For example, URIs and MIME types are widly recognized by literally millions of existing applications.
+  
+  * Your applications are less costly to maintain because you reduce the impact of changes on the system as a whole. This is central to the idea of "loosely-coupled" and "uniform interfaces." Messages are self-describing, relying on shared, standardized types rather than application-specific RPC-like interfaces. For example, you can add support for new content types and clients that support them will magically begin using them. Furthermore, new clients can use the services _without knowing anything specifically about them_, just as search engines do today with Web sites.
+  
+  So if you want to use a proven scalable, loosely-coupled, and extensible architecture for distributed applications, that can leverage a wealth of existing technology and case studies, and that are based on widely accepted and open standards, resource-oriented might be for you.
+  
+  The downside is that resource-oriented architecture can be difficult to implement. Most existing frameworks (including Waves at this point) only implement parts of the REST or resource-oriented architectural style. 
+  
+  This is where Waves comes in: our objective is to make it easier to develop true resource-oriented style applications. Waves allows you to express your applications in a resource-oriented style, rather than using a completely different idiom like MVC as a starting point.
+summary: ""
+key: why-resource-oriented-matters

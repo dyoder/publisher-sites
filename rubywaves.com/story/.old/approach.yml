@@ -1,0 +1,17 @@
+--- 
+name: approach
+format: textile
+title: "Waves: HTTP Beyond MVC"
+author: Dan Yoder
+published: 2008-11-06 00:00:00 -08:00
+tags: ""
+content: |-
+  Waves is a resource-oriented architectural framework. It says so right there in the banner of the Web site. But what exactly does that mean?
+  
+  It means embracing "resource-oriented":/resource-oriented, not MVC, as the real architecture for the Web. It means using a "layered architecture":/layered-architecture approach to add in exactly the architectural features a given application (or applications) needs, rather than using a one-size fits all approach.
+  
+  Waves goes even farther than this, by leveraging the language features of Ruby, which are already quite powerful, rather than trying to reinvent the wheel. For example, in Waves, all configuration is done via ordinary classes, which allows us to support inheritable configurations for free.
+  
+  Waves also encourages reuse by carefully packaging everything, including applications, in modules. Common code across applications can be easily packaged as a Layer and mixed into your applications with minimal risk of name collisions.
+summary: ""
+key: approach

@@ -1,10 +1,10 @@
 --- 
 name: debugs-0
-format: wysiwyg
+format: html
 title: You can't spell 'function pointers' without 'fun'
 author: Pete Elmore
-blog: debugs
-published: 2006-08-02 00:00:00 -07:00
+tags: blog
+published: 2006-08-02
 content: |-
   <div style="font-family: Courier,fixed;">
   <p>&nbsp;#include &lt;stdio.h&gt;<br />

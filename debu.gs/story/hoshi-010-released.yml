@@ -4,8 +4,8 @@ format: html
 blog: debugs
 author: Pete Elmore
 title: Hoshi 0.1.0 Released...Soon
-published: 2008-11-06 00:00:00 -08:00
-tags: ""
+published: 2008-11-06
+tags: blog
 content: |-
   <p>You can check it out at github right now (<a
   	href="http://github.com/pete/hoshi">http://github.com/pete/hoshi</a>), or

@@ -1,0 +1,19 @@
+--- 
+name: presentations
+format: textile
+title: "Presentations On Waves"
+author: Dan Yoder
+published: July 19, 2009
+domain: rubywaves.com
+content: |-
+  I've given enough talks on Waves now that it seems worthwhile making it easier to find them. Fortunately, "Coby Randquist":http://www.confreaks.com/ has basically been stalking me
+  (or, possibly, vice-versa, hard to say which) and, as a result, all of my talks are available on-line. In order of recent-ness:
+  
+  * "GoRuCo 2009":http://goruco2009.confreaks.com/30-may-2009-12-50-resource-oriented-architecture-with-waves-dan-yoder.html
+  * "LA RubyConf 2009":http://larubyconf2009.confreaks.com/04-apr-2009-10-10-resource-oriented-architecture-and-why-it-matters-and-how-waves-make-it-easier-dan-yoder.html 
+  * "RubyConf 2008":http://rubyconf2008.confreaks.com/waves-a-resource-oriented-framework.html
+  * "LoneStar RubyConf 2008":http://lsrc2008.confreaks.com/11-dan-yoder-resource-driven-web-development-with-waves.html
+  
+  
+  
+

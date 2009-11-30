@@ -1,39 +1,5 @@
 --- 
 name: home
-format: textile
-title: ""
-author: Dan Yoder
-published: Jan 22, 2008
-domain: rubywaves.com
-tags: ""
+format: view
 content: |-
-  h2. What Is Waves?
-  
-  Today's Web applications must embrace a wide variety of scenarios that don't really fit the Sun MVC paradigm that has dominated Web-based application architecture in the past. Think Ajax, Adobe Air, mashups, OpenID, rich-client mobile apps, and so on.
-  
-  Waves helps you meet these challenges by providing "a rich DSL":/resource-oriented for dealing with HTTP instead of trying to hide it from you. Waves Resource classes are faster and more flexible than typical routing schemes. And our "mixin approach":/foundations-and-layers provides just the architectural magic that your applications need, and nothing more.
-  
-  h2.  Try It Out
-
-  At the moment, the only version of Waves that is compatible with the latest Rack gem is edge:
-  
-  <pre>
-  sudo gem install waves-edge -s http://gems.github.com/
-  </pre>
-  
-  You can also "run from source":/working-from-source if you like.
-  
-  From there, our "tutorials":/tutorials can help you get started.
-  
-  h2(#articles). Do You Want To Know More?
-  
-  * "Foundations And Layers":/foundations-and-layers
-  * "Inheritable Configurations":/configurations
-  * "What Other Web Frameworks Are Out There?":/other-frameworks
-
-  h2. Get In Touch
-
-  * "Google Group":http://groups.google.com/group/rubywaves
-  * "IRC: #waves on irc.freenode.net":irc://irc.freenode.net/waves
-summary: ""
-key: home
+  view(:story).list_without_layout( model(:blog).find('hang-ten').stories )
