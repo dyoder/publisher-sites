@@ -1,12 +1,13 @@
 --- 
 name: cast-iron-skillet-steak
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: cast iron skillet steak
 author: Janet Joseph
-published: 2008-07-25 00:00:00 -07:00
+published: 2008-07-25
 domain: janetjoseph.com
-tags: ""
+tags: 
+- recipe
 content: |-
   <p>My biggest fan told me to write down the way I did this steak EXACTLY like I made it. He loved it so much and kept going on about being sure to remember every step I did. Well here goes...</p>
   

@@ -1,12 +1,15 @@
 --- 
 name: whole-wheat-pasta-wsausage--veggies
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: whole wheat pasta with sausage & veggies
 author: Janet Joseph
-published: Apr 13, 2009
+published: 2009-04-13
 domain: janetjoseph.com
-tags: whole wheat pasta, chiclen sausage
+tags: 
+- whole wheat pasta
+- chiclen sausage
+- recipe
 content: |-
   <p>Ingredients: whole wheat penne pasta, roasted red pepper, roasted garlic, yellow onion, artichoke chicken sausage, asparagus.</p>
   

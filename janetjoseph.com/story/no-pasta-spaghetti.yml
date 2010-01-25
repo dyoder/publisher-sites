@@ -1,10 +1,12 @@
 --- 
-format: wysiwyg
+format: html
 title: No Pasta Spaghetti
 blog: cooking-jjs-way
 author: Janet Joseph
-published: 2007-11-01 00:00:00 -07:00
-tags: recipe
+published: 2007-11-01
+tags: 
+- recipe
+- recipe
 content: |-
   <p><strong>Ingredients</strong>:  1 sm. can unsalted tomato sauce, 6 tomatoes, 4 yellow bell peppers, 4 cloves garlic, 1 yellow onion, 1lb extra lean ground beef, 3 links chicken sausage(any flavor, I used sun dired tomato) crushed red pepper flakes(a few pinches), 2 tbls dried itallian seasoning, salt &amp; pepper.</p>
   

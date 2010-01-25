@@ -1,9 +1,9 @@
 --- 
 name: my-schedule
-format: text
+format: ""
 title: My Schedule
 author: Janet Joseph
-published: 2008-02-01 00:00:00 -08:00
+published: 2008-02-01
 domain: janetjoseph.com
 tags: ""
 content: "<iframe src=\"http://www.google.com/calendar/hosted/zeraweb.com/embed?showTitle=0&amp;showNav=0&amp;showCalendars=0&amp;height=420&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=dan%40zeraweb.com&amp;color=%232952A3&amp;ctz=America%2FLos_Angeles\" style=\" border:solid 1px #777 \" width=\"560\" height=\"420\" frameborder=\"0\" scrolling=\"no\"></iframe>"

@@ -1,12 +1,13 @@
 --- 
 name: italian-sausage-pasta
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: Italian Sausage Pasta
 author: Janet Joseph
-published: 2008-08-20 00:00:00 -07:00
+published: 2008-08-20
 domain: janetjoseph.com
-tags: ""
+tags: 
+- recipe
 content: |-
   <p>I kept this pretty basic with just a few key ingredients to make this entree delicious. Here is what you will need...</p>
   <p>mild italian sausage, roma tomatoes, garlic, red pepper flakes, nutmeg, basil olive oil, angel hair pasta, fresh grated parmesan cheese.</p>

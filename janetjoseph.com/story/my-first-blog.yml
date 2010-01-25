@@ -1,10 +1,12 @@
 --- 
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: My First Blog!
 author: Janet Joseph
-published: 2007-11-15 00:00:00 -08:00
-tags: recipe
+published: 2007-11-15
+tags: 
+- recipe
+- recipe
 content: |-
   <p>I always gave my boyfriend such a hard time about blogs and all the crap people would write, but here I am Eating my words as usual doing what I said I&rsquo;d never do! The key word here Eating! We love to do it in our household and I come from a long line of &ldquo;Foodies&rdquo;(meaning people who love to eat). My first recipe for my first blog will be Fresh Tomato Pasta w/ Meat. A favorite in our house! Tomatoes are one of those super foods packed full of good stuff like vitamin C, vitamin A and antitoxidants. This is a simple but delicious meal.<br /> Fresh Tomato Sauce Over Pasta Recipe&hellip;</p>
   

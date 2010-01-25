@@ -1,10 +1,16 @@
 --- 
-format: wysiwyg
+format: html
 title: Incredible Tomato Sauce!
 blog: cooking-jjs-way
 author: Janet Joseph
-published: 2008-01-06 00:00:00 -08:00
-tags: "tomato, sauce, costco, ground beef, "
+published: 2008-01-06
+tags: 
+- tomato
+- sauce
+- costco
+- ground beef
+- ""
+- recipe
 content: |-
   <p>For dinner Saturday night, I made my usual fresh tomato sauce w/meat, only it didn't taste like the "usual" sauce. I am going to retrace my steps and set in stone what made it so tasty.</p>
   

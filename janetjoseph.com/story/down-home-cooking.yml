@@ -1,12 +1,13 @@
 --- 
 name: down-home-cooking
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: down home cooking
 author: Janet Joseph
-published: 2008-02-20 00:00:00 -08:00
+published: 2008-02-20
 domain: janetjoseph.com
-tags: ""
+tags: 
+- recipe
 content: |-
   <p>I have been craving lately, some of that good 'ol southern cooking. Comfort food, you know, for those dark days we sometimes have. I've had a bit of a sad change in my life so I think I am going to make a delicious unhealthy meal for some comfort. I can only eat like this a few times a year, and I am going to have to be diligent about getting plenty of exercise for the rest of the week. Not that I am trying to be skinny, just healthy.</p>
   

@@ -1,10 +1,11 @@
 --- 
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: Comfort Food Pasta
 author: Janet Joseph
-published: Jun 05, 2009
-tags: ""
+published: 2009-06-05
+tags: 
+- recipe
 content: |-
   <p>I had some random ingredients leftover from other meals and came up with this yummy pasta dish. It's got all the good stuff for a good comfort food meal.
   <strong></strong></p>

@@ -1,12 +1,14 @@
 --- 
 name: spicy-fried-rice
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: spicy fried rice
 author: Janet Joseph
-published: 2008-03-31 00:00:00 -07:00
+published: 2008-03-31
 domain: janetjoseph.com
-tags: fried rice
+tags: 
+- fried rice
+- recipe
 content: |-
   <p>Fried rice is my latest addiction and rather than ordering it out all the time, I decided I was going to figure out how to make it. I read a few different recipe's and to my my surprise, it can be quite fun to experiment with. It's also healthier and tastier making it yourself since you can control the amount of fats and types of meat to use. Don't you hate it when you get tough meat in your dishes? I do!</p>
   

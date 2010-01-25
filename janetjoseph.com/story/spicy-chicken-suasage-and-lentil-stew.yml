@@ -1,10 +1,15 @@
 --- 
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: Spicy Chicken Sausage and Lentil Stew
 author: Janet Joseph
-published: Apr 28, 2009
-tags: stew, lentils, chicken sausage, spicy
+published: 2009-04-28
+tags: 
+- stew
+- lentils
+- chicken sausage
+- spicy
+- recipe
 content: |-
   <p><br /><strong>Ingredients</strong>: dry lentils, habanero green chili chicken sausage, green bell pepper, white onion, garlic, fresh sage, fennel seed, coriander powder, cayenne pepper, smoked paprika, garlic powder, chicken stock.<br /><br />Soak 2 cups of lentils in water for about 3-5 hours before cooking. (in a warm place is best) Lentils will soak up a lot of the water.</p>
   

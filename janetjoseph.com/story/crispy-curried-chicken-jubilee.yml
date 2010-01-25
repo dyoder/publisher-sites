@@ -1,10 +1,14 @@
 --- 
-format: wysiwyg
+format: html
 author: Janet Joseph
 blog: cooking-jjs-way
 title: Crispy Curried Chicken Jubilee
-published: 2009-04-13 00:00:00 -07:00
-tags: curry, chicken, brown rice
+published: 2009-04-13
+tags: 
+- curry
+- chicken
+- brown rice
+- recipe
 content: |-
   <p>A refreshing take on traditional curry dishes. I coated chicken
   tenders in curry and salt &amp; pepper, then pan seared it. The chicken

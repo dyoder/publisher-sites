@@ -1,10 +1,16 @@
 --- 
-format: wysiwyg
+format: html
 title: Unique Thanksgiving Dinner Feast
 blog: cooking-jjs-way
 author: Janet Joseph
-published: 2007-11-24 00:00:00 -08:00
-tags: cranberries, dark chocolate, green bean casserole, sweet potatoes, holiday cooking
+published: 2007-11-24
+tags: 
+- cranberries
+- dark chocolate
+- green bean casserole
+- sweet potatoes
+- holiday cooking
+- recipe
 content: |-
   <p><span class="Apple-style-span" style="font-style:italic;">N.Y Strip w/a <a href="/cranberry-chutney">Red Wine Cranberry Chutney</a>-</span></p>
   <p>Chutney: 1pkg fresh cranberries, 2 cups red wine, 2 cups of water, 1

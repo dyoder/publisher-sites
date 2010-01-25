@@ -1,10 +1,17 @@
 --- 
-format: wysiwyg
+format: html
 title: Crockpot Cooking
 blog: cooking-jjs-way
 author: Janet Joseph
-published: 2007-12-24 00:00:00 -08:00
-tags: waste not want not, browning, crock pot, meximart, stew, tex-mex
+published: 2007-12-24
+tags: 
+- waste not want not
+- browning
+- crock pot
+- meximart
+- stew
+- tex-mex
+- recipe
 content: |-
   <div class="entry">
   <p>I am so not a crock-pot kind of girl, but I cooked up this idea in my cute little

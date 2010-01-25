@@ -1,12 +1,13 @@
 --- 
 name: feel-better-chicken-tortilla-soup
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: Feel better chicken tortilla soup
 author: Janet Joseph
-published: 2008-06-12 00:00:00 -07:00
+published: 2008-06-12
 domain: janetjoseph.com
-tags: ""
+tags: 
+- recipe
 content: |-
   <h3>Amazing Chicken Tortilla Soup-<br /></h3>
   

@@ -3,13 +3,7 @@ twitter_password: planetjj
 name: janetjoseph
 twitter_account: jmjoseph
 title: Janet Joseph
-domain: janetjoseph.com
-Admin: 
-- property
-- story
-- image
-- blog
-- gallery
+stylesheet: default
 description: My personal Web site, with my cooking blog and spa treatments.
 authors: 
 - Janet Joseph

@@ -1,10 +1,11 @@
 --- 
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: Spicy Lemon Pepper Chicken and Ginger Brown Rice
 author: Janet Joseph
-published: Jul 30, 2009
-tags: ""
+published: 2009-07-30
+tags: 
+- recipe
 content: |-
   <p><strong>Ingredients:</strong></p>
   <ol>

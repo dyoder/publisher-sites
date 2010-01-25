@@ -1,16 +1,5 @@
 --- 
-format: mab
-published: 2009-04-25 12:12:20.294168 -07:00
+format: html
 content: |-
-  div.sidebar do 
-    a :href => '/home' do
-      if Dir["db/#{site['domain']}/file/logo.*"].empty?
-        h1.logo site['title']
-      else
-        logo = File.basename(Dir["db/#{site['domain']}/file/logo.*"].first)
-        img.logo :src => "/images/#{logo}"
-      end
-    end
-    self << story( :menu )
-  end
+  <b>hello</b>
 key: sidebar

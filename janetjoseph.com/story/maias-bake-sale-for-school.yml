@@ -1,10 +1,14 @@
 --- 
-format: wysiwyg
+format: html
 title: maia's bake sale for school
 blog: cooking-jjs-way
 author: Janet Joseph
-published: 2008-01-11 00:00:00 -08:00
-tags: banana bread, blueberries, baking
+published: 2008-01-11
+tags: 
+- banana bread
+- blueberries
+- baking
+- recipe
 content: |-
   <p>We did a little fundraiser bake sale after school for Maia's Science Camp the other day. The idea is to raise money to help the kids pay for the trip. I thought it would be fun for her and her friends to sell the goods to kids after school since kids are always asking for a snack as soon as they get out!&nbsp;</p>
   

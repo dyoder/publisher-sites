@@ -1,10 +1,11 @@
 --- 
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: Strawberry French Toast
 author: Janet Joseph
-published: May 02, 2009
-tags: ""
+published: 2009-05-02
+tags: 
+- recipe
 content: |-
   <p><strong>Ingredients:</strong> fresh strawberries, whole grain bread,
   powdered sugar, maple syrup, cinnamon, eggs, milk, cinnamon stick,

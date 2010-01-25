@@ -1,12 +1,13 @@
 --- 
 name: whats-for-desert
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: What's for Desert?
 author: Janet Joseph
-published: 2008-07-09 00:00:00 -07:00
+published: 2008-07-09
 domain: janetjoseph.com
-tags: ""
+tags: 
+- recipe
 content: |-
   <p>This is a ridiculously delicious ice cream treat! It's a sophisticated way to enjoy a simple dessert with out going to a fancy ice cream parlor and paying big prices. I've combined coffee flavored ice cream, heath bar &amp; dark chocolate reeses peanut butter cups candy and ginger snap cookies. Then I finished it with cinnamon sugar and some fresh pitted cherries. Very easy to pull together and fun to make.</p>
   <p><ol>

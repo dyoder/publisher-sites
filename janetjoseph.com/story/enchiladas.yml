@@ -1,12 +1,13 @@
 --- 
 name: enchiladas
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: Lime-Tomatillo Enchildas
 author: Janet Joseph
-published: 2007-10-15 00:00:00 -07:00
+published: 2007-10-15
 domain: janetjoseph.com
-tags: ""
+tags: 
+- recipe
 content: |-
   <p><span style="font-weight: bold;">Ingredients</span>. 10 corn tortillas, 1lb of ground beef, 1 white onion (diced), 2 tsp chili powder, salt and pepper, 2 cups cheddar cheese, <a href="/lime-sour-cream">lime sour cream</a>, <a href="/tomatillo-sauce">tomatillo sauce</a>, and <a href="/bean-relish">bean relish</a>.</p>
   

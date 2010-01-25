@@ -1,10 +1,16 @@
 --- 
-format: wysiwyg
+format: html
 title: Thanksgiving Dinner
 blog: cooking-jjs-way
 author: Janet Joseph
-published: 2007-11-24 00:00:00 -08:00
-tags: crimini mushrooms, green beans, red wine cranberry, thanksgiving, holiday cooking
+published: 2007-11-24
+tags: 
+- crimini mushrooms
+- green beans
+- red wine cranberry
+- thanksgiving
+- holiday cooking
+- recipe
 content: |-
   <p>Today in my test kitchen I&rsquo;m going to make:</p>
   

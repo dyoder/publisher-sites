@@ -1,10 +1,11 @@
 --- 
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: Chicken Tender Salad
 author: Janet Joseph
-published: May 18, 2009
-tags: ""
+published: 2009-05-18
+tags: 
+- recipe
 content: |-
   <p>Another delicious salad out of JJ's kitchen. I soaked the tenders in buttermilk for about 2 days, but you can get away with a few hours.</p>
   

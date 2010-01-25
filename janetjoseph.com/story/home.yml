@@ -1,24 +1,20 @@
 --- 
 name: home
-format: wysiwyg
-blog: ""
-title: ""
-author: Janet Joseph
-published: Feb 10, 2009
-domain: janetjoseph.com
-tags: ""
+format: textile
 content: |-
-  <blockquote>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/home">JanetJoseph.com</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em>Love the Universe&nbsp;</em>&nbsp;&nbsp; </blockquote> 
-  <p><a href="http://s471.photobucket.com/albums/rr74/janetmjoseph/?action=view&amp;current=IMG_3792.jpg" target="_blank"><img src="http://i471.photobucket.com/albums/rr74/janetmjoseph/IMG_3792.jpg" border="2" alt="sunset" width="518" height="243" /></a></p>
-   
-  <p>&nbsp;<a href="/spa">Spa Therapy: </a>Bask in the expert care of a professional. Enjoy luxurious mani/pedi's with hand and foot massages. Check out <a href="/spa">our services.</a> Then <a title="Epicuren" href="/blog/cooking-jjs-way">book an appointment!</a></p>
-   
-  <p><a title="Epicuren" href="/blog/cooking-jjs-way">Epicurean:</a> A personal food blog with recipes I&rsquo;ve&nbsp;<a href="/epicurean">put together</a> for your enjoyment.&nbsp;Some favorites are <a href="/popcorn">Kickin&rsquo; Movie Popcorn</a> and <a href="/enchiladas">Lime-Tomatillo Enchildas</a>. I cater small parties as well. <a title="email" href="mailto:janetjoseph@mac.com">Email me</a> for more info.</p>
-   
-  <p><a href="/contact"><br /></a></p>
-   
-  <div class="column two">
-  <p>&nbsp;</p>
-  </div>
-summary: ""
-key: home
+  <div class='inset'>
+    <p class='caption'>Mmmm, Fish Tacos!</p>
+    <img src="/image/fish-tacos.jpg" alt="Fish Tacos"/>
+  </div> 
+  
+  h1. Welcome
+  
+  My name is Janet, owner of *Cooking JJ's Way,* a Santa Monica-based _nouvelle cuisine_ chef service. Tired of being at the mercy of fast-food and delivery services? Try our "affordable and healthy menu":/our-menu! 
+  
+  h2. Healthy Cuisine That Tastes Great
+  
+  You don't need to choose between health and flavor.
+  
+  h2. Five-Minute Meals
+  
+  All our selections are made with reheating in mind, using quality ingredients

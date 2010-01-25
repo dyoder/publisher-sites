@@ -1,9 +1,0 @@
---- 
-format: mab
-published: 2009-04-25 12:12:20.767711 -07:00
-content: |-
-  div.sidebar do 
-    h3 'Art Glass Mini-Pumpkins'
-    self << story( :menu )
-  end
-key: sidebar

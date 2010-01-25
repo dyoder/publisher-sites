@@ -1,12 +1,13 @@
 --- 
 name: amazingly-fresh-tomato-sauce
-format: wysiwyg
+format: html
 blog: cooking-jjs-way
 title: Amazingly Fresh Tomato Sauce
 author: Janet Joseph
-published: Jun 08, 2008
+published: 2008-06-08
 domain: janetjoseph.com
-tags: ""
+tags: 
+- recipe
 content: |-
   <p>&nbsp;</p>
   
